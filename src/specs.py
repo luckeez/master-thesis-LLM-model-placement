@@ -21,6 +21,10 @@ class ModelSpec:
     @property
     def activation_size(self) -> int:
         return self.d_model * BYTE_PER_PARAM
+    
+    @property
+    def memory_bytes_per_layer(self) -> int:
+        return int(self.n_params_billion * BYTE_PER_PARAM * 1e9 / self.n_layers)
 
 @dataclass
 class GPUSpec:

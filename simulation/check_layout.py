@@ -4,14 +4,11 @@ from gurobipy import GRB
 
 MEMORY = True
 
-from simulator.initial_layout.ilp_layout.ilp_layout_aux import ILPLayout, NodeType
-from simulator.initial_layout.layout_synthesizer import ModelName
-from simulator.model_manager.model_manager import ModelManager
-from examples.simulation.visualize_solution import output_solution
+from src.ilp_layout_aux import ILPLayout, NodeType
+from simulation.visualize_solution import output_solution
 
 
 CLUSTER_CONFIG = "config/aux12-mem.ini"        
-MACHINE_PROFILE = "./config/machine_profile.ini" 
 MODEL_NAME = "LLaMa30B"                 
 
 TEST_ASSIGNMENT = {
@@ -170,17 +167,12 @@ def check_feasibility(layout: ILPLayout, assignment: dict):
         pass
 
 if __name__ == "__main__":
-    machine_num_dict = {"A100": 2, "T4": 8, "L4": 6}
-    model_name = ModelName.LLaMa30B
-    mm = ModelManager(model_name=model_name, machine_num_dict=machine_num_dict) 
+    model_name = "LLaMa30B"
     
-    layout = ILPLayout(model_manager=mm)
-    layout.from_ini(CLUSTER_CONFIG, MACHINE_PROFILE, MEMORY)
+    layout = ILPLayout()
+    layout.from_ini(CLUSTER_CONFIG, MODEL_NAME, MEMORY, batch_size=8)
     
     print("Costruzione modello MILP...")
-    layout.build_model(seed=42, model_name="checker", 
-                      enable_partial_inference=False, 
-                      remove_redundant=True, 
-                      start_from_heuristic=False, heuristic_sol_path="")
+    layout.build_model(seed=42, model_name="checker")
 
     check_feasibility(layout, TEST_ASSIGNMENT)

@@ -2,9 +2,9 @@ import matplotlib.pyplot as plt
 from typing import List
 import os
 
-from simulator.event_simulator.formulas import calc_throughput
-import simulator.event_simulator.formulas as formulas
-from simulator.event_simulator.specs import ModelSpec, MODEL_SPECS, GPUSpec, GPU_SPECS, LinkSpec, LINK_SPECS, BYTE_PER_PARAM, N_CONCURRENT_REQUESTS, AVERAGE_CONTEXT_WINDOW
+from src.formulas import calc_throughput
+import src.formulas as formulas
+from src.specs import ModelSpec, MODEL_SPECS, GPUSpec, GPU_SPECS, LinkSpec, LINK_SPECS, BYTE_PER_PARAM, N_CONCURRENT_REQUESTS, AVERAGE_CONTEXT_WINDOW
 
 def simulate_inference_scaling(model: ModelSpec, gpu: GPUSpec, max_gpus: int, assigned_layers = None, batch_size: int = 1, link_type: str = None):
     print(f"Simulating for GPU: {gpu.name}")

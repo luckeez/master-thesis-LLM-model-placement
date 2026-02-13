@@ -4,11 +4,9 @@ from enum import Enum
 from configparser import ConfigParser
 import os
 
-from simulator.event_simulator.utils import GB
-from simulator.model_manager.model_manager import ModelManager
-from simulator.initial_layout.ilp_layout.ilp_layout_aux import ILPNode
-from simulator.initial_layout.layout_synthesizer import ModelName
-from simulator.event_simulator.specs import GPU_SPECS, GPUSpec
+from src.utils import GB
+from src.ilp_layout_aux import ILPNode
+from src.specs import GPU_SPECS, GPUSpec, ModelSpec, MODEL_SPECS
 
 from output_costs import output_costs, parse_cluster_config
 
@@ -22,9 +20,8 @@ class NodeType(Enum):
 
 
 def visualize_memory_usage(save_sol_path: str, cluster_config_file_name: str, output_path: str = "memory_usage.png", include_cost = False, old_helix: bool = False) -> None:
-    model_name = ModelName.LLaMa30B 
-    model_manager: ModelManager = ModelManager(model_name, machine_num_dict={"A100": 2, "T4": 8, "L4": 6})
-
+    model_name = "LLaMa30B"
+    model: ModelSpec = MODEL_SPECS[model_name]
     nodes: List[ILPNode] = []
     gpu_groups: Dict[int, List[str]] = {}
 
@@ -57,7 +54,7 @@ def visualize_memory_usage(save_sol_path: str, cluster_config_file_name: str, ou
             name_2_val[name] = eval(val)
 
     # Compute memory usage per layer
-    memory_usage_per_layer_bytes: int = max(model_manager.get_model_params())
+    memory_usage_per_layer_bytes: int = model.memory_bytes_per_layer
     
     node_labels: List[str] = []
     memory_usages: List[float] = []

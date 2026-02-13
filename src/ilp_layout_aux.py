@@ -264,7 +264,7 @@ class ILPLayout:
             # Note: max # layers = (VRAM size / 2) / layer size
             # HACK use 0.92 factor to have values equal to helix
             # layer_size_bytes: int = max(self.model_manager.get_model_params())
-            layer_size_bytes: int = int(self.model_spec.n_params_billion * BYTE_PER_PARAM * GB / self.model_spec.n_layers)
+            layer_size_bytes: int = self.model_spec.memory_bytes_per_layer
             max_num_layers: int = int((machine_type.memory_gb * GB/ 2) / layer_size_bytes)
             
             # Save bottleneck nic throughput
@@ -1638,7 +1638,7 @@ class ILPLayout:
                 name_2_val[name] = eval(val)
 
         # Compute memory usage per layer
-        memory_usage_per_layer_bytes: int = int(self.model_spec.n_params_billion * BYTE_PER_PARAM * GB / self.model_spec.n_layers)
+        memory_usage_per_layer_bytes: int = self.model_spec.memory_bytes_per_layer
         
         node_labels: List[str] = []
         memory_usages: List[float] = []

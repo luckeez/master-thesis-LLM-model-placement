@@ -2,7 +2,7 @@ from typing import Dict, List
 from enum import Enum
 from configparser import ConfigParser
 
-from simulator.event_simulator.specs import GPUSpec, GPU_SPECS
+from src.specs import GPUSpec, GPU_SPECS
 
 def parse_cluster_config(ini_file) -> Dict[str, str]:
     node_types = {}

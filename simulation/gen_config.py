@@ -22,6 +22,14 @@ NVLINK_LAT = "0.005 * MilliSec"
 
 # 4. Memory Bandwidth given GPU type
 MEMORY = {"T4": 320, "L4": 300, "A100": 1935}
+
+REGION_LATENCY = {
+    ("eu-west", "eu-west"): "1 * MilliSec",
+    ("eu-west", "eu-east"): "2 * MilliSec",
+    ("eu-east", "eu-west"): "2 * MilliSec",
+    ("eu-east", "eu-east"): "1 * MilliSec",
+    # ECC TODO fix values
+}
 # --------------------------------
 
 
@@ -79,6 +87,7 @@ def generate_config_file(groups: List[Dict[str, Any]], output_filepath: str):
     for group_config in groups:
         num_nodes = group_config["num_nodes"]
         gpu_type = group_config["type"]
+        region = group_config["region"]
         
         nic_in_id = f"nic_in_{group_id}"
         nic_out_id = f"nic_out_{group_id}"
@@ -97,7 +106,8 @@ def generate_config_file(groups: List[Dict[str, Any]], output_filepath: str):
             "gpus": gpu_ids_in_group,
             "nic_in": nic_in_id,
             "nic_out": nic_out_id,
-            "type": gpu_type
+            "type": gpu_type,
+            "region": region
         })
 
         # Initialize node sections
@@ -114,7 +124,6 @@ def generate_config_file(groups: List[Dict[str, Any]], output_filepath: str):
         group_id += num_nodes
 
     # --- 2. Define links ---
-    all_nic_in_nodes = [g["nic_in"] for g in all_groups_info]
     
     for group_info in all_groups_info:
         nic_in = group_info["nic_in"]
@@ -126,9 +135,12 @@ def generate_config_file(groups: List[Dict[str, Any]], output_filepath: str):
         add_link(nic_out, "sink", EXT_BW, EXT_LAT)
 
         # B. External link (Inter-Group): NIC_OUT -> all other NIC_IN
-        for other_nic_in in all_nic_in_nodes:
-            if other_nic_in != nic_in:
-                add_link(nic_out, other_nic_in, EXT_BW, EXT_LAT)
+        for other_group in all_groups_info:
+            if other_group["nic_in"] != nic_in:
+                src_region = group_info["region"]
+                dst_region = other_group["region"]
+                lat = REGION_LATENCY[(src_region, dst_region)]
+                add_link(nic_out, other_group["nic_in"], EXT_BW, lat)
 
         # C. Internal link (NIC-GPU)
         for gpu_id in gpus:
@@ -225,18 +237,18 @@ if __name__ == "__main__":
     # Scenario: same as aux9 but all single nodes
     name = "aux12.ini"
     cluster_configuration = [
-    	{"num_nodes": 1, "type": "L4"},
-    	{"num_nodes": 1, "type": "A100"},
-    	{"num_nodes": 1, "type": "L4"}, 
-    	{"num_nodes": 1, "type": "L4"},
-    	{"num_nodes": 1, "type": "T4"},
-    	{"num_nodes": 1, "type": "T4"},
-    	{"num_nodes": 1, "type": "T4"},
-    	{"num_nodes": 1, "type": "T4"},
-    	{"num_nodes": 1, "type": "T4"},
-    	{"num_nodes": 1, "type": "A100"},
-    	{"num_nodes": 1, "type": "T4"},
-    	{"num_nodes": 1, "type": "L4"}
+    	{"num_nodes": 1, "type": "L4", "region": "eu-west"},
+    	{"num_nodes": 1, "type": "A100", "region": "eu-west"},
+    	{"num_nodes": 1, "type": "L4", "region": "eu-west"}, 
+    	{"num_nodes": 1, "type": "L4", "region": "eu-west"},
+    	{"num_nodes": 1, "type": "T4", "region": "eu-west"},
+    	{"num_nodes": 1, "type": "T4", "region": "eu-west"},
+    	{"num_nodes": 1, "type": "T4", "region": "eu-west"},
+    	{"num_nodes": 1, "type": "T4", "region": "eu-west"},
+    	{"num_nodes": 1, "type": "T4", "region": "eu-west"},
+    	{"num_nodes": 1, "type": "A100", "region": "eu-west"},
+    	{"num_nodes": 1, "type": "T4", "region": "eu-west"},
+    	{"num_nodes": 1, "type": "L4", "region": "eu-west"}
     ]
 
     # name = "aux12-2groups.ini"
@@ -387,20 +399,20 @@ if __name__ == "__main__":
     # 	{"num_nodes": 1, "type": "L4"}
     # ]
 
-    name = "aux15-2g-a30.ini"
-    cluster_configuration = [
-    	{"num_nodes": 1, "type": "L4"},
-    	{"num_nodes": 4, "type": "A30"},
-    	{"num_nodes": 1, "type": "L4"}, 
-    	{"num_nodes": 1, "type": "L4"},
-    	{"num_nodes": 1, "type": "T4"},
-    	{"num_nodes": 1, "type": "T4"},
-    	{"num_nodes": 1, "type": "T4"},
-    	{"num_nodes": 1, "type": "T4"},
-    	{"num_nodes": 1, "type": "T4"},
-    	{"num_nodes": 4, "type": "A30"},
-    	{"num_nodes": 1, "type": "T4"},
-    	{"num_nodes": 1, "type": "L4"}
-    ]
+    # name = "aux15-2g-a30.ini"
+    # cluster_configuration = [
+    # 	{"num_nodes": 1, "type": "L4"},
+    # 	{"num_nodes": 4, "type": "A30"},
+    # 	{"num_nodes": 1, "type": "L4"}, 
+    # 	{"num_nodes": 1, "type": "L4"},
+    # 	{"num_nodes": 1, "type": "T4"},
+    # 	{"num_nodes": 1, "type": "T4"},
+    # 	{"num_nodes": 1, "type": "T4"},
+    # 	{"num_nodes": 1, "type": "T4"},
+    # 	{"num_nodes": 1, "type": "T4"},
+    # 	{"num_nodes": 4, "type": "A30"},
+    # 	{"num_nodes": 1, "type": "T4"},
+    # 	{"num_nodes": 1, "type": "L4"}
+    # ]
 
     generate_config_file(cluster_configuration, f"config/{name}")

@@ -13,7 +13,7 @@ EXT_LAT = "1 * MilliSec"
 # 2. Internal Bus
 # Used for links: NIC_IN -> GPU, GPU -> NIC_OUT
 PCIE_BW = "64 * gbps" 
-PCIE_LAT = "0.5 * MilliSec"
+PCIE_LAT = "0.01 * MilliSec"
 
 # 3. GPU Interconnect
 # Used for links: GPU <-> GPU (only in multi-node groups)
@@ -25,9 +25,19 @@ MEMORY = {"T4": 320, "L4": 300, "A100": 1935}
 
 REGION_LATENCY = {
     ("eu-west", "eu-west"): "1 * MilliSec",
-    ("eu-west", "eu-east"): "2 * MilliSec",
-    ("eu-east", "eu-west"): "2 * MilliSec",
+    ("eu-west", "eu-east"): "10 * MilliSec",
+    ("eu-east", "eu-west"): "10 * MilliSec",
     ("eu-east", "eu-east"): "1 * MilliSec",
+
+    ("rack1", "rack1"): "0.05 * MilliSec",
+    ("rack1", "rack2"): "0.1 * MilliSec",
+    ("rack2", "rack1"): "0.1 * MilliSec",
+    ("rack2", "rack2"): "0.05 * MilliSec",
+    ("rack1", "rack3"): "0.1 * MilliSec",
+    ("rack3", "rack1"): "0.1 * MilliSec",
+    ("rack2", "rack3"): "0.1 * MilliSec",
+    ("rack3", "rack2"): "0.1 * MilliSec",
+    ("rack3", "rack3"): "0.05 * MilliSec"
     # ECC TODO fix values
 }
 # --------------------------------
@@ -198,6 +208,45 @@ def generate_config_file(groups: List[Dict[str, Any]], output_filepath: str):
         print(f"Error: Unable to write file. {e}", file=sys.stderr)
 
 if __name__ == "__main__":
+
+    name = "test15-1dc-intra-inter.ini"
+    cluster_configuration = [
+    	{"num_nodes": 4, "type": "T4", "region": "rack1"},
+    	{"num_nodes": 1, "type": "A100", "region": "rack1"},
+    	{"num_nodes": 1, "type": "L4", "region": "rack1"}, 
+    	{"num_nodes": 1, "type": "L4", "region": "rack1"},
+
+    	{"num_nodes": 1, "type": "L4", "region": "rack2"},
+    	{"num_nodes": 1, "type": "L4", "region": "rack2"},
+    	{"num_nodes": 1, "type": "T4", "region": "rack2"},
+    	{"num_nodes": 1, "type": "T4", "region": "rack2"},
+
+    	{"num_nodes": 1, "type": "T4", "region": "rack3"},
+    	{"num_nodes": 1, "type": "A100", "region": "rack3"},
+    	{"num_nodes": 1, "type": "T4", "region": "rack3"},
+    	{"num_nodes": 1, "type": "L4", "region": "rack3"}
+    ]
+
+    name = "test12-1dc-intra-inter-l4.ini"
+    cluster_configuration = [
+    	{"num_nodes": 1, "type": "L4", "region": "rack1"},
+    	{"num_nodes": 1, "type": "L4", "region": "rack1"},
+    	{"num_nodes": 1, "type": "L4", "region": "rack1"}, 
+    	{"num_nodes": 1, "type": "L4", "region": "rack1"},
+
+    	{"num_nodes": 1, "type": "L4", "region": "rack2"},
+    	{"num_nodes": 1, "type": "L4", "region": "rack2"},
+    	{"num_nodes": 1, "type": "L4", "region": "rack2"},
+    	{"num_nodes": 1, "type": "L4", "region": "rack2"},
+
+    	{"num_nodes": 1, "type": "L4", "region": "rack3"},
+    	{"num_nodes": 1, "type": "L4", "region": "rack3"},
+    	{"num_nodes": 1, "type": "L4", "region": "rack3"},
+    	{"num_nodes": 1, "type": "L4", "region": "rack3"}
+    ]
+
+    
+
     # Scenario: 4 single nodes + 1 group of 4 T4
     # name = "aux8-1group.ini"
     # cluster_configuration = [
@@ -235,21 +284,21 @@ if __name__ == "__main__":
     # ]
 
     # Scenario: same as aux9 but all single nodes
-    name = "aux12.ini"
-    cluster_configuration = [
-    	{"num_nodes": 1, "type": "L4", "region": "eu-west"},
-    	{"num_nodes": 1, "type": "A100", "region": "eu-west"},
-    	{"num_nodes": 1, "type": "L4", "region": "eu-west"}, 
-    	{"num_nodes": 1, "type": "L4", "region": "eu-west"},
-    	{"num_nodes": 1, "type": "T4", "region": "eu-west"},
-    	{"num_nodes": 1, "type": "T4", "region": "eu-west"},
-    	{"num_nodes": 1, "type": "T4", "region": "eu-west"},
-    	{"num_nodes": 1, "type": "T4", "region": "eu-west"},
-    	{"num_nodes": 1, "type": "T4", "region": "eu-west"},
-    	{"num_nodes": 1, "type": "A100", "region": "eu-west"},
-    	{"num_nodes": 1, "type": "T4", "region": "eu-west"},
-    	{"num_nodes": 1, "type": "L4", "region": "eu-west"}
-    ]
+    # name = "aux12.ini"
+    # cluster_configuration = [
+    # 	{"num_nodes": 1, "type": "L4", "region": "eu-west"},
+    # 	{"num_nodes": 1, "type": "A100", "region": "eu-west"},
+    # 	{"num_nodes": 1, "type": "L4", "region": "eu-west"}, 
+    # 	{"num_nodes": 1, "type": "L4", "region": "eu-west"},
+    # 	{"num_nodes": 1, "type": "T4", "region": "eu-west"},
+    # 	{"num_nodes": 1, "type": "T4", "region": "eu-west"},
+    # 	{"num_nodes": 1, "type": "T4", "region": "eu-west"},
+    # 	{"num_nodes": 1, "type": "T4", "region": "eu-west"},
+    # 	{"num_nodes": 1, "type": "T4", "region": "eu-west"},
+    # 	{"num_nodes": 1, "type": "A100", "region": "eu-west"},
+    # 	{"num_nodes": 1, "type": "T4", "region": "eu-west"},
+    # 	{"num_nodes": 1, "type": "L4", "region": "eu-west"}
+    # ]
 
     # name = "aux12-2groups.ini"
     # cluster_configuration = [

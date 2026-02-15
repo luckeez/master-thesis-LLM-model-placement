@@ -39,7 +39,6 @@ def simulate_inference_scaling_with_cost(model: ModelSpec, gpu: GPUSpec, max_gpu
     results = {
         "n_gpus": [],
         "throughput": [],
-        "cost_purchase": [],    # Totale USD
         "cost_rent_hourly": [], # USD/ora
         "energy_kwh_hourly": [] # kWh consumati in un'ora
     }
@@ -50,7 +49,6 @@ def simulate_inference_scaling_with_cost(model: ModelSpec, gpu: GPUSpec, max_gpu
         if not formulas.check_memory_constraint(model=model, gpu=gpu, n_gpu=n, batch_size=batch_size, assigned_layers=assigned_layers):
             results["n_gpus"].append(n)
             results["throughput"].append(None)
-            results["cost_purchase"].append(None)
             results["cost_rent_hourly"].append(None)
             results["energy_kwh_hourly"].append(None)
             continue
@@ -63,7 +61,6 @@ def simulate_inference_scaling_with_cost(model: ModelSpec, gpu: GPUSpec, max_gpu
         throughput = calc_throughput(model=model, gpu=gpu, n_gpu=n, batch_size=batch_size, link_type=link_type, assigned_layers=assigned_layers)
         print(f"Th: {throughput}, gpu: {gpu.name}, n_gpu: {n}")
 
-        purchase_cost = formulas.calc_purchase_cost(gpu=gpu, n_gpu=n)
         rent_cost = formulas.calc_rental_cost(gpu=gpu, n_gpu=n, hours=1)
         energy = formulas.calc_power_cost(gpu=gpu, n_gpu=n, hours=1, cost_per_kwh=0.15)
 
@@ -71,7 +68,6 @@ def simulate_inference_scaling_with_cost(model: ModelSpec, gpu: GPUSpec, max_gpu
 
         results["n_gpus"].append(n)
         results["throughput"].append(throughput)
-        results["cost_purchase"].append(purchase_cost)
         results["cost_rent_hourly"].append(rent_cost)
         results["energy_kwh_hourly"].append(energy)
 
@@ -99,9 +95,9 @@ def plot_throughput(list_results: dict[dict], model: ModelSpec, assigned_layers 
         plt.show()
 
 def plot_cost(list_results: dict[dict], model: ModelSpec):
-    metrics = ["cost_purchase", "cost_rent_hourly", "energy_kwh_hourly"]
-    titles = ["Purchase Cost", "Rental Cost (Hourly)", "Power Consumption (kWh Hourly)"]
-    ylabels = ["Cost (USD)", "Cost (USD/hour)", "Energy (kWh)"]
+    metrics = ["cost_rent_hourly", "energy_kwh_hourly"]
+    titles = ["Rental Cost (Hourly)", "Power Consumption (kWh Hourly)"]
+    ylabels = ["Cost (USD/hour)", "Energy (kWh)"]
 
     fig, axs = plt.subplots(1, 3, figsize=(18, 5))
     plt.suptitle(f"Cost Metrics Scaling (Model: {model.name})")
@@ -120,24 +116,6 @@ def plot_cost(list_results: dict[dict], model: ModelSpec):
     
     plt.tight_layout()
     plt.savefig(f"images/output_plots/{model.name}/cost_metrics_{model.name}.png")
-    # plt.show()
-
-
-def plot_purchase_vs_throughput(list_results: dict[dict], model: ModelSpec):
-    plt.figure(figsize=(10, 6))
-
-    for gpu_name, results in list_results.items():
-        # plt.plot(results["cost_purchase"], results["throughput"], marker='o', label=f"{gpu_name}")
-        throughput_per_dollar = [tp / cost if cost is not None else None for tp, cost in zip(results["throughput"], results["cost_purchase"])]
-        plt.plot(results["n_gpus"], throughput_per_dollar, marker='o', label=f"{gpu_name}")
-
-    plt.title(f"Inference Throughput per Dollar (Purchase Cost) - Model: {model.name}")
-    plt.xlabel("Number of GPUs")
-    plt.ylabel("Inference Throughput per Dollar (tokens/usd)")
-    plt.grid(True, which="both", linestyle="--", linewidth=0.5)
-    plt.legend()
-    plt.tight_layout()
-    plt.savefig(f"images/output_plots/{model.name}/purchase_cost_vs_throughput_{model.name}.png")
     # plt.show()
 
 def plot_rental_vs_throughput(list_results: dict[dict], model: ModelSpec):
@@ -246,7 +224,7 @@ def plot_scatter(list_results: dict, model: ModelSpec):
 if __name__ == "__main__":
     # model: ModelSpec = MODEL_SPECS["LlaMa-3.1-8B"]
     model: ModelSpec = MODEL_SPECS["LLaMa30B"]
-    assigned_layers = 40
+    assigned_layers = 20
 
     list_results: dict[dict] = {}
     for gpu in GPU_SPECS.values():

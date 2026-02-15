@@ -203,7 +203,8 @@ def draw_graph(data, output_filename, node_types, view=False):
         if type_u == "source":
             throughput += tp
 
-    dot.attr(label=f"{output_filename.split('/')[-2]} - Throughput (token/s): {round(throughput,1)}", labelloc='t', fontsize='18')
+    folder_name = os.path.basename(os.path.dirname(output_filename))
+    dot.attr(label=f"{folder_name} - Throughput (token/s): {round(throughput,1)}", labelloc='t', fontsize='18')
 
     # Output
     output_path = dot.render(output_filename, cleanup=True, view=view)
@@ -239,7 +240,7 @@ if __name__ == "__main__":
     layouts_dir = os.path.join(current_dir, "layouts")
     configs_dir = os.path.join(current_dir, "config")
     
-    aux_folders = [d for d in os.listdir(layouts_dir) if os.path.isdir(os.path.join(layouts_dir, d)) and (d.startswith("ilp_aux"))]
+    aux_folders = [d for d in os.listdir(layouts_dir) if os.path.isdir(os.path.join(layouts_dir, d)) and (d.startswith("ilp_test"))]
 
     if not aux_folders:
         sys.exit(1)

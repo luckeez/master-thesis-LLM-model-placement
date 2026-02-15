@@ -28,7 +28,6 @@ def parse_solution(save_sol_path) -> Dict[str, int]:
     return name_2_val
 
 def output_costs(name_2_val: Dict[str, int], node_types: Dict[str, str], output_path = None) -> tuple[int, float, float]:
-    purchase_cost: int = 0
     rental_cost: int = 0
     energy_cost: float = 0.0
     for key, value in name_2_val.items():
@@ -36,14 +35,13 @@ def output_costs(name_2_val: Dict[str, int], node_types: Dict[str, str], output_
             gpu_id: str = key.split("_")[1]
             gpu_type = node_types[gpu_id]
             gpu: GPUSpec = GPU_SPECS[gpu_type]
-            purchase_cost += gpu.buy_cost
             rental_cost += gpu.rent_cost
             energy_cost += gpu.tdp_watts
     
     if output_path:
-        print(purchase_cost, rental_cost, energy_cost)
+        print(rental_cost, energy_cost)
         
-    return (purchase_cost, rental_cost, energy_cost)
+    return (rental_cost, energy_cost)
     
 
 

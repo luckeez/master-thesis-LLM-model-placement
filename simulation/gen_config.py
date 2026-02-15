@@ -6,9 +6,9 @@ from itertools import permutations
 # --------------------------------
 
 # 1. External Network
-# Used for links: NIC_OUT -> NIC_IN, Source -> NIC_IN, NIC_OUT -> Sink
+# Used for links: Source -> NIC_IN, NIC_OUT -> Sink
 EXT_BW = "1 * gbps"
-EXT_LAT = "1 * MilliSec"
+EXT_LAT = "0.1 * MilliSec"
 
 # 2. Internal Bus
 # Used for links: NIC_IN -> GPU, GPU -> NIC_OUT
@@ -227,23 +227,105 @@ if __name__ == "__main__":
     	{"num_nodes": 1, "type": "L4", "region": "rack3"}
     ]
 
-    name = "test12-1dc-intra-inter-l4.ini"
+    name = "test18-a30.ini"
     cluster_configuration = [
-    	{"num_nodes": 1, "type": "L4", "region": "rack1"},
-    	{"num_nodes": 1, "type": "L4", "region": "rack1"},
+    	{"num_nodes": 4, "type": "T4", "region": "rack1"},
+    	{"num_nodes": 1, "type": "A100", "region": "rack1"},
     	{"num_nodes": 1, "type": "L4", "region": "rack1"}, 
     	{"num_nodes": 1, "type": "L4", "region": "rack1"},
 
     	{"num_nodes": 1, "type": "L4", "region": "rack2"},
     	{"num_nodes": 1, "type": "L4", "region": "rack2"},
-    	{"num_nodes": 1, "type": "L4", "region": "rack2"},
-    	{"num_nodes": 1, "type": "L4", "region": "rack2"},
+    	{"num_nodes": 1, "type": "T4", "region": "rack2"},
+    	{"num_nodes": 1, "type": "T4", "region": "rack2"},
 
-    	{"num_nodes": 1, "type": "L4", "region": "rack3"},
-    	{"num_nodes": 1, "type": "L4", "region": "rack3"},
-    	{"num_nodes": 1, "type": "L4", "region": "rack3"},
+    	{"num_nodes": 1, "type": "T4", "region": "rack3"},
+    	{"num_nodes": 4, "type": "A30", "region": "rack3"},
+    	{"num_nodes": 1, "type": "T4", "region": "rack3"},
     	{"num_nodes": 1, "type": "L4", "region": "rack3"}
     ]
+
+    name = "test15-unique.ini"
+    cluster_configuration = [
+    	{"num_nodes": 4, "type": "T4", "region": "rack1"},
+    	{"num_nodes": 1, "type": "T4", "region": "rack1"},
+    	{"num_nodes": 1, "type": "T4", "region": "rack1"}, 
+    	{"num_nodes": 1, "type": "T4", "region": "rack1"},
+    	{"num_nodes": 1, "type": "T4", "region": "rack1"},
+
+    	{"num_nodes": 1, "type": "L4", "region": "rack1"},
+    	{"num_nodes": 1, "type": "L4", "region": "rack1"},
+    	{"num_nodes": 1, "type": "L4", "region": "rack1"},
+    	{"num_nodes": 1, "type": "L4", "region": "rack1"},
+    	{"num_nodes": 1, "type": "L4", "region": "rack1"},
+
+    	{"num_nodes": 1, "type": "A100", "region": "rack1"},
+    	{"num_nodes": 1, "type": "A100", "region": "rack1"},
+
+    ]
+
+    name = "test15-split.ini"
+    cluster_configuration = [
+    	{"num_nodes": 4, "type": "T4", "region": "rack1"},
+    	{"num_nodes": 1, "type": "T4", "region": "rack1"},
+    	{"num_nodes": 1, "type": "T4", "region": "rack1"}, 
+    	{"num_nodes": 1, "type": "T4", "region": "rack1"},
+    	{"num_nodes": 1, "type": "T4", "region": "rack1"},
+
+    	{"num_nodes": 1, "type": "L4", "region": "rack2"},
+    	{"num_nodes": 1, "type": "L4", "region": "rack2"},
+    	{"num_nodes": 1, "type": "L4", "region": "rack2"},
+    	{"num_nodes": 1, "type": "L4", "region": "rack2"},
+    	{"num_nodes": 1, "type": "L4", "region": "rack2"},
+        
+    	{"num_nodes": 1, "type": "A100", "region": "rack2"},
+    	{"num_nodes": 1, "type": "A100", "region": "rack2"},
+
+    ]
+
+    name = "test-cloud.ini"
+    cluster_configuration = [
+        {"num_nodes": 2, "type": "L40S", "region": "eu-west"},
+        {"num_nodes": 2, "type": "L40S", "region": "eu-west"}, # 1.9
+        {"num_nodes": 1, "type": "L4", "region": "eu-west"}, # 0.9
+        {"num_nodes": 2, "type": "L4", "region": "eu-west"}, # 1.72
+        {"num_nodes": 4, "type": "L4", "region": "eu-west"}, # 3.37
+        {"num_nodes": 1, "type": "A100-80", "region": "eu-west"}, # 1.82
+        {"num_nodes": 2, "type": "A4000", "region": "eu-west"}, # 0.30
+    ]
+
+    # name = "test12-1dc-intra-inter-l4.ini"
+    # cluster_configuration = [
+    # 	{"num_nodes": 1, "type": "L4", "region": "rack1"},
+    # 	{"num_nodes": 1, "type": "L4", "region": "rack1"},
+    # 	{"num_nodes": 1, "type": "L4", "region": "rack1"}, 
+    # 	{"num_nodes": 1, "type": "L4", "region": "rack1"},
+
+    # 	{"num_nodes": 1, "type": "L4", "region": "rack2"},
+    # 	{"num_nodes": 1, "type": "L4", "region": "rack2"},
+    # 	{"num_nodes": 1, "type": "L4", "region": "rack2"},
+    # 	{"num_nodes": 1, "type": "L4", "region": "rack2"},
+
+    # 	{"num_nodes": 1, "type": "L4", "region": "rack3"},
+    # 	{"num_nodes": 1, "type": "L4", "region": "rack3"},
+    # 	{"num_nodes": 1, "type": "L4", "region": "rack3"},
+    # 	{"num_nodes": 1, "type": "L4", "region": "rack3"}
+    # ]
+
+    # name = "test12-1dc-intra-inter-l4-1g.ini"
+    # cluster_configuration = [
+    # 	{"num_nodes": 4, "type": "L4", "region": "rack1"},
+
+    # 	{"num_nodes": 1, "type": "L4", "region": "rack2"},
+    # 	{"num_nodes": 1, "type": "L4", "region": "rack2"},
+    # 	{"num_nodes": 1, "type": "L4", "region": "rack2"},
+    # 	{"num_nodes": 1, "type": "L4", "region": "rack2"},
+
+    # 	{"num_nodes": 1, "type": "L4", "region": "rack3"},
+    # 	{"num_nodes": 1, "type": "L4", "region": "rack3"},
+    # 	{"num_nodes": 1, "type": "L4", "region": "rack3"},
+    # 	{"num_nodes": 1, "type": "L4", "region": "rack3"}
+    # ]
 
     
 
@@ -388,14 +470,16 @@ if __name__ == "__main__":
 
     # name = "aux12-l4.ini"
     # cluster_configuration = [
+    #     {"num_nodes": 1, "type": "L4", "region": "rack1"},
+    #     {"num_nodes": 1, "type": "L4", "region": "rack1"},
+    #     {"num_nodes": 1, "type": "L4", "region": "rack1"},
+    #     {"num_nodes": 1, "type": "L4", "region": "rack1"},
+
     #     {"num_nodes": 1, "type": "L4"},
     #     {"num_nodes": 1, "type": "L4"},
     #     {"num_nodes": 1, "type": "L4"},
     #     {"num_nodes": 1, "type": "L4"},
-    #     {"num_nodes": 1, "type": "L4"},
-    #     {"num_nodes": 1, "type": "L4"},
-    #     {"num_nodes": 1, "type": "L4"},
-    #     {"num_nodes": 1, "type": "L4"},
+
     #     {"num_nodes": 1, "type": "L4"},
     #     {"num_nodes": 1, "type": "L4"},
     #     {"num_nodes": 1, "type": "L4"},

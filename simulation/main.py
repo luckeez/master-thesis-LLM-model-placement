@@ -17,7 +17,7 @@ def ilp_layout(model_name, complete_cluster_file_name):
     # see simulator.initial_layout.layout_synthesizer.synthesize for more details about the arguments
     ilp_args = {
         # ILP
-        "max_run_time": 36000,
+        "max_run_time": 3600,
         "early_stop_time": 100,
         "early_stop_threshold": 0.995,
         "enable_memory": True,
@@ -29,17 +29,17 @@ def ilp_layout(model_name, complete_cluster_file_name):
     layout_synthesizer.synthesize(args=ilp_args)
 
 
-def main():
+def main(complete_cluster_file_name=None):
     """
     Find a model placement for the cluster. The model placement specifies which
     layers each machine holds.
     """
-    assert len(sys.argv) == 2, f"Usage: python {sys.argv[0]} <layout_method> (ilp)"
-    layout_method = sys.argv[1]
+    layout_method = "ilp"
 
     model_name = "LLaMa30B"  # model name, should be one of the keys in MODEL_SPECS in src/specs.py
     
-    complete_cluster_file_name = "./config/aux12-1g-mem.ini"
+    if not complete_cluster_file_name:
+        complete_cluster_file_name = "./config/test12-1dc-intra-inter-l4-1g.ini"
 
     if layout_method == "ilp":
         # ILP layout synthesis

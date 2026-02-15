@@ -688,7 +688,7 @@ class ILPLayout:
                 hold_k: gp.Var = self.var_node_hold_layer[gpu_idx][layer_count]
                 throughput_at_k_with_latency: float = self.batch_size / (self.batch_size / throughput_at_k + L_net)
                 adjusted_tp.append(throughput_at_k_with_latency * hold_k)
-
+                
             # add constraint
             intergroup_tp_constr_name = f"constr_intergroup_throughput_{gpu_idx}_{from_idx}_{to_idx}"
             intergroup_tp_constr = self.ilp_model.addGenConstrIndicator(

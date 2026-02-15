@@ -97,13 +97,6 @@ def check_memory_constraint(model: ModelSpec, gpu: GPUSpec, n_gpu: int, batch_si
         return False
     return True
 
-def calc_purchase_cost(gpu: GPUSpec, n_gpu: int) -> float:
-    """ 
-    Compute the economic cost of using n_gpu of a given gpu type.
-    """
-    total_gpu_cost: float = gpu.buy_cost * n_gpu
-    return total_gpu_cost
-
 def calc_rental_cost(gpu: GPUSpec, n_gpu: int, hours: float) -> float:
     """ 
     Compute the rental cost of using n_gpu of a given gpu type for a certain number of hours.

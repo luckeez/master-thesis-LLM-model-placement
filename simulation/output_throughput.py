@@ -176,7 +176,7 @@ def plot_scatter(list_results: dict, model: ModelSpec):
         for i in range(len(results["n_gpus"])):
             n_val = results["n_gpus"][i]
             th_val = results["throughput"][i]
-            cost_val = results["cost_purchase"][i]
+            cost_val = results["cost_rent_hourly"][i]
             
             # Check: Deve essere un numero di GPU di interesse E avere throughput valido
             # if n_val in [1, 2, 4, 8, 16] and th_val is not None and th_val > 0:
@@ -217,14 +217,14 @@ def plot_scatter(list_results: dict, model: ModelSpec):
     plt.legend(title="GPU Type", loc="upper left")
     
     plt.tight_layout()
-    plt.savefig(f"images/output_plots/{model.name}/scatter_purchase_vs_perf_{model.name}.png")
+    plt.savefig(f"images/output_plots/{model.name}/scatter_rental_vs_perf_{model.name}.png")
     # plt.show()
 # ------------ END PLOTS ------------
 
 if __name__ == "__main__":
     # model: ModelSpec = MODEL_SPECS["LlaMa-3.1-8B"]
     model: ModelSpec = MODEL_SPECS["LLaMa30B"]
-    assigned_layers = 20
+    assigned_layers = None
 
     list_results: dict[dict] = {}
     for gpu in GPU_SPECS.values():
@@ -239,5 +239,5 @@ if __name__ == "__main__":
     # plot_rental_vs_throughput(list_results=list_results, model=model)
     # plot_power_vs_throughput(list_results=list_results, model=model)
     # plot_cost(list_results=list_results, model=model)
-    # plot_scatter(list_results=list_results, model=model)
+    plot_scatter(list_results=list_results, model=model)
 

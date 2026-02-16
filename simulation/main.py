@@ -39,7 +39,7 @@ def main(complete_cluster_file_name=None):
     model_name = "LLaMa30B"  # model name, should be one of the keys in MODEL_SPECS in src/specs.py
     
     if not complete_cluster_file_name:
-        complete_cluster_file_name = "./config/test12-1dc-intra-inter-l4-1g.ini"
+        complete_cluster_file_name = "./config/test-cloud-short-a30.ini"
 
     if layout_method == "ilp":
         # ILP layout synthesis

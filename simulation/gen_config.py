@@ -294,6 +294,28 @@ if __name__ == "__main__":
         {"num_nodes": 2, "type": "A4000", "region": "eu-west"}, # 0.30
     ]
 
+    name = "test-cloud-short-a30.ini"
+    cluster_configuration = [
+        {"num_nodes": 2, "type": "L40S", "region": "eu-west"},
+        {"num_nodes": 2, "type": "L40S", "region": "eu-west"}, # 1.9
+        {"num_nodes": 4, "type": "A30", "region": "eu-west"}, # 0.9
+        # {"num_nodes": 2, "type": "L4", "region": "eu-west"}, # 1.72
+        # {"num_nodes": 4, "type": "L4", "region": "eu-west"}, # 3.37
+        # {"num_nodes": 1, "type": "A100-80", "region": "eu-west"}, # 1.82
+        {"num_nodes": 2, "type": "A4000", "region": "eu-west"}, # 0.30
+    ]
+
+    name = "test-cloud-short-a100.ini"
+    cluster_configuration = [
+        {"num_nodes": 2, "type": "L40S", "region": "eu-west"},
+        {"num_nodes": 2, "type": "L40S", "region": "eu-west"}, # 1.9
+        {"num_nodes": 1, "type": "A100", "region": "eu-west"}, # 0.9
+        # {"num_nodes": 2, "type": "L4", "region": "eu-west"}, # 1.72
+        # {"num_nodes": 4, "type": "L4", "region": "eu-west"}, # 3.37
+        # {"num_nodes": 1, "type": "A100-80", "region": "eu-west"}, # 1.82
+        {"num_nodes": 2, "type": "A4000", "region": "eu-west"}, # 0.30
+    ]
+
     # name = "test12-1dc-intra-inter-l4.ini"
     # cluster_configuration = [
     # 	{"num_nodes": 1, "type": "L4", "region": "rack1"},

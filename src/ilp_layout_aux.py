@@ -110,6 +110,7 @@ class ILPLayout:
         self.cluster_file_name: str = ""
         self.enable_memory: bool = False
         self.batch_size: int = -1
+        self.tp_only: bool = False
 
         # cluster information
         self.ilp_source: ILPNode | None = None
@@ -188,7 +189,7 @@ class ILPLayout:
         # NEW global max num layers
         self.global_max_num_layers: int = -1  # arbitrary number
 
-    def from_ini(self, cluster_file_name: str, model_name: str, enable_memory: bool, batch_size: int) -> None:
+    def from_ini(self, cluster_file_name: str, model_name: str, enable_memory: bool, batch_size: int, tp_only: bool) -> None:
         """
         Initialize the ILP using a given cluster topology and machine profiles.
 
@@ -203,6 +204,7 @@ class ILPLayout:
         # Enable Memory
         self.enable_memory = enable_memory
         self.batch_size = batch_size
+        self.tp_only = tp_only
 
         # # load machine statistics
         # machine_profile_parser = ConfigParser()
@@ -1205,7 +1207,7 @@ class ILPLayout:
                 individual_limit: int = self.ilp_nodes[gpu_id].max_num_layers
 
                 for k, var in self.var_node_hold_layer[gpu_id].items():                    
-                    if k > individual_limit:
+                    if self.tp_only or k > individual_limit:
                         tp_off_limit_constr_name = f"tp_off_limit_constr_{gpu_id}_{k}"
                         tp_off_limit_constr = self.ilp_model.addGenConstrIndicator(
                             control_var, False,
@@ -1320,90 +1322,91 @@ class ILPLayout:
 
 
 
+        if not self.tp_only:
+            
+            _BigM = 2*self.model_spec.n_layers
+            # Step 8.5 pipeline Ordering
+            for group_id, gpu_ids in self.gpu_groups.items():
+                if len(gpu_ids) < 2:
+                    continue
 
-        _BigM = 2*self.model_spec.n_layers
-        # Step 8.5 pipeline Ordering
-        for group_id, gpu_ids in self.gpu_groups.items():
-            if len(gpu_ids) < 2:
-                continue
+                # take the switch variable of the group
+                control_var: gp.Var = self.var_group_tp_active[f"group_tp_active_{group_id}"]
 
-            # take the switch variable of the group
-            control_var: gp.Var = self.var_group_tp_active[f"group_tp_active_{group_id}"]
+                # enforce ordering
+                # for each pair of consecutive gpus in the group
+                sorted_gpu_ids = sorted(gpu_ids)  # assuming gpu_ids can be sorted to reflect order
 
-            # enforce ordering
-            # for each pair of consecutive gpus in the group
-            sorted_gpu_ids = sorted(gpu_ids)  # assuming gpu_ids can be sorted to reflect order
+                nic_in = f"nic_in_{group_id}"
+                nic_out = f"nic_out_{group_id}"
 
-            nic_in = f"nic_in_{group_id}"
-            nic_out = f"nic_out_{group_id}"
+                # A: TP OFF -> only first GPU gets from NIC_IN
+                # If TP OFF (control_var = 0), switch_{nic_in}_{gpu_i} = 0 for every gpu except the FIRST ONE.
+                for gpu_id in sorted_gpu_ids[1:]:
+                    switch_name = f"switch_{nic_in}_{gpu_id}"
+                    if switch_name in self.var_edge_switch:
+                        self.ilp_model.addConstr(
+                            self.var_edge_switch[switch_name] <= control_var,
+                            name=f"pipeline_ordering_start_{group_id}_{gpu_id}"
+                        )
+                        num_constraints += 1
+                
+                # # B: TP OFF -> Only last GPU sends to NIC_OUT
+                # # If TP OFF (control_var = 0), switch_{gpu_i}_{nic_out} = 0 for every gpu except the LAST ONE.
+                # for gpu_id in sorted_gpu_ids[:-1]:
+                #     switch_name = f"switch_{gpu_id}_{nic_out}"
+                #     if switch_name in self.var_edge_switch:
+                #         self.ilp_model.addConstr(
+                #             self.var_edge_switch[switch_name] <= control_var,
+                #             name=f"pipeline_ordering_end_{group_id}_{gpu_id}"
+                #         )
+                #         num_constraints += 1
 
-            # A: TP OFF -> only first GPU gets from NIC_IN
-            # If TP OFF (control_var = 0), switch_{nic_in}_{gpu_i} = 0 for every gpu except the FIRST ONE.
-            for gpu_id in sorted_gpu_ids[1:]:
-                switch_name = f"switch_{nic_in}_{gpu_id}"
-                if switch_name in self.var_edge_switch:
+
+                # B: TP OFF -> enforce ordering between GPUs
+                # If TP OFF (control_var = 0), enforce end_i == start_{i+1} OR start_{i+1} == M for every consecutive pair of gpus in the group
+                for i in range(len(sorted_gpu_ids) - 1):
+                    curr_gpu = sorted_gpu_ids[i]
+                    next_gpu = sorted_gpu_ids[i + 1]
+
+                    if self.enable_memory:
+                        active_next = self.var_node_active[next_gpu]
+                    else:
+                        active_next = 1  # always active
+                    end_curr = self.get_end_layer_index(curr_gpu)
+                    start_next = self.var_node_start[f"start_{next_gpu}"]
+
+                    # B.1: If TP = OFF AND next_gpu is ACTIVE -> end_curr == start_next
+                    # Big-M Formula: |start_next - end_curr| <= M * control_var + M * (1 - active_next)
                     self.ilp_model.addConstr(
-                        self.var_edge_switch[switch_name] <= control_var,
-                        name=f"pipeline_ordering_start_{group_id}_{gpu_id}"
+                        start_next - end_curr <= _BigM * control_var + _BigM * (1 - active_next),
+                        name=f"pipeline_ordering_constr1_{curr_gpu}_{next_gpu}"
+                    )
+                    self.ilp_model.addConstr(
+                        end_curr - start_next <= _BigM * control_var + _BigM * (1 - active_next),
+                        name=f"pipeline_ordering_constr2_{curr_gpu}_{next_gpu}"
+                    )
+                    num_constraints += 2
+
+                    # B.2: If TP = OFF AND next_gpu is INACTIVE -> start_next == M (so that it won't receive any layers)
+                    # Big-M Formula: start_next >= M - M * active_next - M * control_var
+                    self.ilp_model.addConstr(
+                        start_next >= self.model_spec.n_layers - _BigM * active_next - _BigM * control_var,
+                        name=f"pipeline_ordering_constr3_{curr_gpu}_{next_gpu}"
                     )
                     num_constraints += 1
-            
-            # # B: TP OFF -> Only last GPU sends to NIC_OUT
-            # # If TP OFF (control_var = 0), switch_{gpu_i}_{nic_out} = 0 for every gpu except the LAST ONE.
-            # for gpu_id in sorted_gpu_ids[:-1]:
-            #     switch_name = f"switch_{gpu_id}_{nic_out}"
-            #     if switch_name in self.var_edge_switch:
-            #         self.ilp_model.addConstr(
-            #             self.var_edge_switch[switch_name] <= control_var,
-            #             name=f"pipeline_ordering_end_{group_id}_{gpu_id}"
-            #         )
-            #         num_constraints += 1
 
+                    # C: TP OFF -> only last GPU in the pipeline can send to NIC_OUT
+                    # Formula: switch_{gpu_i}_{nic_out} <= 1 - active_next + control_var
+                    switch_out_name = f"switch_{curr_gpu}_{nic_out}"
+                    if switch_name in self.var_edge_switch:
+                        switch_out_var = self.var_edge_switch[switch_out_name]
 
-            # B: TP OFF -> enforce ordering between GPUs
-            # If TP OFF (control_var = 0), enforce end_i == start_{i+1} OR start_{i+1} == M for every consecutive pair of gpus in the group
-            for i in range(len(sorted_gpu_ids) - 1):
-                curr_gpu = sorted_gpu_ids[i]
-                next_gpu = sorted_gpu_ids[i + 1]
-
-                if self.enable_memory:
-                    active_next = self.var_node_active[next_gpu]
-                else:
-                    active_next = 1  # always active
-                end_curr = self.get_end_layer_index(curr_gpu)
-                start_next = self.var_node_start[f"start_{next_gpu}"]
-
-                # B.1: If TP = OFF AND next_gpu is ACTIVE -> end_curr == start_next
-                # Big-M Formula: |start_next - end_curr| <= M * control_var + M * (1 - active_next)
-                self.ilp_model.addConstr(
-                    start_next - end_curr <= _BigM * control_var + _BigM * (1 - active_next),
-                    name=f"pipeline_ordering_constr1_{curr_gpu}_{next_gpu}"
-                )
-                self.ilp_model.addConstr(
-                    end_curr - start_next <= _BigM * control_var + _BigM * (1 - active_next),
-                    name=f"pipeline_ordering_constr2_{curr_gpu}_{next_gpu}"
-                )
-                num_constraints += 2
-
-                # B.2: If TP = OFF AND next_gpu is INACTIVE -> start_next == M (so that it won't receive any layers)
-                # Big-M Formula: start_next >= M - M * active_next - M * control_var
-                self.ilp_model.addConstr(
-                    start_next >= self.model_spec.n_layers - _BigM * active_next - _BigM * control_var,
-                    name=f"pipeline_ordering_constr3_{curr_gpu}_{next_gpu}"
-                )
-                num_constraints += 1
-
-                # C: TP OFF -> only last GPU in the pipeline can send to NIC_OUT
-                # Formula: switch_{gpu_i}_{nic_out} <= 1 - active_next + control_var
-                switch_out_name = f"switch_{curr_gpu}_{nic_out}"
-                if switch_name in self.var_edge_switch:
-                    switch_out_var = self.var_edge_switch[switch_out_name]
-
-                    self.ilp_model.addConstr(
-                        switch_out_var <= 1 - active_next + control_var,
-                        name=f"pipeline_ordering_constr4_{curr_gpu}_{next_gpu}"
-                    )
-                    num_constraints += 1   
+                        self.ilp_model.addConstr(
+                            switch_out_var <= 1 - active_next + control_var,
+                            name=f"pipeline_ordering_constr4_{curr_gpu}_{next_gpu}"
+                        )
+                        num_constraints += 1   
 
             # # C: TP OFF -> enforce ordering between GPUs
             # # If TP OFF (control_var = 0), enforce end_i == start_{i+1} for every consecutive pair of gpus in the group

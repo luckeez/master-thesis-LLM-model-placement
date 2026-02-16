@@ -62,12 +62,14 @@ class LayoutSynthesizer:
         model_name: str = args["model_name"]
         enable_memory: bool = args["enable_memory"]
         batch_size: int = args["batch_size"]
+        tp_only: bool = args["tp_only"]
         # 1. Load the cluster into layout synthesizer
         self.layout_synthesizer.from_ini(
             cluster_file_name=self.complete_cluster_file_name,
             model_name=model_name,
             enable_memory=enable_memory,
-            batch_size=batch_size
+            batch_size=batch_size,
+            tp_only=tp_only
         )
 
         # 2. Build Model

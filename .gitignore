@@ -1,4 +1,6 @@
 .vscode/
 LICENSE
 gurobi.log
+simulation/__pycache__/
+src/__pycache__/
 

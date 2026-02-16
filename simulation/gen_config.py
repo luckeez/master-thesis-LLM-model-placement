@@ -28,6 +28,7 @@ REGION_LATENCY = {
     ("eu-west", "eu-east"): "10 * MilliSec",
     ("eu-east", "eu-west"): "10 * MilliSec",
     ("eu-east", "eu-east"): "1 * MilliSec",
+    
 
     ("rack1", "rack1"): "0.05 * MilliSec",
     ("rack1", "rack2"): "0.1 * MilliSec",

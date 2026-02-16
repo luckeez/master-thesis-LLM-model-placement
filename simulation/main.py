@@ -22,7 +22,8 @@ def ilp_layout(model_name, complete_cluster_file_name):
         "early_stop_threshold": 0.995,
         "enable_memory": True,
         "model_name": "LLaMa30B",
-        "batch_size": 8
+        "batch_size": 8,
+        "tp_only": True
     }
 
     # run the ILP layout synthesis
@@ -39,7 +40,7 @@ def main(complete_cluster_file_name=None):
     model_name = "LLaMa30B"  # model name, should be one of the keys in MODEL_SPECS in src/specs.py
     
     if not complete_cluster_file_name:
-        complete_cluster_file_name = "./config/test-cloud-short-a30.ini"
+        complete_cluster_file_name = "./config/test-cloud.ini"
 
     if layout_method == "ilp":
         # ILP layout synthesis

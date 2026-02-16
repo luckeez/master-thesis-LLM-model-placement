@@ -59,7 +59,8 @@ def simulate_inference_scaling_with_cost(model: ModelSpec, gpu: GPUSpec, max_gpu
             else:
                 link_type = "NVLink"
         throughput = calc_throughput(model=model, gpu=gpu, n_gpu=n, batch_size=batch_size, link_type=link_type, assigned_layers=assigned_layers)
-        print(f"Th: {throughput}, gpu: {gpu.name}, n_gpu: {n}")
+        if gpu.name == "A4000" or gpu.name == "A30":
+            print(f"Th: {throughput}, gpu: {gpu.name}, n_gpu: {n}")
 
         rent_cost = formulas.calc_rental_cost(gpu=gpu, n_gpu=n, hours=1)
         energy = formulas.calc_power_cost(gpu=gpu, n_gpu=n, hours=1, cost_per_kwh=0.15)
@@ -224,7 +225,7 @@ def plot_scatter(list_results: dict, model: ModelSpec):
 if __name__ == "__main__":
     # model: ModelSpec = MODEL_SPECS["LlaMa-3.1-8B"]
     model: ModelSpec = MODEL_SPECS["LLaMa30B"]
-    assigned_layers = None
+    assigned_layers = 48
 
     list_results: dict[dict] = {}
     for gpu in GPU_SPECS.values():
@@ -239,5 +240,5 @@ if __name__ == "__main__":
     # plot_rental_vs_throughput(list_results=list_results, model=model)
     # plot_power_vs_throughput(list_results=list_results, model=model)
     # plot_cost(list_results=list_results, model=model)
-    plot_scatter(list_results=list_results, model=model)
+    # plot_scatter(list_results=list_results, model=model)
 

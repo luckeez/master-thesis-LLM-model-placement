@@ -1520,9 +1520,9 @@ class ILPLayout:
                                             for node_idx, node in self.ilp_nodes.items() if node.node_type == NodeType.COMPUTE])
             norm_rental_cost = rental_cost / sum(node.machine_type.rent_cost for node in self.ilp_nodes.values() if node.node_type == NodeType.COMPUTE)  # normalize rental cost by max
 
-            # Parameter to control trade-off between throughput and memory usage
+            # Parameter to control trade-off between throughput and rental cost
             # Alpha = 1.0 -> only maximize throughput
-            # Alpha = 0.0 -> only minimize memory usage
+            # Alpha = 0.0 -> only minimize rental cost
             # Intermediate values -> trade-off
 
             final_objective = self.opt_alpha * norm_throughput - (1 - self.opt_alpha) * norm_rental_cost

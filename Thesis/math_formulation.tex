@@ -1,0 +1,204 @@
+% Mathematical Formulation - MILP-Based LLM Model Placement
+% Sections 1 and 2: Input Parameters and Decision Variables
+
+% NOTE: This file is meant to be \input{} into a main thesis document.
+% It assumes standard packages: amsmath, amssymb, booktabs, graphicx.
+
+\section{MILP Formulation}\label{sec:milp-formulation}
+
+In this section we present the Mixed-Integer Linear Programming (MILP) formulation
+that lies at the core of our placement engine.  The model takes as input a
+description of the GPU cluster topology together with the architectural
+parameters of the target Large Language Model, and produces an assignment of
+model layers to GPUs that maximises end-to-end inference throughput.
+The formulation natively supports both \emph{Pipeline Parallelism}~(PP) and
+\emph{Tensor Parallelism}~(TP), and can optionally incorporate a
+cost-awareness term that trades off throughput against the rental expense of
+the activated hardware.
+
+%% ---------------------------------------------------------------------------
+\subsection{Graph Topology}\label{ssec:graph-topology}
+
+We model the cluster as a directed graph $G = (V, E)$ whose nodes belong to
+one of five categories.
+
+\begin{itemize}
+    \item \textbf{Compute nodes}~$V_C$: each element of $V_C$ corresponds to a
+          physical GPU that can execute inference on a subset of the model layers.
+    \item \textbf{NIC-IN nodes}~$V_{\mathit{NI}}$: virtual ingress points, one per
+          group, that model the inbound network interface through which tokens
+          enter a group from the rest of the cluster.
+    \item \textbf{NIC-OUT nodes}~$V_{\mathit{NO}}$: symmetric egress points
+          through which tokens leave a group towards other groups or the sink.
+    \item \textbf{Source}~$(\textit{src})$: a virtual node that injects the
+          initial token stream into the pipeline.  Its outgoing flow represents
+          the global inference throughput.
+    \item \textbf{Sink}~$(\textit{snk})$: a virtual node that absorbs the
+          fully-processed token stream.
+\end{itemize}
+
+The set of directed edges $E$ captures the physical and logical communication
+links among these nodes.  Each edge $(i,j)\in E$ is characterised by a
+\emph{throughput capacity}~$C_{ij}$ (tokens\,/\,s) and a
+\emph{latency}~$L_{ij}$ (seconds).  The capacity is derived from the link
+bandwidth and the size of the data unit that traverses the link: for edges
+incident to the source or sink the divisor is the \emph{token size}, whereas
+for all other edges it is the \emph{activation size}
+$d_{\text{model}} \times \beta$, where $\beta$ denotes the number of bytes per
+parameter (2 for FP16).
+
+%% ---------------------------------------------------------------------------
+\subsection{Groups}\label{ssec:groups}
+
+The compute nodes are organised into \emph{groups}
+$\mathcal{G} = \{g_1, g_2, \dots\}$.  Each group~$g$ contains a set of
+GPUs~$V_C^g$ that are connected by high-bandwidth intra-node links (e.g.\
+PCIe or NVLink).  A binary control variable, introduced in
+Section~\ref{ssec:decision-variables}, determines the parallelism strategy
+adopted within each group at the solution time:
+
+\begin{itemize}
+    \item When \textbf{Tensor Parallelism is active}
+          ($\tau_g = 1$), every GPU in the group loads the \emph{same} set of
+          layers and collectively computes each layer in parallel, communicating
+          partial results via AllReduce.  The group therefore behaves as a single,
+          more powerful logical device whose throughput is governed by a dedicated
+          TP throughput profile~$T^{\mathit{TP}}_g(k)$.
+    \item When \textbf{Tensor Parallelism is inactive}
+          ($\tau_g = 0$), the GPUs in the group operate as a local
+          \emph{pipeline}: each GPU processes a contiguous, non-overlapping slice
+          of the model, and tokens flow sequentially from one GPU to the next
+          within the group.
+\end{itemize}
+
+Every group~$g$ is associated with a NIC-IN node
+$\textit{nic\_in}_g \in V_{\mathit{NI}}$ and a NIC-OUT node
+$\textit{nic\_out}_g \in V_{\mathit{NO}}$ that serve as the group's gateway to
+the rest of the cluster
+
+%% ---------------------------------------------------------------------------
+\subsection{Model and Hardware Parameters}\label{ssec:parameters}
+
+The formulation relies on several families of parameters that encode the
+properties of the LLM and the cluster hardware.
+
+\paragraph{Model parameters.}
+Let $M$ denote the total number of transformer layers in the model,
+$B$ the batch size, and $\alpha \in [0,1]$ the trade-off coefficient used in
+the multi-objective variant of the problem (Section~\ref{ssec:objective}).
+
+\paragraph{Node parameters.}
+For each GPU~$i \in V_C$ we define:
+\begin{itemize}
+    \item $K_i$\,: the maximum number of layers that GPU~$i$ can accommodate
+          in its VRAM, computed as
+          $K_i = \bigl\lfloor \tfrac{\text{VRAM}_i / 2}
+                 {\text{bytes\_per\_layer}} \bigr\rfloor$,
+          where the factor~$\frac{1}{2}$ reserves memory for activations and
+          the KV cache.
+    \item $T_i(k)$\,: the inference throughput
+          (tokens\,/\,s) achieved by GPU~$i$ when it holds~$k$ layers and
+          operates individually (i.e.\ in PP mode).  This quantity is
+          pre-computed for every feasible $k \in \{1, \dots, K_i\}$ using the
+          throughput model of Section~\ref{ssec:throughput-model}.
+    \item $c_i$\,: the hourly rental cost of GPU~$i$.
+\end{itemize}
+
+At the group level, $T^{\mathit{TP}}_g(k)$ denotes the throughput of group~$g$
+when all $|V_C^g|$ GPUs cooperate via tensor parallelism on~$k$ layers.  The
+maximum number of layers that a group can hold under TP is
+$K_g^{\mathit{TP}} = K_i \cdot |V_C^g|$, assuming homogeneous GPUs within the
+group.
+
+Finally, the \emph{global maximum layer count}~$K_{\max}$ is defined as the
+largest value that any node might need to represent, accounting for both
+individual capacities and TP-extended capacities:
+\[
+    K_{\max} = \max\!\Bigl(
+        \max_{i \in V_C} K_i,\;
+        \max_{g \in \mathcal{G}:\,|V_C^g|>1} K_i \cdot |V_C^g|
+    \Bigr).
+\]
+
+\paragraph{Edge parameters.}
+Each link $(i,j) \in E$ carries a throughput capacity~$C_{ij}$ and a
+latency~$L_{ij}$.  The latency is relevant only for inter-group links (i.e.\
+NIC-OUT\,$\to$\,NIC-IN edges), where it penalises the effective throughput of
+the downstream node or group.
+
+%% ---------------------------------------------------------------------------
+\subsection{Decision Variables}\label{ssec:decision-variables}
+
+The formulation employs four families of variables that jointly determine the
+layer-to-GPU assignment, the token routing, and the parallelism strategy.
+
+\paragraph{Layer placement.}
+For each compute node~$i \in V_C$ we introduce an integer variable
+\[
+    s_i \in \{0, 1, \dots\}
+\]
+that records the index of the first layer assigned to GPU~$i$.  A family of
+binary indicator variables
+\[
+    b_{ik} \in \{0, 1\}, \quad k = 1, \dots, K_{\max},
+\]
+encodes the number of layers held by the node: $b_{ik} = 1$ if and only if
+GPU~$i$ is assigned exactly~$k$ layers.  Together, these variables define the
+\emph{end layer index}
+\begin{equation}\label{eq:end-layer}
+    e_i \;=\; s_i + \sum_{k=1}^{K_{\max}} k \cdot b_{ik},
+\end{equation}
+so that GPU~$i$ is responsible for layers $[s_i, e_i)$.
+
+\paragraph{Token flow.}
+A continuous variable
+\[
+    f_{ij} \geq 0, \quad (i,j) \in E,
+\]
+represents the token throughput (tokens\,/\,s) routed along edge~$(i,j)$.
+The total flow leaving the source equals the overall inference throughput
+of the system.
+
+\paragraph{Edge activation.}
+A binary variable
+\[
+    d_{ij} \in \{0, 1\}, \quad (i,j) \in E,
+\]
+acts as a switch: $d_{ij} = 1$ if and only if edge~$(i,j)$ carries a
+non-zero flow.  These switches are linked to the layer placement through
+a series of Big-M constraints (Section~\ref{ssec:edge-switching}) that
+ensure an edge is enabled only when the sending and receiving nodes hold
+compatible layer ranges.
+
+\paragraph{Group control.}
+For each group~$g \in \mathcal{G}$ we define a binary variable
+\[
+    \tau_g \in \{0, 1\},
+\]
+where $\tau_g = 1$ activates Tensor Parallelism within the group
+and $\tau_g = 0$ activates Pipeline Parallelism.  This variable controls
+which throughput profile (individual vs.\ group) bounds the flow, and
+which synchronisation and ordering constraints are enforced.
+
+\paragraph{Node activation (memory-aware mode).}
+When the optional memory-aware objective is enabled, an additional binary
+variable
+\[
+    a_i \in \{0, 1\}, \quad i \in V_C,
+\]
+indicates whether GPU~$i$ is active, i.e.\ whether it holds at least one
+layer.  Inactive GPUs incur no rental cost and are excluded from the
+pipeline.  The relationship between~$a_i$ and the layer indicators is
+enforced by
+\begin{align}
+    \sum_{k=1}^{K_{\max}} b_{ik} &\leq M \cdot a_i, \label{eq:active-upper}\\[4pt]
+    \sum_{k=1}^{K_{\max}} b_{ik} &\geq a_i, \label{eq:active-lower}
+\end{align}
+ensuring that~$a_i = 1$ if and only if at least one $b_{ik}$ is non-zero.
+Moreover, when a GPU is inactive its starting index is set to a sentinel
+value:
+\begin{equation}\label{eq:inactive-start}
+    a_i = 0 \;\implies\; s_i = M,
+\end{equation}
+which prevents the inactive node from interfering with the placement of
+active nodes.

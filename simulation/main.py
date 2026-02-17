@@ -21,7 +21,7 @@ def ilp_layout(model_name, complete_cluster_file_name):
         "early_stop_time": 100,
         "early_stop_threshold": 0.995,
         "enable_memory": True,
-        "model_name": "LLaMa30B",
+        "model_name": model_name,
         "batch_size": 8,
         "tp_only": True
     }
@@ -30,14 +30,13 @@ def ilp_layout(model_name, complete_cluster_file_name):
     layout_synthesizer.synthesize(args=ilp_args)
 
 
-def main(complete_cluster_file_name=None):
+def main(complete_cluster_file_name=None, model_name="LLaMa30B"):
     """
     Find a model placement for the cluster. The model placement specifies which
     layers each machine holds.
     """
     layout_method = "ilp"
-
-    model_name = "LLaMa30B"  # model name, should be one of the keys in MODEL_SPECS in src/specs.py
+     # model name, should be one of the keys in MODEL_SPECS in src/specs.py
     
     if not complete_cluster_file_name:
         complete_cluster_file_name = "./config/test-cloud.ini"

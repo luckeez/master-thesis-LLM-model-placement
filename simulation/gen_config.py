@@ -24,22 +24,47 @@ NVLINK_LAT = "0.005 * MilliSec"
 MEMORY = {"T4": 320, "L4": 300, "A100": 1935}
 
 REGION_LATENCY = {
-    ("eu-west", "eu-west"): "1 * MilliSec",
-    ("eu-west", "eu-east"): "10 * MilliSec",
-    ("eu-east", "eu-west"): "10 * MilliSec",
-    ("eu-east", "eu-east"): "1 * MilliSec",
-    
+    ("eu-west", "eu-west"): "0.5 * MilliSec",
+    ("eu-west", "eu-east"): "5 * MilliSec",
+    ("eu-west", "us-east"): "40 * MilliSec",
+    ("eu-west", "us-west"): "70 * MilliSec",
+    ("eu-west", "asia-east"): "100 * MilliSec",
+    ("eu-west", "asia-south"): "85 * MilliSec",
 
-    ("rack1", "rack1"): "0.05 * MilliSec",
-    ("rack1", "rack2"): "0.1 * MilliSec",
-    ("rack2", "rack1"): "0.1 * MilliSec",
-    ("rack2", "rack2"): "0.05 * MilliSec",
-    ("rack1", "rack3"): "0.1 * MilliSec",
-    ("rack3", "rack1"): "0.1 * MilliSec",
-    ("rack2", "rack3"): "0.1 * MilliSec",
-    ("rack3", "rack2"): "0.1 * MilliSec",
-    ("rack3", "rack3"): "0.05 * MilliSec"
-    # ECC TODO fix values
+    ("eu-east", "eu-west"): "5 * MilliSec",
+    ("eu-east", "eu-east"): "0.5 * MilliSec",
+    ("eu-east", "us-east"): "45 * MilliSec",
+    ("eu-east", "us-west"): "75 * MilliSec",
+    ("eu-east", "asia-east"): "90 * MilliSec",
+    ("eu-east", "asia-south"): "75 * MilliSec",
+
+    ("us-east", "eu-west"): "40 * MilliSec",
+    ("us-east", "eu-east"): "45 * MilliSec",
+    ("us-east", "us-east"): "0.5 * MilliSec",
+    ("us-east", "us-west"): "30 * MilliSec",
+    ("us-east", "asia-east"): "90 * MilliSec",
+    ("us-east", "asia-south"): "100 * MilliSec",
+
+    ("us-west", "eu-west"): "70 * MilliSec",
+    ("us-west", "eu-east"): "75 * MilliSec",
+    ("us-west", "us-east"): "30 * MilliSec",
+    ("us-west", "us-west"): "0.5 * MilliSec",
+    ("us-west", "asia-east"): "60 * MilliSec",
+    ("us-west", "asia-south"): "80 * MilliSec",
+
+    ("asia-east", "eu-west"): "100 * MilliSec",
+    ("asia-east", "eu-east"): "90 * MilliSec",
+    ("asia-east", "us-east"): "90 * MilliSec",
+    ("asia-east", "us-west"): "60 * MilliSec",
+    ("asia-east", "asia-east"): "0.5 * MilliSec",
+    ("asia-east", "asia-south"): "25 * MilliSec",
+
+    ("asia-south", "eu-west"): "85 * MilliSec",
+    ("asia-south", "eu-east"): "75 * MilliSec",
+    ("asia-south", "us-east"): "100 * MilliSec",
+    ("asia-south", "us-west"): "80 * MilliSec",
+    ("asia-south", "asia-east"): "25 * MilliSec",
+    ("asia-south", "asia-south"): "0.5 * MilliSec",
 }
 # --------------------------------
 
@@ -75,7 +100,7 @@ def add_link(a: int | str, b: int | str, bw: str, lat: str):
     if b_section:
         node_definitions[b_section]["connected_nodes"].append(a)
 
-def generate_config_file(groups: List[Dict[str, Any]], output_filepath: str):
+def generate_config_file(groups: List[Dict[str, Any]], output_filepath: str, alpha: float = 0.5):
     """
     Generate a .ini configuration file for the cluster topology.
 
@@ -169,7 +194,7 @@ def generate_config_file(groups: List[Dict[str, Any]], output_filepath: str):
             f.write(f"# Topology: {len(groups)} groups.\n\n")
 
             f.write(f"[Settings]\n")
-            f.write("optimization_alpha = 0.5\n")
+            f.write(f"optimization_alpha = {alpha}\n")
 
             # Write node names
             f.write("[ComputeNodes]\n")

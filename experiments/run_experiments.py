@@ -144,6 +144,9 @@ def run_single(
 
     # 1. Generate config
     os.makedirs(output_dir, exist_ok=True)
+    if os.path.exists(ilp_tmp_dir):
+        shutil.rmtree(ilp_tmp_dir)
+    os.makedirs(ilp_tmp_dir, exist_ok=True)
     generate_config_file(groups, config_path, alpha=alpha)
 
     # 2. Run solver
@@ -175,7 +178,7 @@ def run_single(
     if os.path.exists(output_dir):
         with open(os.path.join(output_dir, "metrics.json"), "w") as f:
             json.dump(metrics, f, indent=2)
-
+    exit(0)
     return metrics
 
 
@@ -247,16 +250,6 @@ def generate_e1_configs() -> List[Tuple[str, List[Dict[str, Any]]]]:
     for i, defs in enumerate(mixes):
         groups = [{"num_nodes": n, "type": t, "region": R} for n, t in defs]
         configs.append((f"E1_mix-{i+1}", groups))
-
-    # ---- Cat 6: Budget only (T4, L4, A30, A4000) ----
-    budgets = [
-        [(4,"L4"),(2,"L4"),(2,"A30"),(4,"A4000"),(2,"T4"),(1,"T4"),(1,"A30")],
-        [(4,"T4"),(4,"T4"),(2,"A4000"),(2,"A4000"),(1,"L4"),(1,"L4"),(1,"A30"),(1,"A30")],
-        [(2,"A30"),(2,"A30"),(4,"L4"),(1,"L4"),(1,"L4"),(2,"A4000"),(1,"T4"),(1,"T4"),(1,"T4"),(1,"A4000")],
-    ]
-    for i, defs in enumerate(budgets):
-        groups = [{"num_nodes": n, "type": t, "region": R} for n, t in defs]
-        configs.append((f"E1_budget-{i+1}", groups))
 
     return configs
 

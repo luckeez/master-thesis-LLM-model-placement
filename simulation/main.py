@@ -17,9 +17,9 @@ def ilp_layout(model_name, complete_cluster_file_name):
     # see simulator.initial_layout.layout_synthesizer.synthesize for more details about the arguments
     ilp_args = {
         # ILP
-        "max_run_time": 3600,
+        "max_run_time": 1800, # half an hour
         "early_stop_time": 100,
-        "early_stop_threshold": 0.995,
+        "early_stop_threshold": 0.95,
         "enable_memory": True,
         "model_name": model_name,
         "batch_size": 8,
@@ -39,7 +39,7 @@ def main(complete_cluster_file_name=None, model_name="LLaMa30B"):
      # model name, should be one of the keys in MODEL_SPECS in src/specs.py
     
     if not complete_cluster_file_name:
-        complete_cluster_file_name = "./config/test-cloud.ini"
+        complete_cluster_file_name = "./config/test-config.ini"
 
     if layout_method == "ilp":
         # ILP layout synthesis

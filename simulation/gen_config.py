@@ -342,6 +342,27 @@ if __name__ == "__main__":
         {"num_nodes": 2, "type": "A4000", "region": "eu-west"}, # 0.30
     ]
 
+
+    name = "test-config.ini"
+    cluster_configuration = [
+        {"num_nodes": 1, "type": "L4", "region": "eu-west"},
+        {"num_nodes": 1, "type": "L4", "region": "eu-west"},
+        {"num_nodes": 1, "type": "L4", "region": "eu-west"},
+        {"num_nodes": 1, "type": "L4", "region": "eu-west"},
+        {"num_nodes": 1, "type": "L4", "region": "eu-west"},
+        {"num_nodes": 1, "type": "L4", "region": "eu-west"},
+        {"num_nodes": 1, "type": "L4", "region": "eu-west"},
+        {"num_nodes": 1, "type": "L4", "region": "eu-west"},
+        {"num_nodes": 1, "type": "L4", "region": "eu-west"},
+        {"num_nodes": 1, "type": "L4", "region": "eu-west"},
+        {"num_nodes": 1, "type": "L4", "region": "eu-west"},
+        {"num_nodes": 1, "type": "L4", "region": "eu-west"},
+        {"num_nodes": 1, "type": "L4", "region": "eu-west"},
+        {"num_nodes": 1, "type": "L4", "region": "eu-west"},
+        {"num_nodes": 1, "type": "L4", "region": "eu-west"},
+        {"num_nodes": 1, "type": "L4", "region": "eu-west"},
+    ]
+
     # name = "test12-1dc-intra-inter-l4.ini"
     # cluster_configuration = [
     # 	{"num_nodes": 1, "type": "L4", "region": "rack1"},

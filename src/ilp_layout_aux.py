@@ -1207,7 +1207,7 @@ class ILPLayout:
                 individual_limit: int = self.ilp_nodes[gpu_id].max_num_layers
 
                 for k, var in self.var_node_hold_layer[gpu_id].items():                    
-                    if self.tp_only or k > individual_limit:
+                    if (self.tp_only and len(gpu_ids)>1) or k > individual_limit:
                         tp_off_limit_constr_name = f"tp_off_limit_constr_{gpu_id}_{k}"
                         tp_off_limit_constr = self.ilp_model.addGenConstrIndicator(
                             control_var, False,
@@ -1611,9 +1611,11 @@ class ILPLayout:
                     model.terminate()
 
         import shutil
+        import os
         ini_file = self.cluster_file_name.split("/")[-1]
         ini_path = save_sol_path.replace("ilp_solution.sol", ini_file)
-        shutil.copy(self.cluster_file_name, ini_path)
+        if not os.path.exists(os.path.dirname(ini_path)):
+            shutil.copy(self.cluster_file_name, ini_path)
         print(f"[ILP Layout - Info] Copied cluster file to {ini_path}")
         # solve
         print("# ----------------------------------------- Gurobi ----------------------------------------- #")

@@ -46,8 +46,8 @@ class LayoutSynthesizer:
         self.layout_synthesizer: ILPLayout
 
         # remove files in workspace path ("ilp" folder)
-        for file in os.listdir(self.workspace_path):
-            os.remove(os.path.join(self.workspace_path, file))
+        # for file in os.listdir(self.workspace_path):
+        #     os.remove(os.path.join(self.workspace_path, file))
 
         # save args as a file
         trail_name: str = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")

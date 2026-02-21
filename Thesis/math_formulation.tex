@@ -190,10 +190,10 @@ indicates whether GPU~$i$ is active, i.e.\ whether it holds at least one
 layer.  Inactive GPUs incur no rental cost and are excluded from the
 pipeline.  The relationship between~$a_i$ and the layer indicators is
 enforced by
-\begin{align}
-    \sum_{k=1}^{K_{\max}} b_{ik} &\leq M \cdot a_i, \label{eq:active-upper}\\[4pt]
-    \sum_{k=1}^{K_{\max}} b_{ik} &\geq a_i, \label{eq:active-lower}
-\end{align}
+    \begin{align}
+        \sum_{k=1}^{K_{\max}} b_{ik} &\leq M \cdot a_i, \label{eq:active-upper}\\[4pt]
+        \sum_{k=1}^{K_{\max}} b_{ik} &\geq a_i, \label{eq:active-lower}
+    \end{align}
 ensuring that~$a_i = 1$ if and only if at least one $b_{ik}$ is non-zero.
 Moreover, when a GPU is inactive its starting index is set to a sentinel
 value:
@@ -202,3 +202,496 @@ value:
 \end{equation}
 which prevents the inactive node from interfering with the placement of
 active nodes.
+
+%% ---------------------------------------------------------------------------
+\subsection{Inference Throughput Model}\label{ssec:throughput-model}
+
+The throughput profiles $T_i(k)$ and $T^{\mathit{TP}}_g(k)$ that appear in the
+MILP constraints are not arbitrary inputs: they are pre-computed for every
+feasible layer count using a closed-form model that captures the three main
+bottlenecks of autoregressive inference---memory bandwidth, compute capacity,
+and inter-GPU communication.  This section details that model.
+
+\paragraph{Overall throughput.}
+Given a GPU (or a group of $n$ GPUs under TP) that is assigned $k$ out of $M$
+total layers, the inference throughput in tokens per second is defined as
+\begin{equation}\label{eq:throughput}
+    T(k) \;=\; \frac{B}{\,t_{\text{tok}}(k)\,},
+\end{equation}
+where $B$ is the batch size and $t_{\text{tok}}(k)$ is the \emph{token
+latency}, i.e.\ the time required to process one token through the $k$
+assigned layers for the entire batch.
+
+\paragraph{Token latency.}
+The token latency is the sum of two components: the time spent on inter-GPU
+communication (relevant only when $n > 1$, i.e.\ under tensor parallelism)
+and the time spent on the actual computation, which is limited by either the
+memory bandwidth or the arithmetic throughput of the GPU:
+\begin{equation}\label{eq:token-latency}
+    t_{\text{tok}}(k) \;=\;
+        t_{\text{net}}(k,\,n)
+        \;+\;
+        \max\!\biggl(
+            \underbrace{\frac{P(k)\,\beta}
+                             {n \cdot \mathit{BW}_{\text{mem}}}}_
+                       {\text{memory-bound}},\;\;
+            \underbrace{\frac{2\,P(k)\,B}
+                             {n \cdot \mathit{FLOPS}_{\text{fp16}}}}_
+                       {\text{compute-bound}}
+        \biggr),
+\end{equation}
+where:
+\begin{itemize}
+    \item $P(k) = P_{\text{total}} \cdot k / M$ is the number of parameters
+          contained in the $k$ assigned layers, assuming uniform parameter
+          distribution across layers;
+    \item $\beta$ is the number of bytes per parameter ($\beta = 2$ for FP16);
+    \item $\mathit{BW}_{\text{mem}}$ is the memory bandwidth of a single GPU
+          (bytes\,/\,s);
+    \item $\mathit{FLOPS}_{\text{fp16}}$ is the peak FP16 throughput of a
+          single GPU (FLOP\,/\,s);
+    \item $n$ is the tensor-parallel degree ($n = 1$ for PP mode,
+          $n = |V_C^g|$ for TP mode);
+    \item $t_{\text{net}}(k, n)$ is the network and kernel overhead, defined
+          below.
+\end{itemize}
+
+The \emph{memory-bound} term captures the time needed to stream all model
+weights from GPU memory to the compute units---the dominant cost during
+autoregressive decoding, where each token requires a full pass over the
+weights.  The \emph{compute-bound} term represents the time to execute the
+$2\,P(k)\,B$ floating-point operations (two FLOPs per parameter per token)
+required by the matrix multiplications in the transformer layers.
+
+\paragraph{Network and kernel time.}
+When $n > 1$ GPUs participate in tensor parallelism, each transformer layer
+requires a number of AllReduce collective operations to synchronise the
+partial results.  The total network and kernel overhead is
+\begin{equation}\label{eq:net-kernel-time}
+    t_{\text{net}}(k,\,n) \;=\;
+        k \cdot n_{\text{AR}} \cdot t_{\text{AR}}(n)
+        \;+\;
+        \frac{V_{\text{AR}}(k)}{n \cdot \mathit{BW}_{\text{link}}},
+\end{equation}
+where:
+\begin{itemize}
+    \item $n_{\text{AR}} = 4$ is the number of AllReduce operations per layer
+          (two for the attention block and two for the feed-forward block);
+    \item $t_{\text{AR}}(n) = (6.8 + 1.2\,(n-1)) \times 10^{-6}$\;s is
+          an empirical per-AllReduce latency that accounts for kernel launch
+          and synchronisation overhead, calibrated on NVIDIA NCCL benchmarks;
+    \item $V_{\text{AR}}(k)$ is the total volume of data (in bytes) exchanged
+          across all AllReduce operations for the $k$ layers, given by
+          \begin{equation}\label{eq:allreduce-volume}
+              V_{\text{AR}}(k) \;=\; 2\,(n-1)\,
+              \Bigl[\bigl(1 + \tfrac{2}{g_{\text{att}}}\bigr)\,
+                    n_h\,d_h + 2\,d_{\text{model}} + 2\,d_{\text{ff}}
+              \Bigr]
+              \cdot B \cdot k \cdot \beta,
+          \end{equation}
+          with $g_{\text{att}} = n_h / n_{\text{kv}}$ the GQA group size,
+          $n_h$ the number of attention heads, $d_h = d_{\text{model}} / n_h$
+          the head dimension, $d_{\text{ff}}$ the feed-forward intermediate
+          dimension.  The factor $2(n-1)$ reflects the ring-AllReduce
+          communication pattern;
+    \item $\mathit{BW}_{\text{link}}$ is the per-GPU intra-group link bandwidth
+          (bytes\,/\,s), e.g.\ PCIe~Gen\,4 at 64\,GB/s or NVLink at 600\,GB/s.
+\end{itemize}
+
+When $n = 1$ (single GPU, PP mode), the network term vanishes:
+$t_{\text{net}}(k, 1) = 0$.
+
+\paragraph{Latency-adjusted throughput.}
+When tokens traverse an inter-group link with network latency~$L$ before
+reaching the node or group, the effective throughput is reduced to account for
+the additional delay incurred once per batch:
+\begin{equation}\label{eq:latency-adjusted}
+    T^{\text{eff}}(k,\,L) \;=\; \frac{B}{\;\frac{B}{T(k)} + L\;}\,.
+\end{equation}
+This formula is used both in the per-node throughput constraint
+(Section~\ref{ssec:node-throughput}) and in the group throughput constraint
+(Section~\ref{ssec:group-constraints}) to tighten the flow bound whenever an
+active inter-group link introduces non-negligible latency.
+
+%% ===========================================================================
+%% CONSTRAINTS
+%% ===========================================================================
+
+\subsection{Constraints}\label{ssec:constraints}
+
+The MILP formulation comprises several families of constraints that enforce
+the physical and logical requirements of the placement problem.  We present
+them in the same order in which they are constructed in the solver.
+
+%% ---------------------------------------------------------------------------
+\subsubsection{Layer Placement}\label{ssec:layer-placement}
+
+Two constraints govern how layers are assigned to compute nodes.
+
+\paragraph{One-hot layer count.}
+Each GPU must hold exactly one feasible number of layers.  In standard mode
+this is expressed as an equality, ensuring that every GPU participates in the
+inference pipeline:
+\begin{equation}\label{eq:one-hot}
+    \sum_{k=1}^{K_{\max}} b_{ik} = 1 \qquad \forall\, i \in V_C.
+\end{equation}
+In the memory-aware variant, GPUs are allowed to remain idle, so the
+constraint is relaxed to an inequality:
+\begin{equation}\label{eq:one-hot-mem}
+    \sum_{k=1}^{K_{\max}} b_{ik} \leq 1 \qquad \forall\, i \in V_C.
+\end{equation}
+
+\paragraph{End-layer bound.}
+No GPU may reference layers beyond the last layer of the model:
+\begin{equation}\label{eq:end-bound}
+    e_i = s_i + \sum_{k=1}^{K_{\max}} k \cdot b_{ik} \;\leq\; M
+    \qquad \forall\, i \in V_C.
+\end{equation}
+
+%% ---------------------------------------------------------------------------
+\subsubsection{Flow Conservation}\label{ssec:flow-conservation}
+
+The token flow through the cluster obeys Kirchhoff's current law: for every
+intermediate node---compute nodes, NIC-IN nodes, and NIC-OUT nodes---the
+total incoming flow must equal the total outgoing flow:
+\begin{equation}\label{eq:flow-conservation}
+    \sum_{u:\,(u,v) \in E} f_{uv}
+    \;=\;
+    \sum_{w:\,(v,w) \in E} f_{vw}
+    \qquad \forall\, v \in V \setminus \{\textit{src},\,\textit{snk}\}.
+\end{equation}
+This ensures that tokens are neither created nor destroyed at intermediate
+nodes: every token that enters a node must eventually leave it.
+
+%% ---------------------------------------------------------------------------
+\subsubsection{Node Throughput}\label{ssec:node-throughput}
+
+When a GPU operates individually (TP~OFF, i.e.\ $\tau_g = 0$), the flow
+passing through it cannot exceed the throughput it achieves for the number of
+layers it holds.  Because the throughput profile $T_i(k)$ is pre-computed for
+each feasible~$k$, the one-hot encoding of the layer count yields a linear
+bound:
+\begin{equation}\label{eq:node-tp}
+    \tau_g = 0
+    \;\implies\;
+    \sum_{u} f_{ui}
+    \;\leq\;
+    \sum_{k=1}^{K_i} T_i(k)\,b_{ik}
+    \qquad \forall\, i \in V_C^g.
+\end{equation}
+This is implemented as an indicator constraint that is only active when the
+group's TP control variable is~zero.
+
+\paragraph{Latency-adjusted node throughput.}
+When an inter-group link $(u, v)$ with latency $L_{uv} > 0$ feeds tokens into
+the group that GPU~$i$ belongs to, and that link is active ($d_{uv} = 1$),
+a tighter constraint applies:
+\begin{equation}\label{eq:node-tp-latency}
+    d_{uv} = 1
+    \;\implies\;
+    \sum_{u'} f_{u'i}
+    \;\leq\;
+    \sum_{k=1}^{K_i} T_i^{\text{eff}}(k,\, L_{uv})\,b_{ik},
+\end{equation}
+where $T_i^{\text{eff}}(k, L)$ is the latency-adjusted throughput from
+Equation~\eqref{eq:latency-adjusted}.  This constraint is active only for
+links from NIC-OUT (or source) nodes to NIC-IN nodes that carry a positive
+latency.
+
+The rationale behind this constraint is the following.  Because a GPU's
+inference throughput is inversely proportional to the number of layers it
+holds, a na\"ive formulation that ignores network latency would favour highly
+fragmented solutions: the solver would tend to assign the smallest possible
+number of layers to each GPU---just enough to cover the entire model---thus
+creating a long pipeline of many lightly loaded nodes, each operating at its
+peak per-layer throughput.  While such a solution maximises the sum of
+individual throughputs on paper, it is unrealistic: every hop between nodes
+belonging to different servers incurs a communication cost that degrades the
+end-to-end throughput.  By incorporating the latency penalty
+$T_i^{\text{eff}}(k, L)$ into the throughput bound, the solver is made aware
+that each inter-node transfer reduces the effective processing rate, and
+therefore naturally prefers placements with fewer cross-node hops and a more
+consolidated layer distribution.
+
+%% ---------------------------------------------------------------------------
+\subsubsection{Edge Switching}\label{ssec:edge-switching}
+
+The edge activation variables~$d_{ij}$ must faithfully reflect the layer
+placement: an edge should be ON only when the upstream and downstream nodes
+hold a compatible layer assignment.  Because this compatibility involves
+equalities between integer expressions, we resort to standard Big-M
+linearisations.  The constraints differ by link type.
+
+\paragraph{Source $\to$ NIC-IN.}
+The link from the source to $\textit{nic\_in}_g$ should be active if and only
+if at least one GPU in group~$g$ begins processing at layer~0, i.e.\ accepts
+the raw input tokens.
+
+For each GPU $j \in V_C^g$, we introduce an auxiliary binary variable
+$z_j \in \{0,1\}$ that indicates whether $s_j = 0$:
+\begin{equation}\label{eq:is-start-zero}
+    s_j \;\leq\; M \cdot (1 - z_j)
+    \qquad \forall\, j \in V_C^g.
+\end{equation}
+This Big-M constraint ensures that $z_j$ can only be~1 when $s_j = 0$.
+The edge switch is then bounded by:
+\begin{equation}\label{eq:switch-source}
+    d_{\textit{src},\,\textit{nic\_in}_g}
+    \;\leq\;
+    \sum_{j \in V_C^g} z_j.
+\end{equation}
+
+\paragraph{NIC-OUT $\to$ Sink.}
+Symmetrically, the link from $\textit{nic\_out}_g$ to the sink should be
+active only when at least one GPU in group~$g$ finishes at layer~$M$.
+
+For each GPU $j \in V_C^g$, an auxiliary binary $w_j$ satisfies:
+\begin{equation}\label{eq:is-end-M}
+    e_j \;\geq\; M \cdot w_j
+    \qquad \forall\, j \in V_C^g,
+\end{equation}
+so that $w_j = 1$ implies $e_j \geq M$ (and since $e_j \leq M$ by
+Equation~\eqref{eq:end-bound}, equality holds).  The switch is bounded by:
+\begin{equation}\label{eq:switch-sink}
+    d_{\textit{nic\_out}_g,\,\textit{snk}}
+    \;\leq\;
+    \sum_{j \in V_C^g} w_j.
+\end{equation}
+
+In memory-aware mode an additional indicator constraint prevents inactive GPUs
+from claiming ``end-complete'' status:
+\begin{equation}\label{eq:inactive-end}
+    a_j = 0 \;\implies\; w_j = 0.
+\end{equation}
+
+\paragraph{NIC-OUT $\to$ NIC-IN (inter-group).}
+A link from $\textit{nic\_out}_p$ to $\textit{nic\_in}_q$ connects two
+different groups and should be active only when the last layer produced by
+group~$p$ coincides with the first layer consumed by group~$q$.
+
+Rather than enumerating all GPU pairs across the two groups, we aggregate at
+the group level using auxiliary integer variables:
+\begin{align}
+    E_p^{\max} &= \max_{i \in V_C^p}\; \hat{e}_i,
+    \label{eq:group-end}\\[4pt]
+    S_q^{\min} &= \min_{j \in V_C^q}\; s_j,
+    \label{eq:group-start}
+\end{align}
+where $\hat{e}_i = e_i$ if $a_i = 1$ and $\hat{e}_i = 0$ otherwise (in
+memory-aware mode, inactive GPUs are excluded from the maximum via indicator
+constraints).  These are implemented with Gurobi's native
+\texttt{GenConstrMax} and \texttt{GenConstrMin} general constraints.
+
+The edge switch is then linked to the group-level match via Big-M:
+\begin{align}
+    M \cdot d \;&\leq\; M + (S_q^{\min} - E_p^{\max}),
+    \label{eq:inter-group-1}\\[2pt]
+    M \cdot d \;&\leq\; M - (S_q^{\min} - E_p^{\max}),
+    \label{eq:inter-group-2}
+\end{align}
+where $d = d_{\textit{nic\_out}_p,\,\textit{nic\_in}_q}$.  Together, these
+two inequalities force $d = 0$ whenever $E_p^{\max} \neq S_q^{\min}$.
+
+\paragraph{Intra-group compute links.}
+For an edge $(i, j)$ connecting two GPUs in the \emph{same} group~$g$, the
+link may be active for either of two reasons---tensor parallelism or pipeline
+parallelism---so the switch is bounded by the sum of two permission terms.
+
+A \emph{PP permission} binary $\pi_{ij}$ indicates whether the layers are
+contiguous ($e_i = s_j$), linearised via Big-M:
+\begin{align}
+    M \cdot \pi_{ij} &\leq M + (s_j - e_i),
+    \label{eq:pp-perm-1}\\[2pt]
+    M \cdot \pi_{ij} &\leq M - (s_j - e_i).
+    \label{eq:pp-perm-2}
+\end{align}
+The final constraint allows the edge to be active under either strategy:
+\begin{equation}\label{eq:intra-group-switch}
+    d_{ij} \;\leq\; \tau_g + \pi_{ij}.
+\end{equation}
+
+Edges between GPUs in \emph{different} groups are forced off:
+$d_{ij} = 0$.
+
+\paragraph{Memory-aware edge activation.}
+In memory-aware mode, an additional constraint ensures that no edge can be
+active if either of its compute-node endpoints is inactive:
+\begin{equation}\label{eq:edge-active}
+    d_{uv} \leq a_u \;\;\text{if } u \in V_C,
+    \qquad
+    d_{uv} \leq a_v \;\;\text{if } v \in V_C.
+\end{equation}
+
+%% ---------------------------------------------------------------------------
+\subsubsection{Edge Flow Capacity}\label{ssec:edge-flow}
+
+The flow on each edge is bounded by the link's throughput capacity, gated by
+the edge switch:
+\begin{equation}\label{eq:edge-flow}
+    f_{ij} \;\leq\; C_{ij} \cdot d_{ij}
+    \qquad \forall\, (i,j) \in E.
+\end{equation}
+When the edge is disabled ($d_{ij} = 0$), this forces $f_{ij} = 0$.  When
+enabled, the flow is limited by the physical bandwidth of the link.
+
+%% ---------------------------------------------------------------------------
+\subsubsection{Group Constraints}\label{ssec:group-constraints}
+
+These constraints govern the behaviour of GPU groups and enforce the
+semantics of the tensor-parallelism control variable~$\tau_g$.
+
+\paragraph{Single-GPU groups.}
+If a group contains only one GPU, tensor parallelism is meaningless, so the
+control variable is forced off:
+\begin{equation}\label{eq:single-gpu-group}
+    |V_C^g| = 1 \;\implies\; \tau_g = 0.
+\end{equation}
+
+\paragraph{TP synchronisation.}
+When tensor parallelism is active within a group, all GPUs must process
+exactly the same set of layers.  This requires synchronising both the
+starting layer and the number of layers.  Let $r$ denote the reference
+(first) GPU in group~$g$:
+\begin{align}
+    \tau_g = 1 &\;\implies\; s_i = s_r
+        &&\forall\, i \in V_C^g \setminus \{r\},
+        \label{eq:tp-synch-start}\\[4pt]
+    \tau_g = 1 &\;\implies\; b_{ik} = b_{rk}
+        &&\forall\, i \in V_C^g \setminus \{r\},\;
+           \forall\, k = 1,\dots,K_{\max}.
+        \label{eq:tp-synch-hold}
+\end{align}
+These are implemented as indicator constraints.
+
+\paragraph{Layer limits.}
+The $b_{ik}$ variables are defined for $k$ up to the global maximum
+$K_{\max}$, but the feasible range depends on the active parallelism
+strategy.
+
+When TP is \emph{active}, the group's combined memory is available, but no
+more than $K_g^{\mathit{TP}} = K_r \cdot |V_C^g|$ layers can fit:
+\begin{equation}\label{eq:tp-on-limit}
+    \tau_g = 1 \;\implies\; b_{ik} = 0
+    \qquad \forall\, i \in V_C^g,\;
+           k > K_g^{\mathit{TP}}.
+\end{equation}
+
+When TP is \emph{inactive}, each GPU is limited by its own capacity:
+\begin{equation}\label{eq:tp-off-limit}
+    \tau_g = 0 \;\implies\; b_{ik} = 0
+    \qquad \forall\, i \in V_C^g,\; k > K_i.
+\end{equation}
+In TP-only mode, a stricter variant forces \emph{all} $b_{ik}$ to zero when
+TP is off, thereby preventing any PP operation entirely.
+
+\paragraph{Group throughput (TP~ON).}
+When tensor parallelism is active, the total inflow to the group is bounded
+by the group's TP throughput profile.  Let $\textit{nic\_in}_g$ be the
+group's ingress node and $r$ its reference GPU:
+\begin{equation}\label{eq:group-tp}
+    \tau_g = 1
+    \;\implies\;
+    \sum_{i \in V_C^g} f_{\textit{nic\_in}_g,\, i}
+    \;\leq\;
+    \sum_{k} T_g^{\mathit{TP}}(k)\,b_{rk}.
+\end{equation}
+
+\paragraph{Latency-adjusted group throughput.}
+When an inter-group link $(u, \textit{nic\_in}_g)$ with latency $L > 0$
+feeds a TP-active group, the group throughput must be further reduced.
+Because this constraint should fire only when \emph{both} TP is active and
+the inter-group link is in use, we introduce an AND variable
+$\lambda \in \{0,1\}$:
+\begin{align}
+    \lambda &\leq \tau_g, \qquad
+    \lambda \leq d_{u,\,\textit{nic\_in}_g}, \qquad
+    \lambda \geq \tau_g + d_{u,\,\textit{nic\_in}_g} - 1.
+    \label{eq:and-var}
+\end{align}
+The latency-adjusted constraint then reads:
+\begin{equation}\label{eq:group-tp-latency}
+    \lambda = 1
+    \;\implies\;
+    \sum_{i \in V_C^g} f_{\textit{nic\_in}_g,\, i}
+    \;\leq\;
+    \sum_{k} T_g^{\mathit{TP},\text{eff}}(k,\,L)\,b_{rk},
+\end{equation}
+where $T_g^{\mathit{TP},\text{eff}}(k,L) =
+B \big/ \bigl(\tfrac{B}{T_g^{\mathit{TP}}(k)} + L\bigr)$.
+
+\paragraph{Pipeline ordering (TP~OFF).}
+When tensor parallelism is inactive, the GPUs within a group must form a
+valid local pipeline.  Let $i_1, i_2, \dots, i_n$ be the GPUs in group~$g$
+sorted by index, and let $\hat{M} = 2M$ be a Big-M constant.
+
+\emph{(A)~NIC-IN routing.}  Only the first GPU in the pipeline receives
+tokens from the group's NIC-IN:
+\begin{equation}\label{eq:pipe-nicin}
+    d_{\textit{nic\_in}_g,\, i_j} \;\leq\; \tau_g
+    \qquad \forall\, j \geq 2.
+\end{equation}
+
+\emph{(B)~Consecutive ordering.}  When TP is off and the next GPU in the
+sequence is active, consecutive GPUs must have contiguous layer assignments:
+\begin{align}
+    s_{i_{j+1}} - e_{i_j}
+        &\;\leq\; \hat{M}\,\tau_g + \hat{M}\,(1 - a_{i_{j+1}}),
+    \label{eq:pipe-order-1}\\[2pt]
+    e_{i_j} - s_{i_{j+1}}
+        &\;\leq\; \hat{M}\,\tau_g + \hat{M}\,(1 - a_{i_{j+1}}).
+    \label{eq:pipe-order-2}
+\end{align}
+Together, these two inequalities enforce
+$|s_{i_{j+1}} - e_{i_j}| = 0$ when $\tau_g = 0$ and $a_{i_{j+1}} = 1$.
+
+\emph{(C)~Inactive GPU sentinel.}  If the next GPU in the sequence is
+inactive, its start is pushed to~$M$ so that it does not interfere with the
+pipeline:
+\begin{equation}\label{eq:pipe-inactive}
+    s_{i_{j+1}} \;\geq\; M - \hat{M}\,a_{i_{j+1}} - \hat{M}\,\tau_g.
+\end{equation}
+
+\emph{(D)~NIC-OUT routing.}  Only the last \emph{active} GPU in the pipeline
+may send tokens to the group's NIC-OUT:
+\begin{equation}\label{eq:pipe-nicout}
+    d_{i_j,\, \textit{nic\_out}_g}
+    \;\leq\;
+    1 - a_{i_{j+1}} + \tau_g
+    \qquad \forall\, j = 1, \dots, n-1.
+\end{equation}
+
+%% ---------------------------------------------------------------------------
+\subsection{Objective Function}\label{ssec:objective}
+
+\paragraph{Standard mode.}
+The primary objective is to maximise the total inference throughput, measured
+as the total token flow leaving the source:
+\begin{equation}\label{eq:obj-standard}
+    \max \sum_{v:\,(\textit{src},\,v) \in E} f_{\textit{src},\,v}.
+\end{equation}
+
+\paragraph{Memory-aware mode.}
+When cost awareness is enabled, the objective becomes a weighted combination
+of normalised throughput and normalised rental cost:
+\begin{equation}\label{eq:obj-memory}
+    \max \left[\;
+        \alpha \;\cdot\;
+            \frac{\displaystyle\sum_v f_{\textit{src},\,v}}
+                 {F^{\text{UB}}}
+        \;-\;
+        (1 - \alpha) \;\cdot\;
+            \frac{\displaystyle\sum_{i \in V_C} a_i \cdot c_i}
+                 {\displaystyle\sum_{i \in V_C} c_i}
+    \;\right],
+\end{equation}
+where $F^{\text{UB}}$ is a pre-computed upper bound on the achievable
+throughput and $c_i$ is the hourly rental cost of GPU~$i$.  The parameter
+$\alpha \in [0,1]$ governs the trade-off: $\alpha = 1$ recovers pure
+throughput maximisation, while lower values of~$\alpha$ increasingly penalise
+the use of expensive or unnecessary GPUs.
+
+A minimum-throughput floor is also enforced to prevent degenerate solutions
+that achieve zero cost by deactivating all GPUs:
+\begin{equation}\label{eq:min-throughput}
+    \sum_v f_{\textit{src},\,v} \;\geq\; 1.0.
+\end{equation}

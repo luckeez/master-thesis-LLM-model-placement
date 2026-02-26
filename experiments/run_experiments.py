@@ -178,7 +178,7 @@ def run_single(
     if os.path.exists(output_dir):
         with open(os.path.join(output_dir, "metrics.json"), "w") as f:
             json.dump(metrics, f, indent=2)
-    exit(0)
+    # exit(0)
     return metrics
 
 
@@ -207,15 +207,14 @@ def generate_e1_configs() -> List[Tuple[str, List[Dict[str, Any]]]]:
     configs = []
 
     # ---- Cat 1: Homogeneous, only singles ----
-    for i, gpu in enumerate(["L4", "A30", "L40S"]):
+    for i, gpu in enumerate(["L4", "A30"]):
         groups = [{"num_nodes": 1, "type": gpu, "region": R} for _ in range(16)]
         configs.append((f"E1_homo-{gpu}-{i+1}", groups))
 
     # ---- Cat 2: Homogeneous, singles + groups ----
     homo_grp = [
         ("L4",  [4, 4, 1, 1, 1, 1, 1, 1, 1, 1]),
-        ("A30", [4, 2, 2, 2, 1, 1, 1, 1, 1, 1]),
-        ("L40S",[4, 2, 2, 2, 1, 1, 1, 1, 1, 1]),
+        ("A30", [4, 2, 2, 2, 1, 1, 1, 1, 1, 1])
     ]
     for i, (gpu, sizes) in enumerate(homo_grp):
         groups = [{"num_nodes": s, "type": gpu, "region": R} for s in sizes]
@@ -224,27 +223,26 @@ def generate_e1_configs() -> List[Tuple[str, List[Dict[str, Any]]]]:
     # ---- Cat 3: Two GPU types ----
     heter2 = [
         ("A30-L40S", [(4,"A30"),(1,"A30"),(1,"A30"),(2,"L40S"),(2,"L40S"),(4,"L40S")]),
-        ("L4-A100",  [(1,"L4"),(1,"L4"),(2,"L4"),(4,"L4"),(1,"L4"),(1,"L4"),(1,"A100-80"),(1,"A100-80"),(2,"A100-80")]),
-        ("T4-H100",  [(4,"T4"),(4,"T4"),(4,"T4"),(1,"H100"),(1,"H100"),(1,"H100"),(1,"H100")]),
+        ("L4-A100",  [(1,"L4"),(1,"L4"),(2,"L4"),(4,"L4"),(1,"L4"),(1,"L4"),(1,"A100-80"),(1,"A100-80"),(2,"A100-80")])
     ]
     for i, (tag, defs) in enumerate(heter2):
         groups = [{"num_nodes": n, "type": t, "region": R} for n, t in defs]
         configs.append((f"E1_heter2-{tag}-{i+1}", groups))
 
-    # ---- Cat 4: Three GPU types ----
-    heter3 = [
-        ("L4-A4000-A100", [(2,"L4"),(1,"L4"),(1,"L4"),(2,"A4000"),(2,"A4000"),(1,"A4000"),(1,"A4000"),(2,"A100"),(1,"A100"),(1,"A100")]),
-        ("T4-A30-L40S",   [(4,"T4"),(1,"T4"),(1,"T4"),(4,"A30"),(1,"A30"),(1,"L40S"),(2,"L40S"),(1,"L40S"),(1,"L40S")]),
-        ("A4000-L40S-H100",[(2,"A4000"),(2,"A4000"),(1,"A4000"),(1,"A4000"),(2,"L40S"),(2,"L40S"),(2,"H100"),(2,"H100")]),
-    ]
-    for i, (tag, defs) in enumerate(heter3):
-        groups = [{"num_nodes": n, "type": t, "region": R} for n, t in defs]
-        configs.append((f"E1_heter3-{tag}-{i+1}", groups))
+    # # ---- Cat 4: Three GPU types ----
+    # heter3 = [
+    #     ("L4-A4000-A100", [(2,"L4"),(1,"L4"),(1,"L4"),(2,"A4000"),(2,"A4000"),(1,"A4000"),(1,"A4000"),(2,"A100"),(1,"A100"),(1,"A100")]),
+    #     ("T4-A30-L40S",   [(4,"T4"),(1,"T4"),(1,"T4"),(4,"A30"),(1,"A30"),(1,"L40S"),(2,"L40S"),(1,"L40S"),(1,"L40S")]),
+    #     ("A4000-L40S-H100",[(2,"A4000"),(2,"A4000"),(1,"A4000"),(1,"A4000"),(2,"L40S"),(2,"L40S"),(2,"H100"),(2,"H100")]),
+    # ]
+    # for i, (tag, defs) in enumerate(heter3):
+    #     groups = [{"num_nodes": n, "type": t, "region": R} for n, t in defs]
+    #     configs.append((f"E1_heter3-{tag}-{i+1}", groups))
 
     # ---- Cat 5: Cloud mix (4+ types) ----
     mixes = [
-        [(2,"L40S"),(2,"L40S"),(1,"L4"),(2,"L4"),(4,"L4"),(1,"A100-80"),(2,"A4000"),(1,"A100"),(1,"A30")],
-        [(1,"H100"),(2,"L40S"),(2,"A30"),(4,"L4"),(1,"A4000"),(1,"A4000"),(1,"T4"),(2,"A100"),(1,"T4"),(1,"L4")],
+        [(2,"L40S"),(4,"A30"),(2,"L4"),(4,"L4"),(1,"A100-80"),(2,"A4000"),(1,"A100")],
+        # [(1,"H100"),(2,"L40S"),(2,"A30"),(4,"L4"),(1,"A4000"),(1,"A4000"),(1,"T4"),(2,"A100"),(1,"T4"),(1,"L4")],
         [(4,"A30"),(2,"L40S"),(1,"A100-80"),(1,"H100"),(2,"L4"),(2,"A4000"),(1,"T4"),(1,"T4"),(1,"L4"),(1,"A30")],
     ]
     for i, defs in enumerate(mixes):
@@ -324,7 +322,7 @@ def generate_e2_configs() -> List[Tuple[str, List[Dict[str, Any]]]]:
         ("eu-split",      {"eu-west": 8, "eu-east": 8}, 2),
         ("eu-unbal",      {"eu-west": 10, "eu-east": 6}, 2),
         ("eu-us",         {"eu-west": 8, "us-east": 8}, 2),
-        ("us-split",      {"us-east": 8, "us-west": 8}, 2),
+        # ("us-split",      {"us-east": 8, "us-west": 8}, 2),
         ("eu-us-asia",    {"eu-west": 6, "us-east": 5, "asia-east": 5}, 2),
     ]
 
@@ -355,17 +353,17 @@ def run_e2() -> List[Dict[str, Any]]:
 # Base 30-GPU pool, ordered cheapest-first (removed first when shrinking)
 E3_BASE_POOL = [
     # Cheap (removed first)
-    (1,"T4"),(1,"T4"),(1,"T4"),(1,"T4"),
-    (1,"A4000"),(1,"A4000"),(1,"A4000"),(1,"A4000"),
-    (1,"A30"),(1,"A30"),
-    (1,"L4"),(1,"L4"),(1,"L4"),(1,"L4"),
+    (1,"T4"),(1,"T4"),
+    (1,"A4000"),(1,"A4000"),
+    (1,"A30"),(1,"A30"), (4,"A30"),
+    (1,"L4"),(1,"L4"),(4,"A4000"),
     (2,"L4"),
     # Mid
     (2,"A30"),(2,"L40S"),
     (1,"L40S"),(1,"L40S"),
     # Premium (removed last)
-    (2,"L40S"),
-    (1,"A100-80"),(1,"A100-80"),
+    (2,"L40S"),(1,"A100"),
+    (1,"A100-80"),
     (1,"A100"),
     (1,"H100"),
 ]

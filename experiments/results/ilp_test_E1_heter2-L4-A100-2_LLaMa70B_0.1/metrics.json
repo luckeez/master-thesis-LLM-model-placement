@@ -1,0 +1,12 @@
+{
+  "test_name": "test_E1_heter2-L4-A100-2_LLaMa70B_0.1",
+  "model": "LLaMa70B",
+  "alpha": 0.1,
+  "batch_size": 8,
+  "solver_time_s": 1810.5,
+  "feasible": true,
+  "throughput_tokens_s": 223.86,
+  "rental_cost_usd_hr": 0,
+  "power_watts": 0.0,
+  "active_gpus": 8
+}

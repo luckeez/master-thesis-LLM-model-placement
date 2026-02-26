@@ -1612,7 +1612,10 @@ class ILPLayout:
 
         import shutil
         import os
+        from pathlib import Path
+
         ini_file = self.cluster_file_name.split("/")[-1]
+        ini_file = Path(self.cluster_file_name).name
         ini_path = save_sol_path.replace("ilp_solution.sol", ini_file)
         if not os.path.exists(os.path.dirname(ini_path)):
             shutil.copy(self.cluster_file_name, ini_path)

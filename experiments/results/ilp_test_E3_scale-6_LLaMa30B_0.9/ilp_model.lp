@@ -1,0 +1,1822 @@
+\ Model 2026-02-23_22-59-45
+\ LP format - for model browsing. Use MPS format to capture full model detail.
+Maximize
+  0.000659953 flow_source_nic_in_0 + 0.000659953 flow_source_nic_in_1
+   + 0.000659953 flow_source_nic_in_2 + 0.000659953 flow_source_nic_in_3
+   + 0.000659953 flow_source_nic_in_4 - 0.0214689265536723 is_active_0
+   - 0.0145762711864407 is_active_1 - 0.0186440677966102 is_active_2
+   - 0.0145762711864407 is_active_3 - 0.0153672316384181 is_active_4
+   - 0.0153672316384181 is_active_5 + 0 val_end_0 + 0 val_end_1
+   + 0 val_end_2 + 0 val_end_3 + 0 val_end_4 + 0 val_end_5
+Subject To
+ mem_active_constr_0: hold_0_1 + hold_0_2 + hold_0_3 + hold_0_4 + hold_0_5
+   + hold_0_6 + hold_0_7 + hold_0_8 + hold_0_9 + hold_0_10 + hold_0_11
+   + hold_0_12 + hold_0_13 + hold_0_14 + hold_0_15 + hold_0_16 + hold_0_17
+   + hold_0_18 + hold_0_19 + hold_0_20 + hold_0_21 + hold_0_22 + hold_0_23
+   + hold_0_24 + hold_0_25 + hold_0_26 + hold_0_27 + hold_0_28 + hold_0_29
+   + hold_0_30 + hold_0_31 + hold_0_32 + hold_0_33 + hold_0_34 + hold_0_35
+   + hold_0_36 + hold_0_37 + hold_0_38 + hold_0_39 + hold_0_40 + hold_0_41
+   + hold_0_42 + hold_0_43 + hold_0_44 + hold_0_45 + hold_0_46 + hold_0_47
+   + hold_0_48 - 61 is_active_0 <= 0
+ mem_active_constr2_0: hold_0_1 + hold_0_2 + hold_0_3 + hold_0_4 + hold_0_5
+   + hold_0_6 + hold_0_7 + hold_0_8 + hold_0_9 + hold_0_10 + hold_0_11
+   + hold_0_12 + hold_0_13 + hold_0_14 + hold_0_15 + hold_0_16 + hold_0_17
+   + hold_0_18 + hold_0_19 + hold_0_20 + hold_0_21 + hold_0_22 + hold_0_23
+   + hold_0_24 + hold_0_25 + hold_0_26 + hold_0_27 + hold_0_28 + hold_0_29
+   + hold_0_30 + hold_0_31 + hold_0_32 + hold_0_33 + hold_0_34 + hold_0_35
+   + hold_0_36 + hold_0_37 + hold_0_38 + hold_0_39 + hold_0_40 + hold_0_41
+   + hold_0_42 + hold_0_43 + hold_0_44 + hold_0_45 + hold_0_46 + hold_0_47
+   + hold_0_48 - is_active_0 >= 0
+ mem_active_constr_1: hold_1_1 + hold_1_2 + hold_1_3 + hold_1_4 + hold_1_5
+   + hold_1_6 + hold_1_7 + hold_1_8 + hold_1_9 + hold_1_10 + hold_1_11
+   + hold_1_12 + hold_1_13 + hold_1_14 + hold_1_15 + hold_1_16 + hold_1_17
+   + hold_1_18 + hold_1_19 + hold_1_20 + hold_1_21 + hold_1_22 + hold_1_23
+   + hold_1_24 + hold_1_25 + hold_1_26 + hold_1_27 + hold_1_28 + hold_1_29
+   + hold_1_30 + hold_1_31 + hold_1_32 + hold_1_33 + hold_1_34 + hold_1_35
+   + hold_1_36 + hold_1_37 + hold_1_38 + hold_1_39 + hold_1_40 + hold_1_41
+   + hold_1_42 + hold_1_43 + hold_1_44 + hold_1_45 + hold_1_46 + hold_1_47
+   + hold_1_48 - 61 is_active_1 <= 0
+ mem_active_constr2_1: hold_1_1 + hold_1_2 + hold_1_3 + hold_1_4 + hold_1_5
+   + hold_1_6 + hold_1_7 + hold_1_8 + hold_1_9 + hold_1_10 + hold_1_11
+   + hold_1_12 + hold_1_13 + hold_1_14 + hold_1_15 + hold_1_16 + hold_1_17
+   + hold_1_18 + hold_1_19 + hold_1_20 + hold_1_21 + hold_1_22 + hold_1_23
+   + hold_1_24 + hold_1_25 + hold_1_26 + hold_1_27 + hold_1_28 + hold_1_29
+   + hold_1_30 + hold_1_31 + hold_1_32 + hold_1_33 + hold_1_34 + hold_1_35
+   + hold_1_36 + hold_1_37 + hold_1_38 + hold_1_39 + hold_1_40 + hold_1_41
+   + hold_1_42 + hold_1_43 + hold_1_44 + hold_1_45 + hold_1_46 + hold_1_47
+   + hold_1_48 - is_active_1 >= 0
+ mem_active_constr_2: hold_2_1 + hold_2_2 + hold_2_3 + hold_2_4 + hold_2_5
+   + hold_2_6 + hold_2_7 + hold_2_8 + hold_2_9 + hold_2_10 + hold_2_11
+   + hold_2_12 + hold_2_13 + hold_2_14 + hold_2_15 + hold_2_16 + hold_2_17
+   + hold_2_18 + hold_2_19 + hold_2_20 + hold_2_21 + hold_2_22 + hold_2_23
+   + hold_2_24 + hold_2_25 + hold_2_26 + hold_2_27 + hold_2_28 + hold_2_29
+   + hold_2_30 + hold_2_31 + hold_2_32 + hold_2_33 + hold_2_34 + hold_2_35
+   + hold_2_36 + hold_2_37 + hold_2_38 + hold_2_39 + hold_2_40 + hold_2_41
+   + hold_2_42 + hold_2_43 + hold_2_44 + hold_2_45 + hold_2_46 + hold_2_47
+   + hold_2_48 - 61 is_active_2 <= 0
+ mem_active_constr2_2: hold_2_1 + hold_2_2 + hold_2_3 + hold_2_4 + hold_2_5
+   + hold_2_6 + hold_2_7 + hold_2_8 + hold_2_9 + hold_2_10 + hold_2_11
+   + hold_2_12 + hold_2_13 + hold_2_14 + hold_2_15 + hold_2_16 + hold_2_17
+   + hold_2_18 + hold_2_19 + hold_2_20 + hold_2_21 + hold_2_22 + hold_2_23
+   + hold_2_24 + hold_2_25 + hold_2_26 + hold_2_27 + hold_2_28 + hold_2_29
+   + hold_2_30 + hold_2_31 + hold_2_32 + hold_2_33 + hold_2_34 + hold_2_35
+   + hold_2_36 + hold_2_37 + hold_2_38 + hold_2_39 + hold_2_40 + hold_2_41
+   + hold_2_42 + hold_2_43 + hold_2_44 + hold_2_45 + hold_2_46 + hold_2_47
+   + hold_2_48 - is_active_2 >= 0
+ mem_active_constr_3: hold_3_1 + hold_3_2 + hold_3_3 + hold_3_4 + hold_3_5
+   + hold_3_6 + hold_3_7 + hold_3_8 + hold_3_9 + hold_3_10 + hold_3_11
+   + hold_3_12 + hold_3_13 + hold_3_14 + hold_3_15 + hold_3_16 + hold_3_17
+   + hold_3_18 + hold_3_19 + hold_3_20 + hold_3_21 + hold_3_22 + hold_3_23
+   + hold_3_24 + hold_3_25 + hold_3_26 + hold_3_27 + hold_3_28 + hold_3_29
+   + hold_3_30 + hold_3_31 + hold_3_32 + hold_3_33 + hold_3_34 + hold_3_35
+   + hold_3_36 + hold_3_37 + hold_3_38 + hold_3_39 + hold_3_40 + hold_3_41
+   + hold_3_42 + hold_3_43 + hold_3_44 + hold_3_45 + hold_3_46 + hold_3_47
+   + hold_3_48 - 61 is_active_3 <= 0
+ mem_active_constr2_3: hold_3_1 + hold_3_2 + hold_3_3 + hold_3_4 + hold_3_5
+   + hold_3_6 + hold_3_7 + hold_3_8 + hold_3_9 + hold_3_10 + hold_3_11
+   + hold_3_12 + hold_3_13 + hold_3_14 + hold_3_15 + hold_3_16 + hold_3_17
+   + hold_3_18 + hold_3_19 + hold_3_20 + hold_3_21 + hold_3_22 + hold_3_23
+   + hold_3_24 + hold_3_25 + hold_3_26 + hold_3_27 + hold_3_28 + hold_3_29
+   + hold_3_30 + hold_3_31 + hold_3_32 + hold_3_33 + hold_3_34 + hold_3_35
+   + hold_3_36 + hold_3_37 + hold_3_38 + hold_3_39 + hold_3_40 + hold_3_41
+   + hold_3_42 + hold_3_43 + hold_3_44 + hold_3_45 + hold_3_46 + hold_3_47
+   + hold_3_48 - is_active_3 >= 0
+ mem_active_constr_4: hold_4_1 + hold_4_2 + hold_4_3 + hold_4_4 + hold_4_5
+   + hold_4_6 + hold_4_7 + hold_4_8 + hold_4_9 + hold_4_10 + hold_4_11
+   + hold_4_12 + hold_4_13 + hold_4_14 + hold_4_15 + hold_4_16 + hold_4_17
+   + hold_4_18 + hold_4_19 + hold_4_20 + hold_4_21 + hold_4_22 + hold_4_23
+   + hold_4_24 + hold_4_25 + hold_4_26 + hold_4_27 + hold_4_28 + hold_4_29
+   + hold_4_30 + hold_4_31 + hold_4_32 + hold_4_33 + hold_4_34 + hold_4_35
+   + hold_4_36 + hold_4_37 + hold_4_38 + hold_4_39 + hold_4_40 + hold_4_41
+   + hold_4_42 + hold_4_43 + hold_4_44 + hold_4_45 + hold_4_46 + hold_4_47
+   + hold_4_48 - 61 is_active_4 <= 0
+ mem_active_constr2_4: hold_4_1 + hold_4_2 + hold_4_3 + hold_4_4 + hold_4_5
+   + hold_4_6 + hold_4_7 + hold_4_8 + hold_4_9 + hold_4_10 + hold_4_11
+   + hold_4_12 + hold_4_13 + hold_4_14 + hold_4_15 + hold_4_16 + hold_4_17
+   + hold_4_18 + hold_4_19 + hold_4_20 + hold_4_21 + hold_4_22 + hold_4_23
+   + hold_4_24 + hold_4_25 + hold_4_26 + hold_4_27 + hold_4_28 + hold_4_29
+   + hold_4_30 + hold_4_31 + hold_4_32 + hold_4_33 + hold_4_34 + hold_4_35
+   + hold_4_36 + hold_4_37 + hold_4_38 + hold_4_39 + hold_4_40 + hold_4_41
+   + hold_4_42 + hold_4_43 + hold_4_44 + hold_4_45 + hold_4_46 + hold_4_47
+   + hold_4_48 - is_active_4 >= 0
+ mem_active_constr_5: hold_5_1 + hold_5_2 + hold_5_3 + hold_5_4 + hold_5_5
+   + hold_5_6 + hold_5_7 + hold_5_8 + hold_5_9 + hold_5_10 + hold_5_11
+   + hold_5_12 + hold_5_13 + hold_5_14 + hold_5_15 + hold_5_16 + hold_5_17
+   + hold_5_18 + hold_5_19 + hold_5_20 + hold_5_21 + hold_5_22 + hold_5_23
+   + hold_5_24 + hold_5_25 + hold_5_26 + hold_5_27 + hold_5_28 + hold_5_29
+   + hold_5_30 + hold_5_31 + hold_5_32 + hold_5_33 + hold_5_34 + hold_5_35
+   + hold_5_36 + hold_5_37 + hold_5_38 + hold_5_39 + hold_5_40 + hold_5_41
+   + hold_5_42 + hold_5_43 + hold_5_44 + hold_5_45 + hold_5_46 + hold_5_47
+   + hold_5_48 - 61 is_active_5 <= 0
+ mem_active_constr2_5: hold_5_1 + hold_5_2 + hold_5_3 + hold_5_4 + hold_5_5
+   + hold_5_6 + hold_5_7 + hold_5_8 + hold_5_9 + hold_5_10 + hold_5_11
+   + hold_5_12 + hold_5_13 + hold_5_14 + hold_5_15 + hold_5_16 + hold_5_17
+   + hold_5_18 + hold_5_19 + hold_5_20 + hold_5_21 + hold_5_22 + hold_5_23
+   + hold_5_24 + hold_5_25 + hold_5_26 + hold_5_27 + hold_5_28 + hold_5_29
+   + hold_5_30 + hold_5_31 + hold_5_32 + hold_5_33 + hold_5_34 + hold_5_35
+   + hold_5_36 + hold_5_37 + hold_5_38 + hold_5_39 + hold_5_40 + hold_5_41
+   + hold_5_42 + hold_5_43 + hold_5_44 + hold_5_45 + hold_5_46 + hold_5_47
+   + hold_5_48 - is_active_5 >= 0
+ hold_constraint_0: hold_0_1 + hold_0_2 + hold_0_3 + hold_0_4 + hold_0_5
+   + hold_0_6 + hold_0_7 + hold_0_8 + hold_0_9 + hold_0_10 + hold_0_11
+   + hold_0_12 + hold_0_13 + hold_0_14 + hold_0_15 + hold_0_16 + hold_0_17
+   + hold_0_18 + hold_0_19 + hold_0_20 + hold_0_21 + hold_0_22 + hold_0_23
+   + hold_0_24 + hold_0_25 + hold_0_26 + hold_0_27 + hold_0_28 + hold_0_29
+   + hold_0_30 + hold_0_31 + hold_0_32 + hold_0_33 + hold_0_34 + hold_0_35
+   + hold_0_36 + hold_0_37 + hold_0_38 + hold_0_39 + hold_0_40 + hold_0_41
+   + hold_0_42 + hold_0_43 + hold_0_44 + hold_0_45 + hold_0_46 + hold_0_47
+   + hold_0_48 <= 1
+ end_constraint_0: start_0 + hold_0_1 + 2 hold_0_2 + 3 hold_0_3
+   + 4 hold_0_4 + 5 hold_0_5 + 6 hold_0_6 + 7 hold_0_7 + 8 hold_0_8
+   + 9 hold_0_9 + 10 hold_0_10 + 11 hold_0_11 + 12 hold_0_12 + 13 hold_0_13
+   + 14 hold_0_14 + 15 hold_0_15 + 16 hold_0_16 + 17 hold_0_17
+   + 18 hold_0_18 + 19 hold_0_19 + 20 hold_0_20 + 21 hold_0_21
+   + 22 hold_0_22 + 23 hold_0_23 + 24 hold_0_24 + 25 hold_0_25
+   + 26 hold_0_26 + 27 hold_0_27 + 28 hold_0_28 + 29 hold_0_29
+   + 30 hold_0_30 + 31 hold_0_31 + 32 hold_0_32 + 33 hold_0_33
+   + 34 hold_0_34 + 35 hold_0_35 + 36 hold_0_36 + 37 hold_0_37
+   + 38 hold_0_38 + 39 hold_0_39 + 40 hold_0_40 + 41 hold_0_41
+   + 42 hold_0_42 + 43 hold_0_43 + 44 hold_0_44 + 45 hold_0_45
+   + 46 hold_0_46 + 47 hold_0_47 + 48 hold_0_48 <= 60
+ hold_constraint_1: hold_1_1 + hold_1_2 + hold_1_3 + hold_1_4 + hold_1_5
+   + hold_1_6 + hold_1_7 + hold_1_8 + hold_1_9 + hold_1_10 + hold_1_11
+   + hold_1_12 + hold_1_13 + hold_1_14 + hold_1_15 + hold_1_16 + hold_1_17
+   + hold_1_18 + hold_1_19 + hold_1_20 + hold_1_21 + hold_1_22 + hold_1_23
+   + hold_1_24 + hold_1_25 + hold_1_26 + hold_1_27 + hold_1_28 + hold_1_29
+   + hold_1_30 + hold_1_31 + hold_1_32 + hold_1_33 + hold_1_34 + hold_1_35
+   + hold_1_36 + hold_1_37 + hold_1_38 + hold_1_39 + hold_1_40 + hold_1_41
+   + hold_1_42 + hold_1_43 + hold_1_44 + hold_1_45 + hold_1_46 + hold_1_47
+   + hold_1_48 <= 1
+ end_constraint_1: start_1 + hold_1_1 + 2 hold_1_2 + 3 hold_1_3
+   + 4 hold_1_4 + 5 hold_1_5 + 6 hold_1_6 + 7 hold_1_7 + 8 hold_1_8
+   + 9 hold_1_9 + 10 hold_1_10 + 11 hold_1_11 + 12 hold_1_12 + 13 hold_1_13
+   + 14 hold_1_14 + 15 hold_1_15 + 16 hold_1_16 + 17 hold_1_17
+   + 18 hold_1_18 + 19 hold_1_19 + 20 hold_1_20 + 21 hold_1_21
+   + 22 hold_1_22 + 23 hold_1_23 + 24 hold_1_24 + 25 hold_1_25
+   + 26 hold_1_26 + 27 hold_1_27 + 28 hold_1_28 + 29 hold_1_29
+   + 30 hold_1_30 + 31 hold_1_31 + 32 hold_1_32 + 33 hold_1_33
+   + 34 hold_1_34 + 35 hold_1_35 + 36 hold_1_36 + 37 hold_1_37
+   + 38 hold_1_38 + 39 hold_1_39 + 40 hold_1_40 + 41 hold_1_41
+   + 42 hold_1_42 + 43 hold_1_43 + 44 hold_1_44 + 45 hold_1_45
+   + 46 hold_1_46 + 47 hold_1_47 + 48 hold_1_48 <= 60
+ hold_constraint_2: hold_2_1 + hold_2_2 + hold_2_3 + hold_2_4 + hold_2_5
+   + hold_2_6 + hold_2_7 + hold_2_8 + hold_2_9 + hold_2_10 + hold_2_11
+   + hold_2_12 + hold_2_13 + hold_2_14 + hold_2_15 + hold_2_16 + hold_2_17
+   + hold_2_18 + hold_2_19 + hold_2_20 + hold_2_21 + hold_2_22 + hold_2_23
+   + hold_2_24 + hold_2_25 + hold_2_26 + hold_2_27 + hold_2_28 + hold_2_29
+   + hold_2_30 + hold_2_31 + hold_2_32 + hold_2_33 + hold_2_34 + hold_2_35
+   + hold_2_36 + hold_2_37 + hold_2_38 + hold_2_39 + hold_2_40 + hold_2_41
+   + hold_2_42 + hold_2_43 + hold_2_44 + hold_2_45 + hold_2_46 + hold_2_47
+   + hold_2_48 <= 1
+ end_constraint_2: start_2 + hold_2_1 + 2 hold_2_2 + 3 hold_2_3
+   + 4 hold_2_4 + 5 hold_2_5 + 6 hold_2_6 + 7 hold_2_7 + 8 hold_2_8
+   + 9 hold_2_9 + 10 hold_2_10 + 11 hold_2_11 + 12 hold_2_12 + 13 hold_2_13
+   + 14 hold_2_14 + 15 hold_2_15 + 16 hold_2_16 + 17 hold_2_17
+   + 18 hold_2_18 + 19 hold_2_19 + 20 hold_2_20 + 21 hold_2_21
+   + 22 hold_2_22 + 23 hold_2_23 + 24 hold_2_24 + 25 hold_2_25
+   + 26 hold_2_26 + 27 hold_2_27 + 28 hold_2_28 + 29 hold_2_29
+   + 30 hold_2_30 + 31 hold_2_31 + 32 hold_2_32 + 33 hold_2_33
+   + 34 hold_2_34 + 35 hold_2_35 + 36 hold_2_36 + 37 hold_2_37
+   + 38 hold_2_38 + 39 hold_2_39 + 40 hold_2_40 + 41 hold_2_41
+   + 42 hold_2_42 + 43 hold_2_43 + 44 hold_2_44 + 45 hold_2_45
+   + 46 hold_2_46 + 47 hold_2_47 + 48 hold_2_48 <= 60
+ hold_constraint_3: hold_3_1 + hold_3_2 + hold_3_3 + hold_3_4 + hold_3_5
+   + hold_3_6 + hold_3_7 + hold_3_8 + hold_3_9 + hold_3_10 + hold_3_11
+   + hold_3_12 + hold_3_13 + hold_3_14 + hold_3_15 + hold_3_16 + hold_3_17
+   + hold_3_18 + hold_3_19 + hold_3_20 + hold_3_21 + hold_3_22 + hold_3_23
+   + hold_3_24 + hold_3_25 + hold_3_26 + hold_3_27 + hold_3_28 + hold_3_29
+   + hold_3_30 + hold_3_31 + hold_3_32 + hold_3_33 + hold_3_34 + hold_3_35
+   + hold_3_36 + hold_3_37 + hold_3_38 + hold_3_39 + hold_3_40 + hold_3_41
+   + hold_3_42 + hold_3_43 + hold_3_44 + hold_3_45 + hold_3_46 + hold_3_47
+   + hold_3_48 <= 1
+ end_constraint_3: start_3 + hold_3_1 + 2 hold_3_2 + 3 hold_3_3
+   + 4 hold_3_4 + 5 hold_3_5 + 6 hold_3_6 + 7 hold_3_7 + 8 hold_3_8
+   + 9 hold_3_9 + 10 hold_3_10 + 11 hold_3_11 + 12 hold_3_12 + 13 hold_3_13
+   + 14 hold_3_14 + 15 hold_3_15 + 16 hold_3_16 + 17 hold_3_17
+   + 18 hold_3_18 + 19 hold_3_19 + 20 hold_3_20 + 21 hold_3_21
+   + 22 hold_3_22 + 23 hold_3_23 + 24 hold_3_24 + 25 hold_3_25
+   + 26 hold_3_26 + 27 hold_3_27 + 28 hold_3_28 + 29 hold_3_29
+   + 30 hold_3_30 + 31 hold_3_31 + 32 hold_3_32 + 33 hold_3_33
+   + 34 hold_3_34 + 35 hold_3_35 + 36 hold_3_36 + 37 hold_3_37
+   + 38 hold_3_38 + 39 hold_3_39 + 40 hold_3_40 + 41 hold_3_41
+   + 42 hold_3_42 + 43 hold_3_43 + 44 hold_3_44 + 45 hold_3_45
+   + 46 hold_3_46 + 47 hold_3_47 + 48 hold_3_48 <= 60
+ hold_constraint_4: hold_4_1 + hold_4_2 + hold_4_3 + hold_4_4 + hold_4_5
+   + hold_4_6 + hold_4_7 + hold_4_8 + hold_4_9 + hold_4_10 + hold_4_11
+   + hold_4_12 + hold_4_13 + hold_4_14 + hold_4_15 + hold_4_16 + hold_4_17
+   + hold_4_18 + hold_4_19 + hold_4_20 + hold_4_21 + hold_4_22 + hold_4_23
+   + hold_4_24 + hold_4_25 + hold_4_26 + hold_4_27 + hold_4_28 + hold_4_29
+   + hold_4_30 + hold_4_31 + hold_4_32 + hold_4_33 + hold_4_34 + hold_4_35
+   + hold_4_36 + hold_4_37 + hold_4_38 + hold_4_39 + hold_4_40 + hold_4_41
+   + hold_4_42 + hold_4_43 + hold_4_44 + hold_4_45 + hold_4_46 + hold_4_47
+   + hold_4_48 <= 1
+ end_constraint_4: start_4 + hold_4_1 + 2 hold_4_2 + 3 hold_4_3
+   + 4 hold_4_4 + 5 hold_4_5 + 6 hold_4_6 + 7 hold_4_7 + 8 hold_4_8
+   + 9 hold_4_9 + 10 hold_4_10 + 11 hold_4_11 + 12 hold_4_12 + 13 hold_4_13
+   + 14 hold_4_14 + 15 hold_4_15 + 16 hold_4_16 + 17 hold_4_17
+   + 18 hold_4_18 + 19 hold_4_19 + 20 hold_4_20 + 21 hold_4_21
+   + 22 hold_4_22 + 23 hold_4_23 + 24 hold_4_24 + 25 hold_4_25
+   + 26 hold_4_26 + 27 hold_4_27 + 28 hold_4_28 + 29 hold_4_29
+   + 30 hold_4_30 + 31 hold_4_31 + 32 hold_4_32 + 33 hold_4_33
+   + 34 hold_4_34 + 35 hold_4_35 + 36 hold_4_36 + 37 hold_4_37
+   + 38 hold_4_38 + 39 hold_4_39 + 40 hold_4_40 + 41 hold_4_41
+   + 42 hold_4_42 + 43 hold_4_43 + 44 hold_4_44 + 45 hold_4_45
+   + 46 hold_4_46 + 47 hold_4_47 + 48 hold_4_48 <= 60
+ hold_constraint_5: hold_5_1 + hold_5_2 + hold_5_3 + hold_5_4 + hold_5_5
+   + hold_5_6 + hold_5_7 + hold_5_8 + hold_5_9 + hold_5_10 + hold_5_11
+   + hold_5_12 + hold_5_13 + hold_5_14 + hold_5_15 + hold_5_16 + hold_5_17
+   + hold_5_18 + hold_5_19 + hold_5_20 + hold_5_21 + hold_5_22 + hold_5_23
+   + hold_5_24 + hold_5_25 + hold_5_26 + hold_5_27 + hold_5_28 + hold_5_29
+   + hold_5_30 + hold_5_31 + hold_5_32 + hold_5_33 + hold_5_34 + hold_5_35
+   + hold_5_36 + hold_5_37 + hold_5_38 + hold_5_39 + hold_5_40 + hold_5_41
+   + hold_5_42 + hold_5_43 + hold_5_44 + hold_5_45 + hold_5_46 + hold_5_47
+   + hold_5_48 <= 1
+ end_constraint_5: start_5 + hold_5_1 + 2 hold_5_2 + 3 hold_5_3
+   + 4 hold_5_4 + 5 hold_5_5 + 6 hold_5_6 + 7 hold_5_7 + 8 hold_5_8
+   + 9 hold_5_9 + 10 hold_5_10 + 11 hold_5_11 + 12 hold_5_12 + 13 hold_5_13
+   + 14 hold_5_14 + 15 hold_5_15 + 16 hold_5_16 + 17 hold_5_17
+   + 18 hold_5_18 + 19 hold_5_19 + 20 hold_5_20 + 21 hold_5_21
+   + 22 hold_5_22 + 23 hold_5_23 + 24 hold_5_24 + 25 hold_5_25
+   + 26 hold_5_26 + 27 hold_5_27 + 28 hold_5_28 + 29 hold_5_29
+   + 30 hold_5_30 + 31 hold_5_31 + 32 hold_5_32 + 33 hold_5_33
+   + 34 hold_5_34 + 35 hold_5_35 + 36 hold_5_36 + 37 hold_5_37
+   + 38 hold_5_38 + 39 hold_5_39 + 40 hold_5_40 + 41 hold_5_41
+   + 42 hold_5_42 + 43 hold_5_43 + 44 hold_5_44 + 45 hold_5_45
+   + 46 hold_5_46 + 47 hold_5_47 + 48 hold_5_48 <= 60
+ node_flow_constraint_nic_in_0: flow_source_nic_in_0 - flow_nic_in_0_0
+   + flow_nic_out_1_nic_in_0 + flow_nic_out_2_nic_in_0
+   + flow_nic_out_3_nic_in_0 + flow_nic_out_4_nic_in_0 = 0
+ node_flow_constraint_nic_out_0: - flow_nic_out_0_sink
+   - flow_nic_out_0_nic_in_1 - flow_nic_out_0_nic_in_2
+   - flow_nic_out_0_nic_in_3 - flow_nic_out_0_nic_in_4 + flow_0_nic_out_0
+   = 0
+ node_flow_constraint_nic_in_1: flow_nic_out_0_nic_in_1
+   + flow_source_nic_in_1 - flow_nic_in_1_1 + flow_nic_out_2_nic_in_1
+   + flow_nic_out_3_nic_in_1 + flow_nic_out_4_nic_in_1 = 0
+ node_flow_constraint_nic_out_1: - flow_nic_out_1_sink
+   - flow_nic_out_1_nic_in_0 - flow_nic_out_1_nic_in_2
+   - flow_nic_out_1_nic_in_3 - flow_nic_out_1_nic_in_4 + flow_1_nic_out_1
+   = 0
+ node_flow_constraint_nic_in_2: flow_nic_out_0_nic_in_2
+   + flow_nic_out_1_nic_in_2 + flow_source_nic_in_2 - flow_nic_in_2_2
+   + flow_nic_out_3_nic_in_2 + flow_nic_out_4_nic_in_2 = 0
+ node_flow_constraint_nic_out_2: - flow_nic_out_2_sink
+   - flow_nic_out_2_nic_in_0 - flow_nic_out_2_nic_in_1
+   - flow_nic_out_2_nic_in_3 - flow_nic_out_2_nic_in_4 + flow_2_nic_out_2
+   = 0
+ node_flow_constraint_nic_in_3: flow_nic_out_0_nic_in_3
+   + flow_nic_out_1_nic_in_3 + flow_nic_out_2_nic_in_3
+   + flow_source_nic_in_3 - flow_nic_in_3_3 + flow_nic_out_4_nic_in_3 = 0
+ node_flow_constraint_nic_out_3: - flow_nic_out_3_sink
+   - flow_nic_out_3_nic_in_0 - flow_nic_out_3_nic_in_1
+   - flow_nic_out_3_nic_in_2 - flow_nic_out_3_nic_in_4 + flow_3_nic_out_3
+   = 0
+ node_flow_constraint_nic_in_4: flow_nic_out_0_nic_in_4
+   + flow_nic_out_1_nic_in_4 + flow_nic_out_2_nic_in_4
+   + flow_nic_out_3_nic_in_4 + flow_source_nic_in_4 - flow_nic_in_4_4
+   - flow_nic_in_4_5 = 0
+ node_flow_constraint_nic_out_4: - flow_nic_out_4_sink
+   - flow_nic_out_4_nic_in_0 - flow_nic_out_4_nic_in_1
+   - flow_nic_out_4_nic_in_2 - flow_nic_out_4_nic_in_3 + flow_4_nic_out_4
+   + flow_5_nic_out_4 = 0
+ node_flow_constraint_0: flow_nic_in_0_0 - flow_0_nic_out_0 = 0
+ node_flow_constraint_1: flow_nic_in_1_1 - flow_1_nic_out_1 = 0
+ node_flow_constraint_2: flow_nic_in_2_2 - flow_2_nic_out_2 = 0
+ node_flow_constraint_3: flow_nic_in_3_3 - flow_3_nic_out_3 = 0
+ node_flow_constraint_4: flow_nic_in_4_4 - flow_4_nic_out_4 - flow_4_5
+   + flow_5_4 = 0
+ node_flow_constraint_5: flow_nic_in_4_5 - flow_5_nic_out_4 + flow_4_5
+   - flow_5_4 = 0
+ constr_is_start_zero_0: start_0 + 60 is_start_zero_0_for_source_nic_in_0
+   <= 60
+ constr_edge_switch_start_zero_0_OR: switch_source_nic_in_0
+   - is_start_zero_0_for_source_nic_in_0 <= 0
+ constr_is_end_complete_0: start_0 + hold_0_1 + 2 hold_0_2 + 3 hold_0_3
+   + 4 hold_0_4 + 5 hold_0_5 + 6 hold_0_6 + 7 hold_0_7 + 8 hold_0_8
+   + 9 hold_0_9 + 10 hold_0_10 + 11 hold_0_11 + 12 hold_0_12 + 13 hold_0_13
+   + 14 hold_0_14 + 15 hold_0_15 + 16 hold_0_16 + 17 hold_0_17
+   + 18 hold_0_18 + 19 hold_0_19 + 20 hold_0_20 + 21 hold_0_21
+   + 22 hold_0_22 + 23 hold_0_23 + 24 hold_0_24 + 25 hold_0_25
+   + 26 hold_0_26 + 27 hold_0_27 + 28 hold_0_28 + 29 hold_0_29
+   + 30 hold_0_30 + 31 hold_0_31 + 32 hold_0_32 + 33 hold_0_33
+   + 34 hold_0_34 + 35 hold_0_35 + 36 hold_0_36 + 37 hold_0_37
+   + 38 hold_0_38 + 39 hold_0_39 + 40 hold_0_40 + 41 hold_0_41
+   + 42 hold_0_42 + 43 hold_0_43 + 44 hold_0_44 + 45 hold_0_45
+   + 46 hold_0_46 + 47 hold_0_47 + 48 hold_0_48 - 60 is_end_complete_0
+   >= 0
+ constr_edge_switch_end_max_0_OR: switch_nic_out_0_sink - is_end_complete_0
+   <= 0
+ constr_link_match_1_0_1: 60 switch_nic_out_0_nic_in_1 - group_start_1
+   + group_end_0 <= 60
+ constr_link_match_2_0_1: 60 switch_nic_out_0_nic_in_1 + group_start_1
+   - group_end_0 <= 60
+ constr_link_match_1_0_2: 60 switch_nic_out_0_nic_in_2 + group_end_0
+   - group_start_2 <= 60
+ constr_link_match_2_0_2: 60 switch_nic_out_0_nic_in_2 - group_end_0
+   + group_start_2 <= 60
+ constr_link_match_1_0_3: 60 switch_nic_out_0_nic_in_3 + group_end_0
+   - group_start_3 <= 60
+ constr_link_match_2_0_3: 60 switch_nic_out_0_nic_in_3 - group_end_0
+   + group_start_3 <= 60
+ constr_link_match_1_0_4: 60 switch_nic_out_0_nic_in_4 + group_end_0
+   - group_start_4 <= 60
+ constr_link_match_2_0_4: 60 switch_nic_out_0_nic_in_4 - group_end_0
+   + group_start_4 <= 60
+ constr_is_start_zero_1: start_1 + 60 is_start_zero_1_for_source_nic_in_1
+   <= 60
+ constr_edge_switch_start_zero_1_OR: switch_source_nic_in_1
+   - is_start_zero_1_for_source_nic_in_1 <= 0
+ constr_is_end_complete_1: start_1 + hold_1_1 + 2 hold_1_2 + 3 hold_1_3
+   + 4 hold_1_4 + 5 hold_1_5 + 6 hold_1_6 + 7 hold_1_7 + 8 hold_1_8
+   + 9 hold_1_9 + 10 hold_1_10 + 11 hold_1_11 + 12 hold_1_12 + 13 hold_1_13
+   + 14 hold_1_14 + 15 hold_1_15 + 16 hold_1_16 + 17 hold_1_17
+   + 18 hold_1_18 + 19 hold_1_19 + 20 hold_1_20 + 21 hold_1_21
+   + 22 hold_1_22 + 23 hold_1_23 + 24 hold_1_24 + 25 hold_1_25
+   + 26 hold_1_26 + 27 hold_1_27 + 28 hold_1_28 + 29 hold_1_29
+   + 30 hold_1_30 + 31 hold_1_31 + 32 hold_1_32 + 33 hold_1_33
+   + 34 hold_1_34 + 35 hold_1_35 + 36 hold_1_36 + 37 hold_1_37
+   + 38 hold_1_38 + 39 hold_1_39 + 40 hold_1_40 + 41 hold_1_41
+   + 42 hold_1_42 + 43 hold_1_43 + 44 hold_1_44 + 45 hold_1_45
+   + 46 hold_1_46 + 47 hold_1_47 + 48 hold_1_48 - 60 is_end_complete_1
+   >= 0
+ constr_edge_switch_end_max_1_OR: switch_nic_out_1_sink - is_end_complete_1
+   <= 0
+ constr_link_match_1_1_0: 60 switch_nic_out_1_nic_in_0 - group_start_0
+   + group_end_1 <= 60
+ constr_link_match_2_1_0: 60 switch_nic_out_1_nic_in_0 + group_start_0
+   - group_end_1 <= 60
+ constr_link_match_1_1_2: 60 switch_nic_out_1_nic_in_2 - group_start_2
+   + group_end_1 <= 60
+ constr_link_match_2_1_2: 60 switch_nic_out_1_nic_in_2 + group_start_2
+   - group_end_1 <= 60
+ constr_link_match_1_1_3: 60 switch_nic_out_1_nic_in_3 - group_start_3
+   + group_end_1 <= 60
+ constr_link_match_2_1_3: 60 switch_nic_out_1_nic_in_3 + group_start_3
+   - group_end_1 <= 60
+ constr_link_match_1_1_4: 60 switch_nic_out_1_nic_in_4 - group_start_4
+   + group_end_1 <= 60
+ constr_link_match_2_1_4: 60 switch_nic_out_1_nic_in_4 + group_start_4
+   - group_end_1 <= 60
+ constr_is_start_zero_2: start_2 + 60 is_start_zero_2_for_source_nic_in_2
+   <= 60
+ constr_edge_switch_start_zero_2_OR: switch_source_nic_in_2
+   - is_start_zero_2_for_source_nic_in_2 <= 0
+ constr_is_end_complete_2: start_2 + hold_2_1 + 2 hold_2_2 + 3 hold_2_3
+   + 4 hold_2_4 + 5 hold_2_5 + 6 hold_2_6 + 7 hold_2_7 + 8 hold_2_8
+   + 9 hold_2_9 + 10 hold_2_10 + 11 hold_2_11 + 12 hold_2_12 + 13 hold_2_13
+   + 14 hold_2_14 + 15 hold_2_15 + 16 hold_2_16 + 17 hold_2_17
+   + 18 hold_2_18 + 19 hold_2_19 + 20 hold_2_20 + 21 hold_2_21
+   + 22 hold_2_22 + 23 hold_2_23 + 24 hold_2_24 + 25 hold_2_25
+   + 26 hold_2_26 + 27 hold_2_27 + 28 hold_2_28 + 29 hold_2_29
+   + 30 hold_2_30 + 31 hold_2_31 + 32 hold_2_32 + 33 hold_2_33
+   + 34 hold_2_34 + 35 hold_2_35 + 36 hold_2_36 + 37 hold_2_37
+   + 38 hold_2_38 + 39 hold_2_39 + 40 hold_2_40 + 41 hold_2_41
+   + 42 hold_2_42 + 43 hold_2_43 + 44 hold_2_44 + 45 hold_2_45
+   + 46 hold_2_46 + 47 hold_2_47 + 48 hold_2_48 - 60 is_end_complete_2
+   >= 0
+ constr_edge_switch_end_max_2_OR: switch_nic_out_2_sink - is_end_complete_2
+   <= 0
+ constr_link_match_1_2_0: 60 switch_nic_out_2_nic_in_0 - group_start_0
+   + group_end_2 <= 60
+ constr_link_match_2_2_0: 60 switch_nic_out_2_nic_in_0 + group_start_0
+   - group_end_2 <= 60
+ constr_link_match_1_2_1: 60 switch_nic_out_2_nic_in_1 - group_start_1
+   + group_end_2 <= 60
+ constr_link_match_2_2_1: 60 switch_nic_out_2_nic_in_1 + group_start_1
+   - group_end_2 <= 60
+ constr_link_match_1_2_3: 60 switch_nic_out_2_nic_in_3 - group_start_3
+   + group_end_2 <= 60
+ constr_link_match_2_2_3: 60 switch_nic_out_2_nic_in_3 + group_start_3
+   - group_end_2 <= 60
+ constr_link_match_1_2_4: 60 switch_nic_out_2_nic_in_4 - group_start_4
+   + group_end_2 <= 60
+ constr_link_match_2_2_4: 60 switch_nic_out_2_nic_in_4 + group_start_4
+   - group_end_2 <= 60
+ constr_is_start_zero_3: start_3 + 60 is_start_zero_3_for_source_nic_in_3
+   <= 60
+ constr_edge_switch_start_zero_3_OR: switch_source_nic_in_3
+   - is_start_zero_3_for_source_nic_in_3 <= 0
+ constr_is_end_complete_3: start_3 + hold_3_1 + 2 hold_3_2 + 3 hold_3_3
+   + 4 hold_3_4 + 5 hold_3_5 + 6 hold_3_6 + 7 hold_3_7 + 8 hold_3_8
+   + 9 hold_3_9 + 10 hold_3_10 + 11 hold_3_11 + 12 hold_3_12 + 13 hold_3_13
+   + 14 hold_3_14 + 15 hold_3_15 + 16 hold_3_16 + 17 hold_3_17
+   + 18 hold_3_18 + 19 hold_3_19 + 20 hold_3_20 + 21 hold_3_21
+   + 22 hold_3_22 + 23 hold_3_23 + 24 hold_3_24 + 25 hold_3_25
+   + 26 hold_3_26 + 27 hold_3_27 + 28 hold_3_28 + 29 hold_3_29
+   + 30 hold_3_30 + 31 hold_3_31 + 32 hold_3_32 + 33 hold_3_33
+   + 34 hold_3_34 + 35 hold_3_35 + 36 hold_3_36 + 37 hold_3_37
+   + 38 hold_3_38 + 39 hold_3_39 + 40 hold_3_40 + 41 hold_3_41
+   + 42 hold_3_42 + 43 hold_3_43 + 44 hold_3_44 + 45 hold_3_45
+   + 46 hold_3_46 + 47 hold_3_47 + 48 hold_3_48 - 60 is_end_complete_3
+   >= 0
+ constr_edge_switch_end_max_3_OR: switch_nic_out_3_sink - is_end_complete_3
+   <= 0
+ constr_link_match_1_3_0: 60 switch_nic_out_3_nic_in_0 - group_start_0
+   + group_end_3 <= 60
+ constr_link_match_2_3_0: 60 switch_nic_out_3_nic_in_0 + group_start_0
+   - group_end_3 <= 60
+ constr_link_match_1_3_1: 60 switch_nic_out_3_nic_in_1 - group_start_1
+   + group_end_3 <= 60
+ constr_link_match_2_3_1: 60 switch_nic_out_3_nic_in_1 + group_start_1
+   - group_end_3 <= 60
+ constr_link_match_1_3_2: 60 switch_nic_out_3_nic_in_2 - group_start_2
+   + group_end_3 <= 60
+ constr_link_match_2_3_2: 60 switch_nic_out_3_nic_in_2 + group_start_2
+   - group_end_3 <= 60
+ constr_link_match_1_3_4: 60 switch_nic_out_3_nic_in_4 - group_start_4
+   + group_end_3 <= 60
+ constr_link_match_2_3_4: 60 switch_nic_out_3_nic_in_4 + group_start_4
+   - group_end_3 <= 60
+ constr_is_start_zero_4: start_4 + 60 is_start_zero_4_for_source_nic_in_4
+   <= 60
+ constr_is_start_zero_5: start_5 + 60 is_start_zero_5_for_source_nic_in_4
+   <= 60
+ constr_edge_switch_start_zero_4_OR: switch_source_nic_in_4
+   - is_start_zero_4_for_source_nic_in_4
+   - is_start_zero_5_for_source_nic_in_4 <= 0
+ constr_is_end_complete_4: start_4 + hold_4_1 + 2 hold_4_2 + 3 hold_4_3
+   + 4 hold_4_4 + 5 hold_4_5 + 6 hold_4_6 + 7 hold_4_7 + 8 hold_4_8
+   + 9 hold_4_9 + 10 hold_4_10 + 11 hold_4_11 + 12 hold_4_12 + 13 hold_4_13
+   + 14 hold_4_14 + 15 hold_4_15 + 16 hold_4_16 + 17 hold_4_17
+   + 18 hold_4_18 + 19 hold_4_19 + 20 hold_4_20 + 21 hold_4_21
+   + 22 hold_4_22 + 23 hold_4_23 + 24 hold_4_24 + 25 hold_4_25
+   + 26 hold_4_26 + 27 hold_4_27 + 28 hold_4_28 + 29 hold_4_29
+   + 30 hold_4_30 + 31 hold_4_31 + 32 hold_4_32 + 33 hold_4_33
+   + 34 hold_4_34 + 35 hold_4_35 + 36 hold_4_36 + 37 hold_4_37
+   + 38 hold_4_38 + 39 hold_4_39 + 40 hold_4_40 + 41 hold_4_41
+   + 42 hold_4_42 + 43 hold_4_43 + 44 hold_4_44 + 45 hold_4_45
+   + 46 hold_4_46 + 47 hold_4_47 + 48 hold_4_48 - 60 is_end_complete_4
+   >= 0
+ constr_is_end_complete_5: start_5 + hold_5_1 + 2 hold_5_2 + 3 hold_5_3
+   + 4 hold_5_4 + 5 hold_5_5 + 6 hold_5_6 + 7 hold_5_7 + 8 hold_5_8
+   + 9 hold_5_9 + 10 hold_5_10 + 11 hold_5_11 + 12 hold_5_12 + 13 hold_5_13
+   + 14 hold_5_14 + 15 hold_5_15 + 16 hold_5_16 + 17 hold_5_17
+   + 18 hold_5_18 + 19 hold_5_19 + 20 hold_5_20 + 21 hold_5_21
+   + 22 hold_5_22 + 23 hold_5_23 + 24 hold_5_24 + 25 hold_5_25
+   + 26 hold_5_26 + 27 hold_5_27 + 28 hold_5_28 + 29 hold_5_29
+   + 30 hold_5_30 + 31 hold_5_31 + 32 hold_5_32 + 33 hold_5_33
+   + 34 hold_5_34 + 35 hold_5_35 + 36 hold_5_36 + 37 hold_5_37
+   + 38 hold_5_38 + 39 hold_5_39 + 40 hold_5_40 + 41 hold_5_41
+   + 42 hold_5_42 + 43 hold_5_43 + 44 hold_5_44 + 45 hold_5_45
+   + 46 hold_5_46 + 47 hold_5_47 + 48 hold_5_48 - 60 is_end_complete_5
+   >= 0
+ constr_edge_switch_end_max_4_OR: switch_nic_out_4_sink - is_end_complete_4
+   - is_end_complete_5 <= 0
+ constr_link_match_1_4_0: 60 switch_nic_out_4_nic_in_0 - group_start_0
+   + group_end_4 <= 60
+ constr_link_match_2_4_0: 60 switch_nic_out_4_nic_in_0 + group_start_0
+   - group_end_4 <= 60
+ constr_link_match_1_4_1: 60 switch_nic_out_4_nic_in_1 - group_start_1
+   + group_end_4 <= 60
+ constr_link_match_2_4_1: 60 switch_nic_out_4_nic_in_1 + group_start_1
+   - group_end_4 <= 60
+ constr_link_match_1_4_2: 60 switch_nic_out_4_nic_in_2 - group_start_2
+   + group_end_4 <= 60
+ constr_link_match_2_4_2: 60 switch_nic_out_4_nic_in_2 + group_start_2
+   - group_end_4 <= 60
+ constr_link_match_1_4_3: 60 switch_nic_out_4_nic_in_3 - group_start_3
+   + group_end_4 <= 60
+ constr_link_match_2_4_3: 60 switch_nic_out_4_nic_in_3 + group_start_3
+   - group_end_4 <= 60
+ constr_pp_permissionA_4_5: start_4 - start_5 + hold_4_1 + 2 hold_4_2
+   + 3 hold_4_3 + 4 hold_4_4 + 5 hold_4_5 + 6 hold_4_6 + 7 hold_4_7
+   + 8 hold_4_8 + 9 hold_4_9 + 10 hold_4_10 + 11 hold_4_11 + 12 hold_4_12
+   + 13 hold_4_13 + 14 hold_4_14 + 15 hold_4_15 + 16 hold_4_16
+   + 17 hold_4_17 + 18 hold_4_18 + 19 hold_4_19 + 20 hold_4_20
+   + 21 hold_4_21 + 22 hold_4_22 + 23 hold_4_23 + 24 hold_4_24
+   + 25 hold_4_25 + 26 hold_4_26 + 27 hold_4_27 + 28 hold_4_28
+   + 29 hold_4_29 + 30 hold_4_30 + 31 hold_4_31 + 32 hold_4_32
+   + 33 hold_4_33 + 34 hold_4_34 + 35 hold_4_35 + 36 hold_4_36
+   + 37 hold_4_37 + 38 hold_4_38 + 39 hold_4_39 + 40 hold_4_40
+   + 41 hold_4_41 + 42 hold_4_42 + 43 hold_4_43 + 44 hold_4_44
+   + 45 hold_4_45 + 46 hold_4_46 + 47 hold_4_47 + 48 hold_4_48
+   + 60 pp_permission_4_5 <= 60
+ constr_pp_permissionB_4_5: - start_4 + start_5 - hold_4_1 - 2 hold_4_2
+   - 3 hold_4_3 - 4 hold_4_4 - 5 hold_4_5 - 6 hold_4_6 - 7 hold_4_7
+   - 8 hold_4_8 - 9 hold_4_9 - 10 hold_4_10 - 11 hold_4_11 - 12 hold_4_12
+   - 13 hold_4_13 - 14 hold_4_14 - 15 hold_4_15 - 16 hold_4_16
+   - 17 hold_4_17 - 18 hold_4_18 - 19 hold_4_19 - 20 hold_4_20
+   - 21 hold_4_21 - 22 hold_4_22 - 23 hold_4_23 - 24 hold_4_24
+   - 25 hold_4_25 - 26 hold_4_26 - 27 hold_4_27 - 28 hold_4_28
+   - 29 hold_4_29 - 30 hold_4_30 - 31 hold_4_31 - 32 hold_4_32
+   - 33 hold_4_33 - 34 hold_4_34 - 35 hold_4_35 - 36 hold_4_36
+   - 37 hold_4_37 - 38 hold_4_38 - 39 hold_4_39 - 40 hold_4_40
+   - 41 hold_4_41 - 42 hold_4_42 - 43 hold_4_43 - 44 hold_4_44
+   - 45 hold_4_45 - 46 hold_4_46 - 47 hold_4_47 - 48 hold_4_48
+   + 60 pp_permission_4_5 <= 60
+ constr_internal_compute_4_5: switch_4_5 - group_tp_active_4
+   - pp_permission_4_5 <= 0
+ constr_pp_permissionA_5_4: - start_4 + start_5 + hold_5_1 + 2 hold_5_2
+   + 3 hold_5_3 + 4 hold_5_4 + 5 hold_5_5 + 6 hold_5_6 + 7 hold_5_7
+   + 8 hold_5_8 + 9 hold_5_9 + 10 hold_5_10 + 11 hold_5_11 + 12 hold_5_12
+   + 13 hold_5_13 + 14 hold_5_14 + 15 hold_5_15 + 16 hold_5_16
+   + 17 hold_5_17 + 18 hold_5_18 + 19 hold_5_19 + 20 hold_5_20
+   + 21 hold_5_21 + 22 hold_5_22 + 23 hold_5_23 + 24 hold_5_24
+   + 25 hold_5_25 + 26 hold_5_26 + 27 hold_5_27 + 28 hold_5_28
+   + 29 hold_5_29 + 30 hold_5_30 + 31 hold_5_31 + 32 hold_5_32
+   + 33 hold_5_33 + 34 hold_5_34 + 35 hold_5_35 + 36 hold_5_36
+   + 37 hold_5_37 + 38 hold_5_38 + 39 hold_5_39 + 40 hold_5_40
+   + 41 hold_5_41 + 42 hold_5_42 + 43 hold_5_43 + 44 hold_5_44
+   + 45 hold_5_45 + 46 hold_5_46 + 47 hold_5_47 + 48 hold_5_48
+   + 60 pp_permission_5_4 <= 60
+ constr_pp_permissionB_5_4: start_4 - start_5 - hold_5_1 - 2 hold_5_2
+   - 3 hold_5_3 - 4 hold_5_4 - 5 hold_5_5 - 6 hold_5_6 - 7 hold_5_7
+   - 8 hold_5_8 - 9 hold_5_9 - 10 hold_5_10 - 11 hold_5_11 - 12 hold_5_12
+   - 13 hold_5_13 - 14 hold_5_14 - 15 hold_5_15 - 16 hold_5_16
+   - 17 hold_5_17 - 18 hold_5_18 - 19 hold_5_19 - 20 hold_5_20
+   - 21 hold_5_21 - 22 hold_5_22 - 23 hold_5_23 - 24 hold_5_24
+   - 25 hold_5_25 - 26 hold_5_26 - 27 hold_5_27 - 28 hold_5_28
+   - 29 hold_5_29 - 30 hold_5_30 - 31 hold_5_31 - 32 hold_5_32
+   - 33 hold_5_33 - 34 hold_5_34 - 35 hold_5_35 - 36 hold_5_36
+   - 37 hold_5_37 - 38 hold_5_38 - 39 hold_5_39 - 40 hold_5_40
+   - 41 hold_5_41 - 42 hold_5_42 - 43 hold_5_43 - 44 hold_5_44
+   - 45 hold_5_45 - 46 hold_5_46 - 47 hold_5_47 - 48 hold_5_48
+   + 60 pp_permission_5_4 <= 60
+ constr_internal_compute_5_4: switch_5_4 - group_tp_active_4
+   - pp_permission_5_4 <= 0
+ link_activation_dst_nic_in_0_0: switch_nic_in_0_0 - is_active_0 <= 0
+ link_activation_src_0_nic_out_0: switch_0_nic_out_0 - is_active_0 <= 0
+ link_activation_dst_nic_in_1_1: switch_nic_in_1_1 - is_active_1 <= 0
+ link_activation_src_1_nic_out_1: switch_1_nic_out_1 - is_active_1 <= 0
+ link_activation_dst_nic_in_2_2: switch_nic_in_2_2 - is_active_2 <= 0
+ link_activation_src_2_nic_out_2: switch_2_nic_out_2 - is_active_2 <= 0
+ link_activation_dst_nic_in_3_3: switch_nic_in_3_3 - is_active_3 <= 0
+ link_activation_src_3_nic_out_3: switch_3_nic_out_3 - is_active_3 <= 0
+ link_activation_dst_nic_in_4_4: switch_nic_in_4_4 - is_active_4 <= 0
+ link_activation_src_4_nic_out_4: switch_4_nic_out_4 - is_active_4 <= 0
+ link_activation_dst_nic_in_4_5: switch_nic_in_4_5 - is_active_5 <= 0
+ link_activation_src_5_nic_out_4: switch_5_nic_out_4 - is_active_5 <= 0
+ link_activation_src_4_5: switch_4_5 - is_active_4 <= 0
+ link_activation_dst_4_5: switch_4_5 - is_active_5 <= 0
+ link_activation_src_5_4: switch_5_4 - is_active_5 <= 0
+ link_activation_dst_5_4: switch_5_4 - is_active_4 <= 0
+ edge_flow_constr_source_nic_in_0: flow_source_nic_in_0
+   - 5e+08 switch_source_nic_in_0 <= 0
+ edge_flow_constr_nic_out_0_sink: flow_nic_out_0_sink
+   - 5e+08 switch_nic_out_0_sink <= 0
+ edge_flow_constr_nic_out_0_nic_in_1: flow_nic_out_0_nic_in_1
+   - 75120.19230769231 switch_nic_out_0_nic_in_1 <= 0
+ edge_flow_constr_nic_out_0_nic_in_2: flow_nic_out_0_nic_in_2
+   - 75120.19230769231 switch_nic_out_0_nic_in_2 <= 0
+ edge_flow_constr_nic_out_0_nic_in_3: flow_nic_out_0_nic_in_3
+   - 75120.19230769231 switch_nic_out_0_nic_in_3 <= 0
+ edge_flow_constr_nic_out_0_nic_in_4: flow_nic_out_0_nic_in_4
+   - 75120.19230769231 switch_nic_out_0_nic_in_4 <= 0
+ edge_flow_constr_nic_in_0_0: flow_nic_in_0_0
+   - 4.807692307692308e+06 switch_nic_in_0_0 <= 0
+ edge_flow_constr_0_nic_out_0: flow_0_nic_out_0
+   - 4.807692307692308e+06 switch_0_nic_out_0 <= 0
+ edge_flow_constr_source_nic_in_1: flow_source_nic_in_1
+   - 5e+08 switch_source_nic_in_1 <= 0
+ edge_flow_constr_nic_out_1_sink: flow_nic_out_1_sink
+   - 5e+08 switch_nic_out_1_sink <= 0
+ edge_flow_constr_nic_out_1_nic_in_0: flow_nic_out_1_nic_in_0
+   - 75120.19230769231 switch_nic_out_1_nic_in_0 <= 0
+ edge_flow_constr_nic_out_1_nic_in_2: flow_nic_out_1_nic_in_2
+   - 75120.19230769231 switch_nic_out_1_nic_in_2 <= 0
+ edge_flow_constr_nic_out_1_nic_in_3: flow_nic_out_1_nic_in_3
+   - 75120.19230769231 switch_nic_out_1_nic_in_3 <= 0
+ edge_flow_constr_nic_out_1_nic_in_4: flow_nic_out_1_nic_in_4
+   - 75120.19230769231 switch_nic_out_1_nic_in_4 <= 0
+ edge_flow_constr_nic_in_1_1: flow_nic_in_1_1
+   - 4.807692307692308e+06 switch_nic_in_1_1 <= 0
+ edge_flow_constr_1_nic_out_1: flow_1_nic_out_1
+   - 4.807692307692308e+06 switch_1_nic_out_1 <= 0
+ edge_flow_constr_source_nic_in_2: flow_source_nic_in_2
+   - 5e+08 switch_source_nic_in_2 <= 0
+ edge_flow_constr_nic_out_2_sink: flow_nic_out_2_sink
+   - 5e+08 switch_nic_out_2_sink <= 0
+ edge_flow_constr_nic_out_2_nic_in_0: flow_nic_out_2_nic_in_0
+   - 75120.19230769231 switch_nic_out_2_nic_in_0 <= 0
+ edge_flow_constr_nic_out_2_nic_in_1: flow_nic_out_2_nic_in_1
+   - 75120.19230769231 switch_nic_out_2_nic_in_1 <= 0
+ edge_flow_constr_nic_out_2_nic_in_3: flow_nic_out_2_nic_in_3
+   - 75120.19230769231 switch_nic_out_2_nic_in_3 <= 0
+ edge_flow_constr_nic_out_2_nic_in_4: flow_nic_out_2_nic_in_4
+   - 75120.19230769231 switch_nic_out_2_nic_in_4 <= 0
+ edge_flow_constr_nic_in_2_2: flow_nic_in_2_2
+   - 4.807692307692308e+06 switch_nic_in_2_2 <= 0
+ edge_flow_constr_2_nic_out_2: flow_2_nic_out_2
+   - 4.807692307692308e+06 switch_2_nic_out_2 <= 0
+ edge_flow_constr_source_nic_in_3: flow_source_nic_in_3
+   - 5e+08 switch_source_nic_in_3 <= 0
+ edge_flow_constr_nic_out_3_sink: flow_nic_out_3_sink
+   - 5e+08 switch_nic_out_3_sink <= 0
+ edge_flow_constr_nic_out_3_nic_in_0: flow_nic_out_3_nic_in_0
+   - 75120.19230769231 switch_nic_out_3_nic_in_0 <= 0
+ edge_flow_constr_nic_out_3_nic_in_1: flow_nic_out_3_nic_in_1
+   - 75120.19230769231 switch_nic_out_3_nic_in_1 <= 0
+ edge_flow_constr_nic_out_3_nic_in_2: flow_nic_out_3_nic_in_2
+   - 75120.19230769231 switch_nic_out_3_nic_in_2 <= 0
+ edge_flow_constr_nic_out_3_nic_in_4: flow_nic_out_3_nic_in_4
+   - 75120.19230769231 switch_nic_out_3_nic_in_4 <= 0
+ edge_flow_constr_nic_in_3_3: flow_nic_in_3_3
+   - 4.807692307692308e+06 switch_nic_in_3_3 <= 0
+ edge_flow_constr_3_nic_out_3: flow_3_nic_out_3
+   - 4.807692307692308e+06 switch_3_nic_out_3 <= 0
+ edge_flow_constr_source_nic_in_4: flow_source_nic_in_4
+   - 5e+08 switch_source_nic_in_4 <= 0
+ edge_flow_constr_nic_out_4_sink: flow_nic_out_4_sink
+   - 5e+08 switch_nic_out_4_sink <= 0
+ edge_flow_constr_nic_out_4_nic_in_0: flow_nic_out_4_nic_in_0
+   - 75120.19230769231 switch_nic_out_4_nic_in_0 <= 0
+ edge_flow_constr_nic_out_4_nic_in_1: flow_nic_out_4_nic_in_1
+   - 75120.19230769231 switch_nic_out_4_nic_in_1 <= 0
+ edge_flow_constr_nic_out_4_nic_in_2: flow_nic_out_4_nic_in_2
+   - 75120.19230769231 switch_nic_out_4_nic_in_2 <= 0
+ edge_flow_constr_nic_out_4_nic_in_3: flow_nic_out_4_nic_in_3
+   - 75120.19230769231 switch_nic_out_4_nic_in_3 <= 0
+ edge_flow_constr_nic_in_4_4: flow_nic_in_4_4
+   - 4.807692307692308e+06 switch_nic_in_4_4 <= 0
+ edge_flow_constr_4_nic_out_4: flow_4_nic_out_4
+   - 4.807692307692308e+06 switch_4_nic_out_4 <= 0
+ edge_flow_constr_nic_in_4_5: flow_nic_in_4_5
+   - 4.807692307692308e+06 switch_nic_in_4_5 <= 0
+ edge_flow_constr_5_nic_out_4: flow_5_nic_out_4
+   - 4.807692307692308e+06 switch_5_nic_out_4 <= 0
+ edge_flow_constr_4_5: flow_4_5 - 4.807692307692308e+06 switch_4_5 <= 0
+ edge_flow_constr_5_4: flow_5_4 - 4.807692307692308e+06 switch_5_4 <= 0
+ force_group_off_constr_0: group_tp_active_0 = 0
+ force_group_off_constr_1: group_tp_active_1 = 0
+ force_group_off_constr_2: group_tp_active_2 = 0
+ force_group_off_constr_3: group_tp_active_3 = 0
+ R172: - group_tp_active_4 + tp_on_and_switch_nic_out_0_nic_in_4_4 <= 0
+ R173: - switch_nic_out_0_nic_in_4 + tp_on_and_switch_nic_out_0_nic_in_4_4
+   <= 0
+ R174: - switch_nic_out_0_nic_in_4 - group_tp_active_4
+   + tp_on_and_switch_nic_out_0_nic_in_4_4 >= -1
+ R175: - group_tp_active_4 + tp_on_and_switch_nic_out_1_nic_in_4_4 <= 0
+ R176: - switch_nic_out_1_nic_in_4 + tp_on_and_switch_nic_out_1_nic_in_4_4
+   <= 0
+ R177: - switch_nic_out_1_nic_in_4 - group_tp_active_4
+   + tp_on_and_switch_nic_out_1_nic_in_4_4 >= -1
+ R178: - group_tp_active_4 + tp_on_and_switch_nic_out_2_nic_in_4_4 <= 0
+ R179: - switch_nic_out_2_nic_in_4 + tp_on_and_switch_nic_out_2_nic_in_4_4
+   <= 0
+ R180: - switch_nic_out_2_nic_in_4 - group_tp_active_4
+   + tp_on_and_switch_nic_out_2_nic_in_4_4 >= -1
+ R181: - group_tp_active_4 + tp_on_and_switch_nic_out_3_nic_in_4_4 <= 0
+ R182: - switch_nic_out_3_nic_in_4 + tp_on_and_switch_nic_out_3_nic_in_4_4
+   <= 0
+ R183: - switch_nic_out_3_nic_in_4 - group_tp_active_4
+   + tp_on_and_switch_nic_out_3_nic_in_4_4 >= -1
+ R184: - group_tp_active_4 + tp_on_and_switch_source_nic_in_4_4 <= 0
+ R185: - switch_source_nic_in_4 + tp_on_and_switch_source_nic_in_4_4 <= 0
+ R186: - switch_source_nic_in_4 - group_tp_active_4
+   + tp_on_and_switch_source_nic_in_4_4 >= -1
+ force_min_throughput: flow_source_nic_in_0 + flow_source_nic_in_1
+   + flow_source_nic_in_2 + flow_source_nic_in_3 + flow_source_nic_in_4
+   >= 1
+ inactive_start_invalid_0: is_active_0 = 0 -> start_0 = 60
+ inactive_start_invalid_1: is_active_1 = 0 -> start_1 = 60
+ inactive_start_invalid_2: is_active_2 = 0 -> start_2 = 60
+ inactive_start_invalid_3: is_active_3 = 0 -> start_3 = 60
+ inactive_start_invalid_4: is_active_4 = 0 -> start_4 = 60
+ inactive_start_invalid_5: is_active_5 = 0 -> start_5 = 60
+ node_throughput_constraint_0: group_tp_active_0 = 0 -> - 26800 hold_0_1
+   - 13400 hold_0_2 - 8933.333333333334 hold_0_3 - 6700 hold_0_4
+   - 5360 hold_0_5 - 4466.666666666667 hold_0_6
+   - 3828.571428571429 hold_0_7 - 3350 hold_0_8
+   - 2977.777777777778 hold_0_9 - 2680 hold_0_10
+   - 2436.363636363636 hold_0_11 - 2233.333333333333 hold_0_12
+   - 2061.538461538461 hold_0_13 - 1914.285714285714 hold_0_14
+   - 1786.666666666667 hold_0_15 - 1675 hold_0_16
+   - 1576.470588235294 hold_0_17 - 1488.888888888889 hold_0_18
+   - 1410.526315789474 hold_0_19 - 1340 hold_0_20
+   - 1276.190476190476 hold_0_21 - 1218.181818181818 hold_0_22
+   - 1165.217391304348 hold_0_23 - 1116.666666666667 hold_0_24
+   - 1072 hold_0_25 - 1030.769230769231 hold_0_26
+   - 992.5925925925926 hold_0_27 - 957.1428571428572 hold_0_28
+   - 924.1379310344828 hold_0_29 - 893.3333333333333 hold_0_30
+   - 864.5161290322579 hold_0_31 - 837.5 hold_0_32
+   - 812.121212121212 hold_0_33 - 788.2352941176471 hold_0_34
+   - 765.7142857142857 hold_0_35 - 744.4444444444445 hold_0_36
+   - 724.3243243243244 hold_0_37 - 705.2631578947368 hold_0_38
+   - 687.1794871794872 hold_0_39 - 670 hold_0_40 + flow_nic_in_0_0 <= 0
+ node_throughput_constraint_1: group_tp_active_1 = 0 -> - 12440 hold_1_1
+   - 6220 hold_1_2 - 4146.666666666667 hold_1_3 - 3110 hold_1_4
+   - 2488 hold_1_5 - 2073.333333333333 hold_1_6
+   - 1777.142857142857 hold_1_7 - 1555 hold_1_8
+   - 1382.222222222222 hold_1_9 - 1244 hold_1_10
+   - 1130.909090909091 hold_1_11 - 1036.666666666667 hold_1_12
+   - 956.9230769230769 hold_1_13 - 888.5714285714287 hold_1_14
+   - 829.3333333333333 hold_1_15 - 777.5 hold_1_16
+   - 731.7647058823529 hold_1_17 - 691.1111111111112 hold_1_18
+   - 654.7368421052631 hold_1_19 - 622 hold_1_20 + flow_nic_in_1_1 <= 0
+ node_throughput_constraint_2: group_tp_active_2 = 0 -> - 16320 hold_2_1
+   - 8160 hold_2_2 - 5440 hold_2_3 - 4080 hold_2_4 - 3264 hold_2_5
+   - 2720 hold_2_6 - 2331.428571428572 hold_2_7 - 2040 hold_2_8
+   - 1813.333333333333 hold_2_9 - 1632 hold_2_10
+   - 1483.636363636364 hold_2_11 - 1360 hold_2_12
+   - 1255.384615384615 hold_2_13 - 1165.714285714286 hold_2_14
+   - 1088 hold_2_15 - 1020 hold_2_16 - 960 hold_2_17
+   - 906.6666666666666 hold_2_18 - 858.9473684210526 hold_2_19
+   - 816 hold_2_20 - 777.1428571428571 hold_2_21
+   - 741.8181818181819 hold_2_22 - 709.5652173913044 hold_2_23
+   - 680 hold_2_24 - 652.8 hold_2_25 - 627.6923076923077 hold_2_26
+   - 604.4444444444445 hold_2_27 - 582.8571428571429 hold_2_28
+   - 562.7586206896552 hold_2_29 - 544 hold_2_30
+   - 526.4516129032257 hold_2_31 - 510 hold_2_32
+   - 494.5454545454545 hold_2_33 - 480 hold_2_34
+   - 466.2857142857142 hold_2_35 - 453.3333333333333 hold_2_36
+   - 441.081081081081 hold_2_37 - 429.4736842105263 hold_2_38
+   - 418.4615384615385 hold_2_39 - 408 hold_2_40 + flow_nic_in_2_2 <= 0
+ node_throughput_constraint_3: group_tp_active_3 = 0 -> - 12440 hold_3_1
+   - 6220 hold_3_2 - 4146.666666666667 hold_3_3 - 3110 hold_3_4
+   - 2488 hold_3_5 - 2073.333333333333 hold_3_6
+   - 1777.142857142857 hold_3_7 - 1555 hold_3_8
+   - 1382.222222222222 hold_3_9 - 1244 hold_3_10
+   - 1130.909090909091 hold_3_11 - 1036.666666666667 hold_3_12
+   - 956.9230769230769 hold_3_13 - 888.5714285714287 hold_3_14
+   - 829.3333333333333 hold_3_15 - 777.5 hold_3_16
+   - 731.7647058823529 hold_3_17 - 691.1111111111112 hold_3_18
+   - 654.7368421052631 hold_3_19 - 622 hold_3_20 + flow_nic_in_3_3 <= 0
+ node_throughput_constraint_4: group_tp_active_4 = 0 -> - 6912 hold_4_1
+   - 3456 hold_4_2 - 2304 hold_4_3 - 1728 hold_4_4 - 1382.4 hold_4_5
+   - 1152 hold_4_6 - 987.4285714285714 hold_4_7 - 864 hold_4_8
+   - 768 hold_4_9 - 691.2 hold_4_10 - 628.3636363636364 hold_4_11
+   - 576 hold_4_12 - 531.6923076923077 hold_4_13
+   - 493.7142857142857 hold_4_14 - 460.8 hold_4_15 - 432 hold_4_16
+   - 406.5882352941176 hold_4_17 - 384 hold_4_18
+   - 363.7894736842105 hold_4_19 - 345.6 hold_4_20
+   - 329.1428571428571 hold_4_21 - 314.1818181818182 hold_4_22
+   - 300.5217391304348 hold_4_23 - 288 hold_4_24 + flow_nic_in_4_4
+   + flow_5_4 <= 0
+ node_throughput_constraint_5: group_tp_active_4 = 0 -> - 6912 hold_5_1
+   - 3456 hold_5_2 - 2304 hold_5_3 - 1728 hold_5_4 - 1382.4 hold_5_5
+   - 1152 hold_5_6 - 987.4285714285714 hold_5_7 - 864 hold_5_8
+   - 768 hold_5_9 - 691.2 hold_5_10 - 628.3636363636364 hold_5_11
+   - 576 hold_5_12 - 531.6923076923077 hold_5_13
+   - 493.7142857142857 hold_5_14 - 460.8 hold_5_15 - 432 hold_5_16
+   - 406.5882352941176 hold_5_17 - 384 hold_5_18
+   - 363.7894736842105 hold_5_19 - 345.6 hold_5_20
+   - 329.1428571428571 hold_5_21 - 314.1818181818182 hold_5_22
+   - 300.5217391304348 hold_5_23 - 288 hold_5_24 + flow_nic_in_4_5
+   + flow_4_5 <= 0
+ constr_intergroup_throughput_0_source_nic_in_0: switch_source_nic_in_0 = 1 ->
+   - 20074.9063670412 hold_0_1 - 11477.51605995717 hold_0_2
+   - 8035.982008995504 hold_0_3 - 6182.237600922722 hold_0_4
+   - 5023.430178069353 hold_0_5 - 4230.465666929756 hold_0_6
+   - 3653.71506475801 hold_0_7 - 3215.356928614277 hold_0_8
+   - 2870.915907873594 hold_0_9 - 2593.130140299952 hold_0_10
+   - 2364.358182620203 hold_0_11 - 2172.67936765302 hold_0_12
+   - 2009.748781402325 hold_0_13 - 1869.550052319498 hold_0_14
+   - 1747.636126507988 hold_0_15 - 1640.648913376186 hold_0_16
+   - 1546.00519180848 hold_0_17 - 1461.685301336242 hold_0_18
+   - 1386.087406258081 hold_0_19 - 1317.924760265552 hold_0_20
+   - 1256.151863135693 hold_0_21 - 1199.910454443698 hold_0_22
+   - 1148.489393614742 hold_0_23 - 1101.294431888227 hold_0_24
+   - 1057.825143082692 hold_0_25 - 1017.657110309474 hold_0_26
+   - 980.4280226815439 hold_0_27 - 945.8267160755252 hold_0_28
+   - 913.5844554286689 hold_0_29 - 883.4679413219054 hold_0_30
+   - 855.273655656614 hold_0_31 - 828.8232565331684 hold_0_32
+   - 803.9598020098995 hold_0_33 - 780.544633755643 hold_0_34
+   - 758.4547898684025 hold_0_35 - 737.5808449153709 hold_0_36
+   - 717.8250970938798 hold_0_37 - 699.1000391287336 hold_0_38
+   - 681.3270624126097 hold_0_39 - 664.4353539109954 hold_0_40
+   + flow_nic_in_0_0 <= 0
+ constr_intergroup_throughput_1_nic_out_0_nic_in_1: switch_nic_out_0_nic_in_1 = 1 ->
+   - 6998.593530239101 hold_1_1 - 4478.847884788479 hold_1_2
+   - 3293.183322303111 hold_1_3 - 2603.872318158033 hold_1_4
+   - 2153.180441367374 hold_1_5 - 1835.48506086315 hold_1_6
+   - 1599.485695917711 hold_1_7 - 1417.26003987468 hold_1_8
+   - 1272.308872411148 hold_1_9 - 1154.256553003943 hold_1_10
+   - 1056.251326682233 hold_1_11 - 973.586382312659 hold_1_12
+   - 902.9214298675377 hold_1_13 - 841.8203349687025 hold_1_14
+   - 788.4645856441134 hold_1_15 - 741.469229623007 hold_1_16
+   - 699.76093376459 hold_1_17 - 662.4950073225936 hold_1_18
+   - 628.9975982808747 hold_1_19 - 598.7245818794369 hold_1_20
+   + flow_nic_in_1_1 <= 0
+ constr_intergroup_throughput_2_nic_out_0_nic_in_2: switch_nic_out_0_nic_in_2 = 1 ->
+   - 8079.207920792079 hold_2_1 - 5403.973509933775 hold_2_2
+   - 4059.701492537313 hold_2_3 - 3250.996015936255 hold_2_4
+   - 2710.963455149502 hold_2_5 - 2324.786324786325 hold_2_6
+   - 2034.912718204489 hold_2_7 - 1809.312638580931 hold_2_8
+   - 1628.74251497006 hold_2_9 - 1480.943738656987 hold_2_10
+   - 1357.737104825291 hold_2_11 - 1253.456221198157 hold_2_12
+   - 1164.051355206847 hold_2_13 - 1086.551264980027 hold_2_14
+   - 1018.7265917603 hold_2_15 - 958.8719153936545 hold_2_16
+   - 905.6603773584906 hold_2_17 - 858.0441640378549 hold_2_18
+   - 815.1848151848152 hold_2_19 - 776.4034253092293 hold_2_20
+   - 741.1444141689373 hold_2_21 - 708.9487402258906 hold_2_22
+   - 679.4338051623647 hold_2_23 - 652.2781774580336 hold_2_24
+   - 627.2098385857032 hold_2_25 - 603.9970392301998 hold_2_26
+   - 582.441113490364 hold_2_27 - 562.3707787732598 hold_2_28
+   - 543.6375749500334 hold_2_29 - 526.1121856866538 hold_2_30
+   - 509.681449094316 hold_2_31 - 494.2459115687462 hold_2_32
+   - 479.7178130511463 hold_2_33 - 466.0194174757282 hold_2_34
+   - 453.081621321488 hold_2_35 - 440.8427876823339 hold_2_36
+   - 429.2477643345607 hold_2_37 - 418.2470527934393 hold_2_38
+   - 407.7961019490255 hold_2_39 - 397.8547050219405 hold_2_40
+   + flow_nic_in_2_2 <= 0
+ constr_intergroup_throughput_3_nic_out_0_nic_in_3: switch_nic_out_0_nic_in_3 = 1 ->
+   - 6998.593530239101 hold_3_1 - 4478.847884788479 hold_3_2
+   - 3293.183322303111 hold_3_3 - 2603.872318158033 hold_3_4
+   - 2153.180441367374 hold_3_5 - 1835.48506086315 hold_3_6
+   - 1599.485695917711 hold_3_7 - 1417.26003987468 hold_3_8
+   - 1272.308872411148 hold_3_9 - 1154.256553003943 hold_3_10
+   - 1056.251326682233 hold_3_11 - 973.586382312659 hold_3_12
+   - 902.9214298675377 hold_3_13 - 841.8203349687025 hold_3_14
+   - 788.4645856441134 hold_3_15 - 741.469229623007 hold_3_16
+   - 699.76093376459 hold_3_17 - 662.4950073225936 hold_3_18
+   - 628.9975982808747 hold_3_19 - 598.7245818794369 hold_3_20
+   + flow_nic_in_3_3 <= 0
+ constr_intergroup_throughput_4_nic_out_0_nic_in_4: switch_nic_out_0_nic_in_4 = 1 ->
+   - 4826.815642458101 hold_4_1 - 2842.105263157895 hold_4_2
+   - 2013.986013986014 hold_4_3 - 1559.56678700361 hold_4_4
+   - 1272.459499263623 hold_4_5 - 1074.626865671642 hold_4_6
+   - 930.032292787944 hold_4_7 - 819.7343453510437 hold_4_8
+   - 732.824427480916 hold_4_9 - 662.5766871165645 hold_4_10
+   - 604.6186144156753 hold_4_11 - 555.984555984556 hold_4_12
+   - 514.5920190589637 hold_4_13 - 478.9356984478936 hold_4_14
+   - 447.900466562986 hold_4_15 - 420.6426484907498 hold_4_16
+   - 396.5121615419917 hold_4_17 - 375 hold_4_18
+   - 355.7019349526554 hold_4_19 - 338.2928739232577 hold_4_20
+   - 322.5083986562149 hold_4_21 - 308.1312410841655 hold_4_22
+   - 294.981222260157 hold_4_23 - 282.9076620825147 hold_4_24
+   + flow_nic_in_4_4 + flow_5_4 <= 0
+ constr_intergroup_throughput_1_source_nic_in_1: switch_source_nic_in_1 = 1 ->
+   - 10765.90220683687 hold_1_1 - 5771.282765019717 hold_1_2
+   - 3942.322928220568 hold_1_3 - 2993.622909397185 hold_1_4
+   - 2412.957036174959 hold_1_5 - 2020.956867841768 hold_1_6
+   - 1738.522814618126 hold_1_7 - 1525.350990129361 hold_1_8
+   - 1358.746108896292 hold_1_9 - 1224.951996455123 hold_1_10
+   - 1115.14499574201 hold_1_11 - 1023.405042984657 hold_1_12
+   - 945.6121014024553 hold_1_13 - 878.810356398573 hold_1_14
+   - 820.8241232555838 hold_1_15 - 770.0164030825416 hold_1_16
+   - 725.1318819037627 hold_1_17 - 685.1918151524333 hold_1_18
+   - 649.4218370702931 hold_1_19 - 617.20126020193 hold_1_20
+   + flow_nic_in_1_1 <= 0
+ constr_intergroup_throughput_0_nic_out_1_nic_in_0: switch_nic_out_1_nic_in_0 = 1 ->
+   - 10018.69158878505 hold_0_1 - 7292.517006802721 hold_0_2
+   - 5732.620320855616 hold_0_3 - 4722.466960352423 hold_0_4
+   - 4014.981273408239 hold_0_5 - 3491.85667752443 hold_0_6
+   - 3089.337175792507 hold_0_7 - 2770.025839793282 hold_0_8
+   - 2510.538641686183 hold_0_9 - 2295.503211991434 hold_0_10
+   - 2114.39842209073 hold_0_11 - 1959.780621572212 hold_0_12
+   - 1826.235093696763 hold_0_13 - 1709.728867623605 hold_0_14
+   - 1607.196401799101 hold_0_15 - 1516.265912305516 hold_0_16
+   - 1435.073627844712 hold_0_17 - 1362.134688691232 hold_0_18
+   - 1296.251511487303 hold_0_19 - 1236.447520184544 hold_0_20
+   - 1181.918412348401 hold_0_21 - 1131.995776135164 hold_0_22
+   - 1086.119554204661 hold_0_23 - 1043.81694255112 hold_0_24
+   - 1004.686035613871 hold_0_25 - 968.383017163505 hold_0_26
+   - 934.6120313862249 hold_0_27 - 903.117101937658 hold_0_28
+   - 873.6756316218418 hold_0_29 - 846.093133385951 hold_0_30
+   - 820.1989288446823 hold_0_31 - 795.8426132145509 hold_0_32
+   - 772.8911319394375 hold_0_33 - 751.2263489838823 hold_0_34
+   - 730.7430129516018 hold_0_35 - 711.3470471134705 hold_0_36
+   - 692.9541047188105 hold_0_37 - 675.4883427851291 hold_0_38
+   - 658.8813767670559 hold_0_39 - 643.0713857228554 hold_0_40
+   + flow_nic_in_0_0 <= 0
+ constr_intergroup_throughput_2_nic_out_1_nic_in_2: switch_nic_out_1_nic_in_2 = 1 ->
+   - 8079.207920792079 hold_2_1 - 5403.973509933775 hold_2_2
+   - 4059.701492537313 hold_2_3 - 3250.996015936255 hold_2_4
+   - 2710.963455149502 hold_2_5 - 2324.786324786325 hold_2_6
+   - 2034.912718204489 hold_2_7 - 1809.312638580931 hold_2_8
+   - 1628.74251497006 hold_2_9 - 1480.943738656987 hold_2_10
+   - 1357.737104825291 hold_2_11 - 1253.456221198157 hold_2_12
+   - 1164.051355206847 hold_2_13 - 1086.551264980027 hold_2_14
+   - 1018.7265917603 hold_2_15 - 958.8719153936545 hold_2_16
+   - 905.6603773584906 hold_2_17 - 858.0441640378549 hold_2_18
+   - 815.1848151848152 hold_2_19 - 776.4034253092293 hold_2_20
+   - 741.1444141689373 hold_2_21 - 708.9487402258906 hold_2_22
+   - 679.4338051623647 hold_2_23 - 652.2781774580336 hold_2_24
+   - 627.2098385857032 hold_2_25 - 603.9970392301998 hold_2_26
+   - 582.441113490364 hold_2_27 - 562.3707787732598 hold_2_28
+   - 543.6375749500334 hold_2_29 - 526.1121856866538 hold_2_30
+   - 509.681449094316 hold_2_31 - 494.2459115687462 hold_2_32
+   - 479.7178130511463 hold_2_33 - 466.0194174757282 hold_2_34
+   - 453.081621321488 hold_2_35 - 440.8427876823339 hold_2_36
+   - 429.2477643345607 hold_2_37 - 418.2470527934393 hold_2_38
+   - 407.7961019490255 hold_2_39 - 397.8547050219405 hold_2_40
+   + flow_nic_in_2_2 <= 0
+ constr_intergroup_throughput_3_nic_out_1_nic_in_3: switch_nic_out_1_nic_in_3 = 1 ->
+   - 6998.593530239101 hold_3_1 - 4478.847884788479 hold_3_2
+   - 3293.183322303111 hold_3_3 - 2603.872318158033 hold_3_4
+   - 2153.180441367374 hold_3_5 - 1835.48506086315 hold_3_6
+   - 1599.485695917711 hold_3_7 - 1417.26003987468 hold_3_8
+   - 1272.308872411148 hold_3_9 - 1154.256553003943 hold_3_10
+   - 1056.251326682233 hold_3_11 - 973.586382312659 hold_3_12
+   - 902.9214298675377 hold_3_13 - 841.8203349687025 hold_3_14
+   - 788.4645856441134 hold_3_15 - 741.469229623007 hold_3_16
+   - 699.76093376459 hold_3_17 - 662.4950073225936 hold_3_18
+   - 628.9975982808747 hold_3_19 - 598.7245818794369 hold_3_20
+   + flow_nic_in_3_3 <= 0
+ constr_intergroup_throughput_4_nic_out_1_nic_in_4: switch_nic_out_1_nic_in_4 = 1 ->
+   - 4826.815642458101 hold_4_1 - 2842.105263157895 hold_4_2
+   - 2013.986013986014 hold_4_3 - 1559.56678700361 hold_4_4
+   - 1272.459499263623 hold_4_5 - 1074.626865671642 hold_4_6
+   - 930.032292787944 hold_4_7 - 819.7343453510437 hold_4_8
+   - 732.824427480916 hold_4_9 - 662.5766871165645 hold_4_10
+   - 604.6186144156753 hold_4_11 - 555.984555984556 hold_4_12
+   - 514.5920190589637 hold_4_13 - 478.9356984478936 hold_4_14
+   - 447.900466562986 hold_4_15 - 420.6426484907498 hold_4_16
+   - 396.5121615419917 hold_4_17 - 375 hold_4_18
+   - 355.7019349526554 hold_4_19 - 338.2928739232577 hold_4_20
+   - 322.5083986562149 hold_4_21 - 308.1312410841655 hold_4_22
+   - 294.981222260157 hold_4_23 - 282.9076620825147 hold_4_24
+   + flow_nic_in_4_4 + flow_5_4 <= 0
+ constr_intergroup_throughput_2_source_nic_in_2: switch_source_nic_in_2 = 1 ->
+   - 13554.81727574751 hold_2_1 - 7404.718693284936 hold_2_2
+   - 5093.632958801498 hold_2_3 - 3882.017126546147 hold_2_4
+   - 3136.049192928517 hold_2_5 - 2630.560928433269 hold_2_6
+   - 2265.40810660744 hold_2_7 - 1989.273525109702 hold_2_8
+   - 1773.142112125163 hold_2_9 - 1599.37279498236 hold_2_10
+   - 1456.622634773295 hold_2_11 - 1337.266470009833 hold_2_12
+   - 1235.989094213875 hold_2_13 - 1148.972120529428 hold_2_14
+   - 1073.401736385162 hold_2_15 - 1007.158726240435 hold_2_16
+   - 948.6166007905139 hold_2_17 - 896.5062623599209 hold_2_18
+   - 849.8229535513435 hold_2_19 - 807.7608394377352 hold_2_20
+   - 769.6661007357103 hold_2_21 - 735.0027022158171 hold_2_22
+   - 703.3270125840373 hold_2_23 - 674.2687159147249 hold_2_24
+   - 647.5162672591651 hold_2_25 - 622.805678522363 hold_2_26
+   - 599.911777679753 hold_2_27 - 578.6413274712806 hold_2_28
+   - 558.8275578687852 hold_2_29 - 540.3257846642829 hold_2_30
+   - 523.0098705294192 hold_2_31 - 506.7693454229288 hold_2_32
+   - 491.5070473436935 hold_2_33 - 477.1371769383698 hold_2_34
+   - 463.5836836723099 hold_2_35 - 450.7789194564137 hold_2_36
+   - 438.6625094075906 hold_2_37 - 427.1803999581196 hold_2_38
+   - 416.284052647689 hold_2_39 - 405.9297582330117 hold_2_40
+   + flow_nic_in_2_2 <= 0
+ constr_intergroup_throughput_0_nic_out_2_nic_in_0: switch_nic_out_2_nic_in_0 = 1 ->
+   - 10018.69158878505 hold_0_1 - 7292.517006802721 hold_0_2
+   - 5732.620320855616 hold_0_3 - 4722.466960352423 hold_0_4
+   - 4014.981273408239 hold_0_5 - 3491.85667752443 hold_0_6
+   - 3089.337175792507 hold_0_7 - 2770.025839793282 hold_0_8
+   - 2510.538641686183 hold_0_9 - 2295.503211991434 hold_0_10
+   - 2114.39842209073 hold_0_11 - 1959.780621572212 hold_0_12
+   - 1826.235093696763 hold_0_13 - 1709.728867623605 hold_0_14
+   - 1607.196401799101 hold_0_15 - 1516.265912305516 hold_0_16
+   - 1435.073627844712 hold_0_17 - 1362.134688691232 hold_0_18
+   - 1296.251511487303 hold_0_19 - 1236.447520184544 hold_0_20
+   - 1181.918412348401 hold_0_21 - 1131.995776135164 hold_0_22
+   - 1086.119554204661 hold_0_23 - 1043.81694255112 hold_0_24
+   - 1004.686035613871 hold_0_25 - 968.383017163505 hold_0_26
+   - 934.6120313862249 hold_0_27 - 903.117101937658 hold_0_28
+   - 873.6756316218418 hold_0_29 - 846.093133385951 hold_0_30
+   - 820.1989288446823 hold_0_31 - 795.8426132145509 hold_0_32
+   - 772.8911319394375 hold_0_33 - 751.2263489838823 hold_0_34
+   - 730.7430129516018 hold_0_35 - 711.3470471134705 hold_0_36
+   - 692.9541047188105 hold_0_37 - 675.4883427851291 hold_0_38
+   - 658.8813767670559 hold_0_39 - 643.0713857228554 hold_0_40
+   + flow_nic_in_0_0 <= 0
+ constr_intergroup_throughput_1_nic_out_2_nic_in_1: switch_nic_out_2_nic_in_1 = 1 ->
+   - 6998.593530239101 hold_1_1 - 4478.847884788479 hold_1_2
+   - 3293.183322303111 hold_1_3 - 2603.872318158033 hold_1_4
+   - 2153.180441367374 hold_1_5 - 1835.48506086315 hold_1_6
+   - 1599.485695917711 hold_1_7 - 1417.26003987468 hold_1_8
+   - 1272.308872411148 hold_1_9 - 1154.256553003943 hold_1_10
+   - 1056.251326682233 hold_1_11 - 973.586382312659 hold_1_12
+   - 902.9214298675377 hold_1_13 - 841.8203349687025 hold_1_14
+   - 788.4645856441134 hold_1_15 - 741.469229623007 hold_1_16
+   - 699.76093376459 hold_1_17 - 662.4950073225936 hold_1_18
+   - 628.9975982808747 hold_1_19 - 598.7245818794369 hold_1_20
+   + flow_nic_in_1_1 <= 0
+ constr_intergroup_throughput_3_nic_out_2_nic_in_3: switch_nic_out_2_nic_in_3 = 1 ->
+   - 6998.593530239101 hold_3_1 - 4478.847884788479 hold_3_2
+   - 3293.183322303111 hold_3_3 - 2603.872318158033 hold_3_4
+   - 2153.180441367374 hold_3_5 - 1835.48506086315 hold_3_6
+   - 1599.485695917711 hold_3_7 - 1417.26003987468 hold_3_8
+   - 1272.308872411148 hold_3_9 - 1154.256553003943 hold_3_10
+   - 1056.251326682233 hold_3_11 - 973.586382312659 hold_3_12
+   - 902.9214298675377 hold_3_13 - 841.8203349687025 hold_3_14
+   - 788.4645856441134 hold_3_15 - 741.469229623007 hold_3_16
+   - 699.76093376459 hold_3_17 - 662.4950073225936 hold_3_18
+   - 628.9975982808747 hold_3_19 - 598.7245818794369 hold_3_20
+   + flow_nic_in_3_3 <= 0
+ constr_intergroup_throughput_4_nic_out_2_nic_in_4: switch_nic_out_2_nic_in_4 = 1 ->
+   - 4826.815642458101 hold_4_1 - 2842.105263157895 hold_4_2
+   - 2013.986013986014 hold_4_3 - 1559.56678700361 hold_4_4
+   - 1272.459499263623 hold_4_5 - 1074.626865671642 hold_4_6
+   - 930.032292787944 hold_4_7 - 819.7343453510437 hold_4_8
+   - 732.824427480916 hold_4_9 - 662.5766871165645 hold_4_10
+   - 604.6186144156753 hold_4_11 - 555.984555984556 hold_4_12
+   - 514.5920190589637 hold_4_13 - 478.9356984478936 hold_4_14
+   - 447.900466562986 hold_4_15 - 420.6426484907498 hold_4_16
+   - 396.5121615419917 hold_4_17 - 375 hold_4_18
+   - 355.7019349526554 hold_4_19 - 338.2928739232577 hold_4_20
+   - 322.5083986562149 hold_4_21 - 308.1312410841655 hold_4_22
+   - 294.981222260157 hold_4_23 - 282.9076620825147 hold_4_24
+   + flow_nic_in_4_4 + flow_5_4 <= 0
+ constr_intergroup_throughput_3_source_nic_in_3: switch_source_nic_in_3 = 1 ->
+   - 10765.90220683687 hold_3_1 - 5771.282765019717 hold_3_2
+   - 3942.322928220568 hold_3_3 - 2993.622909397185 hold_3_4
+   - 2412.957036174959 hold_3_5 - 2020.956867841768 hold_3_6
+   - 1738.522814618126 hold_3_7 - 1525.350990129361 hold_3_8
+   - 1358.746108896292 hold_3_9 - 1224.951996455123 hold_3_10
+   - 1115.14499574201 hold_3_11 - 1023.405042984657 hold_3_12
+   - 945.6121014024553 hold_3_13 - 878.810356398573 hold_3_14
+   - 820.8241232555838 hold_3_15 - 770.0164030825416 hold_3_16
+   - 725.1318819037627 hold_3_17 - 685.1918151524333 hold_3_18
+   - 649.4218370702931 hold_3_19 - 617.20126020193 hold_3_20
+   + flow_nic_in_3_3 <= 0
+ constr_intergroup_throughput_0_nic_out_3_nic_in_0: switch_nic_out_3_nic_in_0 = 1 ->
+   - 10018.69158878505 hold_0_1 - 7292.517006802721 hold_0_2
+   - 5732.620320855616 hold_0_3 - 4722.466960352423 hold_0_4
+   - 4014.981273408239 hold_0_5 - 3491.85667752443 hold_0_6
+   - 3089.337175792507 hold_0_7 - 2770.025839793282 hold_0_8
+   - 2510.538641686183 hold_0_9 - 2295.503211991434 hold_0_10
+   - 2114.39842209073 hold_0_11 - 1959.780621572212 hold_0_12
+   - 1826.235093696763 hold_0_13 - 1709.728867623605 hold_0_14
+   - 1607.196401799101 hold_0_15 - 1516.265912305516 hold_0_16
+   - 1435.073627844712 hold_0_17 - 1362.134688691232 hold_0_18
+   - 1296.251511487303 hold_0_19 - 1236.447520184544 hold_0_20
+   - 1181.918412348401 hold_0_21 - 1131.995776135164 hold_0_22
+   - 1086.119554204661 hold_0_23 - 1043.81694255112 hold_0_24
+   - 1004.686035613871 hold_0_25 - 968.383017163505 hold_0_26
+   - 934.6120313862249 hold_0_27 - 903.117101937658 hold_0_28
+   - 873.6756316218418 hold_0_29 - 846.093133385951 hold_0_30
+   - 820.1989288446823 hold_0_31 - 795.8426132145509 hold_0_32
+   - 772.8911319394375 hold_0_33 - 751.2263489838823 hold_0_34
+   - 730.7430129516018 hold_0_35 - 711.3470471134705 hold_0_36
+   - 692.9541047188105 hold_0_37 - 675.4883427851291 hold_0_38
+   - 658.8813767670559 hold_0_39 - 643.0713857228554 hold_0_40
+   + flow_nic_in_0_0 <= 0
+ constr_intergroup_throughput_1_nic_out_3_nic_in_1: switch_nic_out_3_nic_in_1 = 1 ->
+   - 6998.593530239101 hold_1_1 - 4478.847884788479 hold_1_2
+   - 3293.183322303111 hold_1_3 - 2603.872318158033 hold_1_4
+   - 2153.180441367374 hold_1_5 - 1835.48506086315 hold_1_6
+   - 1599.485695917711 hold_1_7 - 1417.26003987468 hold_1_8
+   - 1272.308872411148 hold_1_9 - 1154.256553003943 hold_1_10
+   - 1056.251326682233 hold_1_11 - 973.586382312659 hold_1_12
+   - 902.9214298675377 hold_1_13 - 841.8203349687025 hold_1_14
+   - 788.4645856441134 hold_1_15 - 741.469229623007 hold_1_16
+   - 699.76093376459 hold_1_17 - 662.4950073225936 hold_1_18
+   - 628.9975982808747 hold_1_19 - 598.7245818794369 hold_1_20
+   + flow_nic_in_1_1 <= 0
+ constr_intergroup_throughput_2_nic_out_3_nic_in_2: switch_nic_out_3_nic_in_2 = 1 ->
+   - 8079.207920792079 hold_2_1 - 5403.973509933775 hold_2_2
+   - 4059.701492537313 hold_2_3 - 3250.996015936255 hold_2_4
+   - 2710.963455149502 hold_2_5 - 2324.786324786325 hold_2_6
+   - 2034.912718204489 hold_2_7 - 1809.312638580931 hold_2_8
+   - 1628.74251497006 hold_2_9 - 1480.943738656987 hold_2_10
+   - 1357.737104825291 hold_2_11 - 1253.456221198157 hold_2_12
+   - 1164.051355206847 hold_2_13 - 1086.551264980027 hold_2_14
+   - 1018.7265917603 hold_2_15 - 958.8719153936545 hold_2_16
+   - 905.6603773584906 hold_2_17 - 858.0441640378549 hold_2_18
+   - 815.1848151848152 hold_2_19 - 776.4034253092293 hold_2_20
+   - 741.1444141689373 hold_2_21 - 708.9487402258906 hold_2_22
+   - 679.4338051623647 hold_2_23 - 652.2781774580336 hold_2_24
+   - 627.2098385857032 hold_2_25 - 603.9970392301998 hold_2_26
+   - 582.441113490364 hold_2_27 - 562.3707787732598 hold_2_28
+   - 543.6375749500334 hold_2_29 - 526.1121856866538 hold_2_30
+   - 509.681449094316 hold_2_31 - 494.2459115687462 hold_2_32
+   - 479.7178130511463 hold_2_33 - 466.0194174757282 hold_2_34
+   - 453.081621321488 hold_2_35 - 440.8427876823339 hold_2_36
+   - 429.2477643345607 hold_2_37 - 418.2470527934393 hold_2_38
+   - 407.7961019490255 hold_2_39 - 397.8547050219405 hold_2_40
+   + flow_nic_in_2_2 <= 0
+ constr_intergroup_throughput_4_nic_out_3_nic_in_4: switch_nic_out_3_nic_in_4 = 1 ->
+   - 4826.815642458101 hold_4_1 - 2842.105263157895 hold_4_2
+   - 2013.986013986014 hold_4_3 - 1559.56678700361 hold_4_4
+   - 1272.459499263623 hold_4_5 - 1074.626865671642 hold_4_6
+   - 930.032292787944 hold_4_7 - 819.7343453510437 hold_4_8
+   - 732.824427480916 hold_4_9 - 662.5766871165645 hold_4_10
+   - 604.6186144156753 hold_4_11 - 555.984555984556 hold_4_12
+   - 514.5920190589637 hold_4_13 - 478.9356984478936 hold_4_14
+   - 447.900466562986 hold_4_15 - 420.6426484907498 hold_4_16
+   - 396.5121615419917 hold_4_17 - 375 hold_4_18
+   - 355.7019349526554 hold_4_19 - 338.2928739232577 hold_4_20
+   - 322.5083986562149 hold_4_21 - 308.1312410841655 hold_4_22
+   - 294.981222260157 hold_4_23 - 282.9076620825147 hold_4_24
+   + flow_nic_in_4_4 + flow_5_4 <= 0
+ constr_intergroup_throughput_4_source_nic_in_4: switch_source_nic_in_4 = 1 ->
+   - 6362.297496318115 hold_4_1 - 3312.883435582823 hold_4_2
+   - 2239.50233281493 hold_4_3 - 1691.464369616288 hold_4_4
+   - 1358.917898710286 hold_4_5 - 1135.646687697161 hold_4_6
+   - 975.3894784375707 hold_4_7 - 854.7685001978632 hold_4_8
+   - 760.6973058637085 hold_4_9 - 685.279187817259 hold_4_10
+   - 623.4665896954829 hold_4_11 - 571.8824463860207 hold_4_12
+   - 528.1819293312142 hold_4_13 - 490.6860517946388 hold_4_14
+   - 458.1609926821508 hold_4_15 - 429.6797294609111 hold_4_16
+   - 404.5322595748665 hold_4_17 - 382.1656050955414 hold_4_18
+   - 362.1426775085925 hold_4_19 - 344.1134299824757 hold_4_20
+   - 327.7942180742089 hold_4_21 - 312.9527673138221 hold_4_22
+   - 299.3970476124471 hold_4_23 - 286.9669190912714 hold_4_24
+   + flow_nic_in_4_4 + flow_5_4 <= 0
+ constr_intergroup_throughput_0_nic_out_4_nic_in_0: switch_nic_out_4_nic_in_0 = 1 ->
+   - 10018.69158878505 hold_0_1 - 7292.517006802721 hold_0_2
+   - 5732.620320855616 hold_0_3 - 4722.466960352423 hold_0_4
+   - 4014.981273408239 hold_0_5 - 3491.85667752443 hold_0_6
+   - 3089.337175792507 hold_0_7 - 2770.025839793282 hold_0_8
+   - 2510.538641686183 hold_0_9 - 2295.503211991434 hold_0_10
+   - 2114.39842209073 hold_0_11 - 1959.780621572212 hold_0_12
+   - 1826.235093696763 hold_0_13 - 1709.728867623605 hold_0_14
+   - 1607.196401799101 hold_0_15 - 1516.265912305516 hold_0_16
+   - 1435.073627844712 hold_0_17 - 1362.134688691232 hold_0_18
+   - 1296.251511487303 hold_0_19 - 1236.447520184544 hold_0_20
+   - 1181.918412348401 hold_0_21 - 1131.995776135164 hold_0_22
+   - 1086.119554204661 hold_0_23 - 1043.81694255112 hold_0_24
+   - 1004.686035613871 hold_0_25 - 968.383017163505 hold_0_26
+   - 934.6120313862249 hold_0_27 - 903.117101937658 hold_0_28
+   - 873.6756316218418 hold_0_29 - 846.093133385951 hold_0_30
+   - 820.1989288446823 hold_0_31 - 795.8426132145509 hold_0_32
+   - 772.8911319394375 hold_0_33 - 751.2263489838823 hold_0_34
+   - 730.7430129516018 hold_0_35 - 711.3470471134705 hold_0_36
+   - 692.9541047188105 hold_0_37 - 675.4883427851291 hold_0_38
+   - 658.8813767670559 hold_0_39 - 643.0713857228554 hold_0_40
+   + flow_nic_in_0_0 <= 0
+ constr_intergroup_throughput_1_nic_out_4_nic_in_1: switch_nic_out_4_nic_in_1 = 1 ->
+   - 6998.593530239101 hold_1_1 - 4478.847884788479 hold_1_2
+   - 3293.183322303111 hold_1_3 - 2603.872318158033 hold_1_4
+   - 2153.180441367374 hold_1_5 - 1835.48506086315 hold_1_6
+   - 1599.485695917711 hold_1_7 - 1417.26003987468 hold_1_8
+   - 1272.308872411148 hold_1_9 - 1154.256553003943 hold_1_10
+   - 1056.251326682233 hold_1_11 - 973.586382312659 hold_1_12
+   - 902.9214298675377 hold_1_13 - 841.8203349687025 hold_1_14
+   - 788.4645856441134 hold_1_15 - 741.469229623007 hold_1_16
+   - 699.76093376459 hold_1_17 - 662.4950073225936 hold_1_18
+   - 628.9975982808747 hold_1_19 - 598.7245818794369 hold_1_20
+   + flow_nic_in_1_1 <= 0
+ constr_intergroup_throughput_2_nic_out_4_nic_in_2: switch_nic_out_4_nic_in_2 = 1 ->
+   - 8079.207920792079 hold_2_1 - 5403.973509933775 hold_2_2
+   - 4059.701492537313 hold_2_3 - 3250.996015936255 hold_2_4
+   - 2710.963455149502 hold_2_5 - 2324.786324786325 hold_2_6
+   - 2034.912718204489 hold_2_7 - 1809.312638580931 hold_2_8
+   - 1628.74251497006 hold_2_9 - 1480.943738656987 hold_2_10
+   - 1357.737104825291 hold_2_11 - 1253.456221198157 hold_2_12
+   - 1164.051355206847 hold_2_13 - 1086.551264980027 hold_2_14
+   - 1018.7265917603 hold_2_15 - 958.8719153936545 hold_2_16
+   - 905.6603773584906 hold_2_17 - 858.0441640378549 hold_2_18
+   - 815.1848151848152 hold_2_19 - 776.4034253092293 hold_2_20
+   - 741.1444141689373 hold_2_21 - 708.9487402258906 hold_2_22
+   - 679.4338051623647 hold_2_23 - 652.2781774580336 hold_2_24
+   - 627.2098385857032 hold_2_25 - 603.9970392301998 hold_2_26
+   - 582.441113490364 hold_2_27 - 562.3707787732598 hold_2_28
+   - 543.6375749500334 hold_2_29 - 526.1121856866538 hold_2_30
+   - 509.681449094316 hold_2_31 - 494.2459115687462 hold_2_32
+   - 479.7178130511463 hold_2_33 - 466.0194174757282 hold_2_34
+   - 453.081621321488 hold_2_35 - 440.8427876823339 hold_2_36
+   - 429.2477643345607 hold_2_37 - 418.2470527934393 hold_2_38
+   - 407.7961019490255 hold_2_39 - 397.8547050219405 hold_2_40
+   + flow_nic_in_2_2 <= 0
+ constr_intergroup_throughput_3_nic_out_4_nic_in_3: switch_nic_out_4_nic_in_3 = 1 ->
+   - 6998.593530239101 hold_3_1 - 4478.847884788479 hold_3_2
+   - 3293.183322303111 hold_3_3 - 2603.872318158033 hold_3_4
+   - 2153.180441367374 hold_3_5 - 1835.48506086315 hold_3_6
+   - 1599.485695917711 hold_3_7 - 1417.26003987468 hold_3_8
+   - 1272.308872411148 hold_3_9 - 1154.256553003943 hold_3_10
+   - 1056.251326682233 hold_3_11 - 973.586382312659 hold_3_12
+   - 902.9214298675377 hold_3_13 - 841.8203349687025 hold_3_14
+   - 788.4645856441134 hold_3_15 - 741.469229623007 hold_3_16
+   - 699.76093376459 hold_3_17 - 662.4950073225936 hold_3_18
+   - 628.9975982808747 hold_3_19 - 598.7245818794369 hold_3_20
+   + flow_nic_in_3_3 <= 0
+ inactive_end_not_complete_0: is_active_0 = 0 -> is_end_complete_0 = 0
+ active_end_val_0: is_active_0 = 1 -> - start_0 - hold_0_1 - 2 hold_0_2
+   - 3 hold_0_3 - 4 hold_0_4 - 5 hold_0_5 - 6 hold_0_6 - 7 hold_0_7
+   - 8 hold_0_8 - 9 hold_0_9 - 10 hold_0_10 - 11 hold_0_11 - 12 hold_0_12
+   - 13 hold_0_13 - 14 hold_0_14 - 15 hold_0_15 - 16 hold_0_16
+   - 17 hold_0_17 - 18 hold_0_18 - 19 hold_0_19 - 20 hold_0_20
+   - 21 hold_0_21 - 22 hold_0_22 - 23 hold_0_23 - 24 hold_0_24
+   - 25 hold_0_25 - 26 hold_0_26 - 27 hold_0_27 - 28 hold_0_28
+   - 29 hold_0_29 - 30 hold_0_30 - 31 hold_0_31 - 32 hold_0_32
+   - 33 hold_0_33 - 34 hold_0_34 - 35 hold_0_35 - 36 hold_0_36
+   - 37 hold_0_37 - 38 hold_0_38 - 39 hold_0_39 - 40 hold_0_40
+   - 41 hold_0_41 - 42 hold_0_42 - 43 hold_0_43 - 44 hold_0_44
+   - 45 hold_0_45 - 46 hold_0_46 - 47 hold_0_47 - 48 hold_0_48 + val_end_0
+   = 0
+ inactive_end_zero_0: is_active_0 = 0 -> val_end_0 = 0
+ inactive_end_not_complete_1: is_active_1 = 0 -> is_end_complete_1 = 0
+ active_end_val_1: is_active_1 = 1 -> - start_1 - hold_1_1 - 2 hold_1_2
+   - 3 hold_1_3 - 4 hold_1_4 - 5 hold_1_5 - 6 hold_1_6 - 7 hold_1_7
+   - 8 hold_1_8 - 9 hold_1_9 - 10 hold_1_10 - 11 hold_1_11 - 12 hold_1_12
+   - 13 hold_1_13 - 14 hold_1_14 - 15 hold_1_15 - 16 hold_1_16
+   - 17 hold_1_17 - 18 hold_1_18 - 19 hold_1_19 - 20 hold_1_20
+   - 21 hold_1_21 - 22 hold_1_22 - 23 hold_1_23 - 24 hold_1_24
+   - 25 hold_1_25 - 26 hold_1_26 - 27 hold_1_27 - 28 hold_1_28
+   - 29 hold_1_29 - 30 hold_1_30 - 31 hold_1_31 - 32 hold_1_32
+   - 33 hold_1_33 - 34 hold_1_34 - 35 hold_1_35 - 36 hold_1_36
+   - 37 hold_1_37 - 38 hold_1_38 - 39 hold_1_39 - 40 hold_1_40
+   - 41 hold_1_41 - 42 hold_1_42 - 43 hold_1_43 - 44 hold_1_44
+   - 45 hold_1_45 - 46 hold_1_46 - 47 hold_1_47 - 48 hold_1_48 + val_end_1
+   = 0
+ inactive_end_zero_1: is_active_1 = 0 -> val_end_1 = 0
+ inactive_end_not_complete_2: is_active_2 = 0 -> is_end_complete_2 = 0
+ active_end_val_2: is_active_2 = 1 -> - start_2 - hold_2_1 - 2 hold_2_2
+   - 3 hold_2_3 - 4 hold_2_4 - 5 hold_2_5 - 6 hold_2_6 - 7 hold_2_7
+   - 8 hold_2_8 - 9 hold_2_9 - 10 hold_2_10 - 11 hold_2_11 - 12 hold_2_12
+   - 13 hold_2_13 - 14 hold_2_14 - 15 hold_2_15 - 16 hold_2_16
+   - 17 hold_2_17 - 18 hold_2_18 - 19 hold_2_19 - 20 hold_2_20
+   - 21 hold_2_21 - 22 hold_2_22 - 23 hold_2_23 - 24 hold_2_24
+   - 25 hold_2_25 - 26 hold_2_26 - 27 hold_2_27 - 28 hold_2_28
+   - 29 hold_2_29 - 30 hold_2_30 - 31 hold_2_31 - 32 hold_2_32
+   - 33 hold_2_33 - 34 hold_2_34 - 35 hold_2_35 - 36 hold_2_36
+   - 37 hold_2_37 - 38 hold_2_38 - 39 hold_2_39 - 40 hold_2_40
+   - 41 hold_2_41 - 42 hold_2_42 - 43 hold_2_43 - 44 hold_2_44
+   - 45 hold_2_45 - 46 hold_2_46 - 47 hold_2_47 - 48 hold_2_48 + val_end_2
+   = 0
+ inactive_end_zero_2: is_active_2 = 0 -> val_end_2 = 0
+ inactive_end_not_complete_3: is_active_3 = 0 -> is_end_complete_3 = 0
+ active_end_val_3: is_active_3 = 1 -> - start_3 - hold_3_1 - 2 hold_3_2
+   - 3 hold_3_3 - 4 hold_3_4 - 5 hold_3_5 - 6 hold_3_6 - 7 hold_3_7
+   - 8 hold_3_8 - 9 hold_3_9 - 10 hold_3_10 - 11 hold_3_11 - 12 hold_3_12
+   - 13 hold_3_13 - 14 hold_3_14 - 15 hold_3_15 - 16 hold_3_16
+   - 17 hold_3_17 - 18 hold_3_18 - 19 hold_3_19 - 20 hold_3_20
+   - 21 hold_3_21 - 22 hold_3_22 - 23 hold_3_23 - 24 hold_3_24
+   - 25 hold_3_25 - 26 hold_3_26 - 27 hold_3_27 - 28 hold_3_28
+   - 29 hold_3_29 - 30 hold_3_30 - 31 hold_3_31 - 32 hold_3_32
+   - 33 hold_3_33 - 34 hold_3_34 - 35 hold_3_35 - 36 hold_3_36
+   - 37 hold_3_37 - 38 hold_3_38 - 39 hold_3_39 - 40 hold_3_40
+   - 41 hold_3_41 - 42 hold_3_42 - 43 hold_3_43 - 44 hold_3_44
+   - 45 hold_3_45 - 46 hold_3_46 - 47 hold_3_47 - 48 hold_3_48 + val_end_3
+   = 0
+ inactive_end_zero_3: is_active_3 = 0 -> val_end_3 = 0
+ inactive_end_not_complete_4: is_active_4 = 0 -> is_end_complete_4 = 0
+ inactive_end_not_complete_5: is_active_5 = 0 -> is_end_complete_5 = 0
+ active_end_val_4: is_active_4 = 1 -> - start_4 - hold_4_1 - 2 hold_4_2
+   - 3 hold_4_3 - 4 hold_4_4 - 5 hold_4_5 - 6 hold_4_6 - 7 hold_4_7
+   - 8 hold_4_8 - 9 hold_4_9 - 10 hold_4_10 - 11 hold_4_11 - 12 hold_4_12
+   - 13 hold_4_13 - 14 hold_4_14 - 15 hold_4_15 - 16 hold_4_16
+   - 17 hold_4_17 - 18 hold_4_18 - 19 hold_4_19 - 20 hold_4_20
+   - 21 hold_4_21 - 22 hold_4_22 - 23 hold_4_23 - 24 hold_4_24
+   - 25 hold_4_25 - 26 hold_4_26 - 27 hold_4_27 - 28 hold_4_28
+   - 29 hold_4_29 - 30 hold_4_30 - 31 hold_4_31 - 32 hold_4_32
+   - 33 hold_4_33 - 34 hold_4_34 - 35 hold_4_35 - 36 hold_4_36
+   - 37 hold_4_37 - 38 hold_4_38 - 39 hold_4_39 - 40 hold_4_40
+   - 41 hold_4_41 - 42 hold_4_42 - 43 hold_4_43 - 44 hold_4_44
+   - 45 hold_4_45 - 46 hold_4_46 - 47 hold_4_47 - 48 hold_4_48 + val_end_4
+   = 0
+ inactive_end_zero_4: is_active_4 = 0 -> val_end_4 = 0
+ active_end_val_5: is_active_5 = 1 -> - start_5 - hold_5_1 - 2 hold_5_2
+   - 3 hold_5_3 - 4 hold_5_4 - 5 hold_5_5 - 6 hold_5_6 - 7 hold_5_7
+   - 8 hold_5_8 - 9 hold_5_9 - 10 hold_5_10 - 11 hold_5_11 - 12 hold_5_12
+   - 13 hold_5_13 - 14 hold_5_14 - 15 hold_5_15 - 16 hold_5_16
+   - 17 hold_5_17 - 18 hold_5_18 - 19 hold_5_19 - 20 hold_5_20
+   - 21 hold_5_21 - 22 hold_5_22 - 23 hold_5_23 - 24 hold_5_24
+   - 25 hold_5_25 - 26 hold_5_26 - 27 hold_5_27 - 28 hold_5_28
+   - 29 hold_5_29 - 30 hold_5_30 - 31 hold_5_31 - 32 hold_5_32
+   - 33 hold_5_33 - 34 hold_5_34 - 35 hold_5_35 - 36 hold_5_36
+   - 37 hold_5_37 - 38 hold_5_38 - 39 hold_5_39 - 40 hold_5_40
+   - 41 hold_5_41 - 42 hold_5_42 - 43 hold_5_43 - 44 hold_5_44
+   - 45 hold_5_45 - 46 hold_5_46 - 47 hold_5_47 - 48 hold_5_48 + val_end_5
+   = 0
+ inactive_end_zero_5: is_active_5 = 0 -> val_end_5 = 0
+ tp_off_limit_constr_0_41: group_tp_active_0 = 0 -> hold_0_41 = 0
+ tp_off_limit_constr_0_42: group_tp_active_0 = 0 -> hold_0_42 = 0
+ tp_off_limit_constr_0_43: group_tp_active_0 = 0 -> hold_0_43 = 0
+ tp_off_limit_constr_0_44: group_tp_active_0 = 0 -> hold_0_44 = 0
+ tp_off_limit_constr_0_45: group_tp_active_0 = 0 -> hold_0_45 = 0
+ tp_off_limit_constr_0_46: group_tp_active_0 = 0 -> hold_0_46 = 0
+ tp_off_limit_constr_0_47: group_tp_active_0 = 0 -> hold_0_47 = 0
+ tp_off_limit_constr_0_48: group_tp_active_0 = 0 -> hold_0_48 = 0
+ tp_off_limit_constr_1_21: group_tp_active_1 = 0 -> hold_1_21 = 0
+ tp_off_limit_constr_1_22: group_tp_active_1 = 0 -> hold_1_22 = 0
+ tp_off_limit_constr_1_23: group_tp_active_1 = 0 -> hold_1_23 = 0
+ tp_off_limit_constr_1_24: group_tp_active_1 = 0 -> hold_1_24 = 0
+ tp_off_limit_constr_1_25: group_tp_active_1 = 0 -> hold_1_25 = 0
+ tp_off_limit_constr_1_26: group_tp_active_1 = 0 -> hold_1_26 = 0
+ tp_off_limit_constr_1_27: group_tp_active_1 = 0 -> hold_1_27 = 0
+ tp_off_limit_constr_1_28: group_tp_active_1 = 0 -> hold_1_28 = 0
+ tp_off_limit_constr_1_29: group_tp_active_1 = 0 -> hold_1_29 = 0
+ tp_off_limit_constr_1_30: group_tp_active_1 = 0 -> hold_1_30 = 0
+ tp_off_limit_constr_1_31: group_tp_active_1 = 0 -> hold_1_31 = 0
+ tp_off_limit_constr_1_32: group_tp_active_1 = 0 -> hold_1_32 = 0
+ tp_off_limit_constr_1_33: group_tp_active_1 = 0 -> hold_1_33 = 0
+ tp_off_limit_constr_1_34: group_tp_active_1 = 0 -> hold_1_34 = 0
+ tp_off_limit_constr_1_35: group_tp_active_1 = 0 -> hold_1_35 = 0
+ tp_off_limit_constr_1_36: group_tp_active_1 = 0 -> hold_1_36 = 0
+ tp_off_limit_constr_1_37: group_tp_active_1 = 0 -> hold_1_37 = 0
+ tp_off_limit_constr_1_38: group_tp_active_1 = 0 -> hold_1_38 = 0
+ tp_off_limit_constr_1_39: group_tp_active_1 = 0 -> hold_1_39 = 0
+ tp_off_limit_constr_1_40: group_tp_active_1 = 0 -> hold_1_40 = 0
+ tp_off_limit_constr_1_41: group_tp_active_1 = 0 -> hold_1_41 = 0
+ tp_off_limit_constr_1_42: group_tp_active_1 = 0 -> hold_1_42 = 0
+ tp_off_limit_constr_1_43: group_tp_active_1 = 0 -> hold_1_43 = 0
+ tp_off_limit_constr_1_44: group_tp_active_1 = 0 -> hold_1_44 = 0
+ tp_off_limit_constr_1_45: group_tp_active_1 = 0 -> hold_1_45 = 0
+ tp_off_limit_constr_1_46: group_tp_active_1 = 0 -> hold_1_46 = 0
+ tp_off_limit_constr_1_47: group_tp_active_1 = 0 -> hold_1_47 = 0
+ tp_off_limit_constr_1_48: group_tp_active_1 = 0 -> hold_1_48 = 0
+ tp_off_limit_constr_2_41: group_tp_active_2 = 0 -> hold_2_41 = 0
+ tp_off_limit_constr_2_42: group_tp_active_2 = 0 -> hold_2_42 = 0
+ tp_off_limit_constr_2_43: group_tp_active_2 = 0 -> hold_2_43 = 0
+ tp_off_limit_constr_2_44: group_tp_active_2 = 0 -> hold_2_44 = 0
+ tp_off_limit_constr_2_45: group_tp_active_2 = 0 -> hold_2_45 = 0
+ tp_off_limit_constr_2_46: group_tp_active_2 = 0 -> hold_2_46 = 0
+ tp_off_limit_constr_2_47: group_tp_active_2 = 0 -> hold_2_47 = 0
+ tp_off_limit_constr_2_48: group_tp_active_2 = 0 -> hold_2_48 = 0
+ tp_off_limit_constr_3_21: group_tp_active_3 = 0 -> hold_3_21 = 0
+ tp_off_limit_constr_3_22: group_tp_active_3 = 0 -> hold_3_22 = 0
+ tp_off_limit_constr_3_23: group_tp_active_3 = 0 -> hold_3_23 = 0
+ tp_off_limit_constr_3_24: group_tp_active_3 = 0 -> hold_3_24 = 0
+ tp_off_limit_constr_3_25: group_tp_active_3 = 0 -> hold_3_25 = 0
+ tp_off_limit_constr_3_26: group_tp_active_3 = 0 -> hold_3_26 = 0
+ tp_off_limit_constr_3_27: group_tp_active_3 = 0 -> hold_3_27 = 0
+ tp_off_limit_constr_3_28: group_tp_active_3 = 0 -> hold_3_28 = 0
+ tp_off_limit_constr_3_29: group_tp_active_3 = 0 -> hold_3_29 = 0
+ tp_off_limit_constr_3_30: group_tp_active_3 = 0 -> hold_3_30 = 0
+ tp_off_limit_constr_3_31: group_tp_active_3 = 0 -> hold_3_31 = 0
+ tp_off_limit_constr_3_32: group_tp_active_3 = 0 -> hold_3_32 = 0
+ tp_off_limit_constr_3_33: group_tp_active_3 = 0 -> hold_3_33 = 0
+ tp_off_limit_constr_3_34: group_tp_active_3 = 0 -> hold_3_34 = 0
+ tp_off_limit_constr_3_35: group_tp_active_3 = 0 -> hold_3_35 = 0
+ tp_off_limit_constr_3_36: group_tp_active_3 = 0 -> hold_3_36 = 0
+ tp_off_limit_constr_3_37: group_tp_active_3 = 0 -> hold_3_37 = 0
+ tp_off_limit_constr_3_38: group_tp_active_3 = 0 -> hold_3_38 = 0
+ tp_off_limit_constr_3_39: group_tp_active_3 = 0 -> hold_3_39 = 0
+ tp_off_limit_constr_3_40: group_tp_active_3 = 0 -> hold_3_40 = 0
+ tp_off_limit_constr_3_41: group_tp_active_3 = 0 -> hold_3_41 = 0
+ tp_off_limit_constr_3_42: group_tp_active_3 = 0 -> hold_3_42 = 0
+ tp_off_limit_constr_3_43: group_tp_active_3 = 0 -> hold_3_43 = 0
+ tp_off_limit_constr_3_44: group_tp_active_3 = 0 -> hold_3_44 = 0
+ tp_off_limit_constr_3_45: group_tp_active_3 = 0 -> hold_3_45 = 0
+ tp_off_limit_constr_3_46: group_tp_active_3 = 0 -> hold_3_46 = 0
+ tp_off_limit_constr_3_47: group_tp_active_3 = 0 -> hold_3_47 = 0
+ tp_off_limit_constr_3_48: group_tp_active_3 = 0 -> hold_3_48 = 0
+ group_synch_start_constr_4_5: group_tp_active_4 = 1 -> start_4 - start_5
+   = 0
+ group_synch_hold_constr_4_5_1: group_tp_active_4 = 1 -> hold_4_1
+   - hold_5_1 = 0
+ group_synch_hold_constr_4_5_2: group_tp_active_4 = 1 -> hold_4_2
+   - hold_5_2 = 0
+ group_synch_hold_constr_4_5_3: group_tp_active_4 = 1 -> hold_4_3
+   - hold_5_3 = 0
+ group_synch_hold_constr_4_5_4: group_tp_active_4 = 1 -> hold_4_4
+   - hold_5_4 = 0
+ group_synch_hold_constr_4_5_5: group_tp_active_4 = 1 -> hold_4_5
+   - hold_5_5 = 0
+ group_synch_hold_constr_4_5_6: group_tp_active_4 = 1 -> hold_4_6
+   - hold_5_6 = 0
+ group_synch_hold_constr_4_5_7: group_tp_active_4 = 1 -> hold_4_7
+   - hold_5_7 = 0
+ group_synch_hold_constr_4_5_8: group_tp_active_4 = 1 -> hold_4_8
+   - hold_5_8 = 0
+ group_synch_hold_constr_4_5_9: group_tp_active_4 = 1 -> hold_4_9
+   - hold_5_9 = 0
+ group_synch_hold_constr_4_5_10: group_tp_active_4 = 1 -> hold_4_10
+   - hold_5_10 = 0
+ group_synch_hold_constr_4_5_11: group_tp_active_4 = 1 -> hold_4_11
+   - hold_5_11 = 0
+ group_synch_hold_constr_4_5_12: group_tp_active_4 = 1 -> hold_4_12
+   - hold_5_12 = 0
+ group_synch_hold_constr_4_5_13: group_tp_active_4 = 1 -> hold_4_13
+   - hold_5_13 = 0
+ group_synch_hold_constr_4_5_14: group_tp_active_4 = 1 -> hold_4_14
+   - hold_5_14 = 0
+ group_synch_hold_constr_4_5_15: group_tp_active_4 = 1 -> hold_4_15
+   - hold_5_15 = 0
+ group_synch_hold_constr_4_5_16: group_tp_active_4 = 1 -> hold_4_16
+   - hold_5_16 = 0
+ group_synch_hold_constr_4_5_17: group_tp_active_4 = 1 -> hold_4_17
+   - hold_5_17 = 0
+ group_synch_hold_constr_4_5_18: group_tp_active_4 = 1 -> hold_4_18
+   - hold_5_18 = 0
+ group_synch_hold_constr_4_5_19: group_tp_active_4 = 1 -> hold_4_19
+   - hold_5_19 = 0
+ group_synch_hold_constr_4_5_20: group_tp_active_4 = 1 -> hold_4_20
+   - hold_5_20 = 0
+ group_synch_hold_constr_4_5_21: group_tp_active_4 = 1 -> hold_4_21
+   - hold_5_21 = 0
+ group_synch_hold_constr_4_5_22: group_tp_active_4 = 1 -> hold_4_22
+   - hold_5_22 = 0
+ group_synch_hold_constr_4_5_23: group_tp_active_4 = 1 -> hold_4_23
+   - hold_5_23 = 0
+ group_synch_hold_constr_4_5_24: group_tp_active_4 = 1 -> hold_4_24
+   - hold_5_24 = 0
+ group_synch_hold_constr_4_5_25: group_tp_active_4 = 1 -> hold_4_25
+   - hold_5_25 = 0
+ group_synch_hold_constr_4_5_26: group_tp_active_4 = 1 -> hold_4_26
+   - hold_5_26 = 0
+ group_synch_hold_constr_4_5_27: group_tp_active_4 = 1 -> hold_4_27
+   - hold_5_27 = 0
+ group_synch_hold_constr_4_5_28: group_tp_active_4 = 1 -> hold_4_28
+   - hold_5_28 = 0
+ group_synch_hold_constr_4_5_29: group_tp_active_4 = 1 -> hold_4_29
+   - hold_5_29 = 0
+ group_synch_hold_constr_4_5_30: group_tp_active_4 = 1 -> hold_4_30
+   - hold_5_30 = 0
+ group_synch_hold_constr_4_5_31: group_tp_active_4 = 1 -> hold_4_31
+   - hold_5_31 = 0
+ group_synch_hold_constr_4_5_32: group_tp_active_4 = 1 -> hold_4_32
+   - hold_5_32 = 0
+ group_synch_hold_constr_4_5_33: group_tp_active_4 = 1 -> hold_4_33
+   - hold_5_33 = 0
+ group_synch_hold_constr_4_5_34: group_tp_active_4 = 1 -> hold_4_34
+   - hold_5_34 = 0
+ group_synch_hold_constr_4_5_35: group_tp_active_4 = 1 -> hold_4_35
+   - hold_5_35 = 0
+ group_synch_hold_constr_4_5_36: group_tp_active_4 = 1 -> hold_4_36
+   - hold_5_36 = 0
+ group_synch_hold_constr_4_5_37: group_tp_active_4 = 1 -> hold_4_37
+   - hold_5_37 = 0
+ group_synch_hold_constr_4_5_38: group_tp_active_4 = 1 -> hold_4_38
+   - hold_5_38 = 0
+ group_synch_hold_constr_4_5_39: group_tp_active_4 = 1 -> hold_4_39
+   - hold_5_39 = 0
+ group_synch_hold_constr_4_5_40: group_tp_active_4 = 1 -> hold_4_40
+   - hold_5_40 = 0
+ group_synch_hold_constr_4_5_41: group_tp_active_4 = 1 -> hold_4_41
+   - hold_5_41 = 0
+ group_synch_hold_constr_4_5_42: group_tp_active_4 = 1 -> hold_4_42
+   - hold_5_42 = 0
+ group_synch_hold_constr_4_5_43: group_tp_active_4 = 1 -> hold_4_43
+   - hold_5_43 = 0
+ group_synch_hold_constr_4_5_44: group_tp_active_4 = 1 -> hold_4_44
+   - hold_5_44 = 0
+ group_synch_hold_constr_4_5_45: group_tp_active_4 = 1 -> hold_4_45
+   - hold_5_45 = 0
+ group_synch_hold_constr_4_5_46: group_tp_active_4 = 1 -> hold_4_46
+   - hold_5_46 = 0
+ group_synch_hold_constr_4_5_47: group_tp_active_4 = 1 -> hold_4_47
+   - hold_5_47 = 0
+ group_synch_hold_constr_4_5_48: group_tp_active_4 = 1 -> hold_4_48
+   - hold_5_48 = 0
+ tp_off_limit_constr_4_1: group_tp_active_4 = 0 -> hold_4_1 = 0
+ tp_off_limit_constr_4_2: group_tp_active_4 = 0 -> hold_4_2 = 0
+ tp_off_limit_constr_4_3: group_tp_active_4 = 0 -> hold_4_3 = 0
+ tp_off_limit_constr_4_4: group_tp_active_4 = 0 -> hold_4_4 = 0
+ tp_off_limit_constr_4_5: group_tp_active_4 = 0 -> hold_4_5 = 0
+ tp_off_limit_constr_4_6: group_tp_active_4 = 0 -> hold_4_6 = 0
+ tp_off_limit_constr_4_7: group_tp_active_4 = 0 -> hold_4_7 = 0
+ tp_off_limit_constr_4_8: group_tp_active_4 = 0 -> hold_4_8 = 0
+ tp_off_limit_constr_4_9: group_tp_active_4 = 0 -> hold_4_9 = 0
+ tp_off_limit_constr_4_10: group_tp_active_4 = 0 -> hold_4_10 = 0
+ tp_off_limit_constr_4_11: group_tp_active_4 = 0 -> hold_4_11 = 0
+ tp_off_limit_constr_4_12: group_tp_active_4 = 0 -> hold_4_12 = 0
+ tp_off_limit_constr_4_13: group_tp_active_4 = 0 -> hold_4_13 = 0
+ tp_off_limit_constr_4_14: group_tp_active_4 = 0 -> hold_4_14 = 0
+ tp_off_limit_constr_4_15: group_tp_active_4 = 0 -> hold_4_15 = 0
+ tp_off_limit_constr_4_16: group_tp_active_4 = 0 -> hold_4_16 = 0
+ tp_off_limit_constr_4_17: group_tp_active_4 = 0 -> hold_4_17 = 0
+ tp_off_limit_constr_4_18: group_tp_active_4 = 0 -> hold_4_18 = 0
+ tp_off_limit_constr_4_19: group_tp_active_4 = 0 -> hold_4_19 = 0
+ tp_off_limit_constr_4_20: group_tp_active_4 = 0 -> hold_4_20 = 0
+ tp_off_limit_constr_4_21: group_tp_active_4 = 0 -> hold_4_21 = 0
+ tp_off_limit_constr_4_22: group_tp_active_4 = 0 -> hold_4_22 = 0
+ tp_off_limit_constr_4_23: group_tp_active_4 = 0 -> hold_4_23 = 0
+ tp_off_limit_constr_4_24: group_tp_active_4 = 0 -> hold_4_24 = 0
+ tp_off_limit_constr_4_25: group_tp_active_4 = 0 -> hold_4_25 = 0
+ tp_off_limit_constr_4_26: group_tp_active_4 = 0 -> hold_4_26 = 0
+ tp_off_limit_constr_4_27: group_tp_active_4 = 0 -> hold_4_27 = 0
+ tp_off_limit_constr_4_28: group_tp_active_4 = 0 -> hold_4_28 = 0
+ tp_off_limit_constr_4_29: group_tp_active_4 = 0 -> hold_4_29 = 0
+ tp_off_limit_constr_4_30: group_tp_active_4 = 0 -> hold_4_30 = 0
+ tp_off_limit_constr_4_31: group_tp_active_4 = 0 -> hold_4_31 = 0
+ tp_off_limit_constr_4_32: group_tp_active_4 = 0 -> hold_4_32 = 0
+ tp_off_limit_constr_4_33: group_tp_active_4 = 0 -> hold_4_33 = 0
+ tp_off_limit_constr_4_34: group_tp_active_4 = 0 -> hold_4_34 = 0
+ tp_off_limit_constr_4_35: group_tp_active_4 = 0 -> hold_4_35 = 0
+ tp_off_limit_constr_4_36: group_tp_active_4 = 0 -> hold_4_36 = 0
+ tp_off_limit_constr_4_37: group_tp_active_4 = 0 -> hold_4_37 = 0
+ tp_off_limit_constr_4_38: group_tp_active_4 = 0 -> hold_4_38 = 0
+ tp_off_limit_constr_4_39: group_tp_active_4 = 0 -> hold_4_39 = 0
+ tp_off_limit_constr_4_40: group_tp_active_4 = 0 -> hold_4_40 = 0
+ tp_off_limit_constr_4_41: group_tp_active_4 = 0 -> hold_4_41 = 0
+ tp_off_limit_constr_4_42: group_tp_active_4 = 0 -> hold_4_42 = 0
+ tp_off_limit_constr_4_43: group_tp_active_4 = 0 -> hold_4_43 = 0
+ tp_off_limit_constr_4_44: group_tp_active_4 = 0 -> hold_4_44 = 0
+ tp_off_limit_constr_4_45: group_tp_active_4 = 0 -> hold_4_45 = 0
+ tp_off_limit_constr_4_46: group_tp_active_4 = 0 -> hold_4_46 = 0
+ tp_off_limit_constr_4_47: group_tp_active_4 = 0 -> hold_4_47 = 0
+ tp_off_limit_constr_4_48: group_tp_active_4 = 0 -> hold_4_48 = 0
+ tp_off_limit_constr_5_1: group_tp_active_4 = 0 -> hold_5_1 = 0
+ tp_off_limit_constr_5_2: group_tp_active_4 = 0 -> hold_5_2 = 0
+ tp_off_limit_constr_5_3: group_tp_active_4 = 0 -> hold_5_3 = 0
+ tp_off_limit_constr_5_4: group_tp_active_4 = 0 -> hold_5_4 = 0
+ tp_off_limit_constr_5_5: group_tp_active_4 = 0 -> hold_5_5 = 0
+ tp_off_limit_constr_5_6: group_tp_active_4 = 0 -> hold_5_6 = 0
+ tp_off_limit_constr_5_7: group_tp_active_4 = 0 -> hold_5_7 = 0
+ tp_off_limit_constr_5_8: group_tp_active_4 = 0 -> hold_5_8 = 0
+ tp_off_limit_constr_5_9: group_tp_active_4 = 0 -> hold_5_9 = 0
+ tp_off_limit_constr_5_10: group_tp_active_4 = 0 -> hold_5_10 = 0
+ tp_off_limit_constr_5_11: group_tp_active_4 = 0 -> hold_5_11 = 0
+ tp_off_limit_constr_5_12: group_tp_active_4 = 0 -> hold_5_12 = 0
+ tp_off_limit_constr_5_13: group_tp_active_4 = 0 -> hold_5_13 = 0
+ tp_off_limit_constr_5_14: group_tp_active_4 = 0 -> hold_5_14 = 0
+ tp_off_limit_constr_5_15: group_tp_active_4 = 0 -> hold_5_15 = 0
+ tp_off_limit_constr_5_16: group_tp_active_4 = 0 -> hold_5_16 = 0
+ tp_off_limit_constr_5_17: group_tp_active_4 = 0 -> hold_5_17 = 0
+ tp_off_limit_constr_5_18: group_tp_active_4 = 0 -> hold_5_18 = 0
+ tp_off_limit_constr_5_19: group_tp_active_4 = 0 -> hold_5_19 = 0
+ tp_off_limit_constr_5_20: group_tp_active_4 = 0 -> hold_5_20 = 0
+ tp_off_limit_constr_5_21: group_tp_active_4 = 0 -> hold_5_21 = 0
+ tp_off_limit_constr_5_22: group_tp_active_4 = 0 -> hold_5_22 = 0
+ tp_off_limit_constr_5_23: group_tp_active_4 = 0 -> hold_5_23 = 0
+ tp_off_limit_constr_5_24: group_tp_active_4 = 0 -> hold_5_24 = 0
+ tp_off_limit_constr_5_25: group_tp_active_4 = 0 -> hold_5_25 = 0
+ tp_off_limit_constr_5_26: group_tp_active_4 = 0 -> hold_5_26 = 0
+ tp_off_limit_constr_5_27: group_tp_active_4 = 0 -> hold_5_27 = 0
+ tp_off_limit_constr_5_28: group_tp_active_4 = 0 -> hold_5_28 = 0
+ tp_off_limit_constr_5_29: group_tp_active_4 = 0 -> hold_5_29 = 0
+ tp_off_limit_constr_5_30: group_tp_active_4 = 0 -> hold_5_30 = 0
+ tp_off_limit_constr_5_31: group_tp_active_4 = 0 -> hold_5_31 = 0
+ tp_off_limit_constr_5_32: group_tp_active_4 = 0 -> hold_5_32 = 0
+ tp_off_limit_constr_5_33: group_tp_active_4 = 0 -> hold_5_33 = 0
+ tp_off_limit_constr_5_34: group_tp_active_4 = 0 -> hold_5_34 = 0
+ tp_off_limit_constr_5_35: group_tp_active_4 = 0 -> hold_5_35 = 0
+ tp_off_limit_constr_5_36: group_tp_active_4 = 0 -> hold_5_36 = 0
+ tp_off_limit_constr_5_37: group_tp_active_4 = 0 -> hold_5_37 = 0
+ tp_off_limit_constr_5_38: group_tp_active_4 = 0 -> hold_5_38 = 0
+ tp_off_limit_constr_5_39: group_tp_active_4 = 0 -> hold_5_39 = 0
+ tp_off_limit_constr_5_40: group_tp_active_4 = 0 -> hold_5_40 = 0
+ tp_off_limit_constr_5_41: group_tp_active_4 = 0 -> hold_5_41 = 0
+ tp_off_limit_constr_5_42: group_tp_active_4 = 0 -> hold_5_42 = 0
+ tp_off_limit_constr_5_43: group_tp_active_4 = 0 -> hold_5_43 = 0
+ tp_off_limit_constr_5_44: group_tp_active_4 = 0 -> hold_5_44 = 0
+ tp_off_limit_constr_5_45: group_tp_active_4 = 0 -> hold_5_45 = 0
+ tp_off_limit_constr_5_46: group_tp_active_4 = 0 -> hold_5_46 = 0
+ tp_off_limit_constr_5_47: group_tp_active_4 = 0 -> hold_5_47 = 0
+ tp_off_limit_constr_5_48: group_tp_active_4 = 0 -> hold_5_48 = 0
+ group_throughput_constr_0: group_tp_active_0 = 1 -> - 26800 hold_0_1
+   - 13400 hold_0_2 - 8933.333333333334 hold_0_3 - 6700 hold_0_4
+   - 5360 hold_0_5 - 4466.666666666667 hold_0_6
+   - 3828.571428571429 hold_0_7 - 3350 hold_0_8
+   - 2977.777777777778 hold_0_9 - 2680 hold_0_10
+   - 2436.363636363636 hold_0_11 - 2233.333333333333 hold_0_12
+   - 2061.538461538461 hold_0_13 - 1914.285714285714 hold_0_14
+   - 1786.666666666667 hold_0_15 - 1675 hold_0_16
+   - 1576.470588235294 hold_0_17 - 1488.888888888889 hold_0_18
+   - 1410.526315789474 hold_0_19 - 1340 hold_0_20
+   - 1276.190476190476 hold_0_21 - 1218.181818181818 hold_0_22
+   - 1165.217391304348 hold_0_23 - 1116.666666666667 hold_0_24
+   - 1072 hold_0_25 - 1030.769230769231 hold_0_26
+   - 992.5925925925926 hold_0_27 - 957.1428571428572 hold_0_28
+   - 924.1379310344828 hold_0_29 - 893.3333333333333 hold_0_30
+   - 864.5161290322579 hold_0_31 - 837.5 hold_0_32
+   - 812.121212121212 hold_0_33 - 788.2352941176471 hold_0_34
+   - 765.7142857142857 hold_0_35 - 744.4444444444445 hold_0_36
+   - 724.3243243243244 hold_0_37 - 705.2631578947368 hold_0_38
+   - 687.1794871794872 hold_0_39 - 670 hold_0_40 + flow_nic_in_0_0 <= 0
+ group_throughput_constr_1: group_tp_active_1 = 1 -> - 12440 hold_1_1
+   - 6220 hold_1_2 - 4146.666666666667 hold_1_3 - 3110 hold_1_4
+   - 2488 hold_1_5 - 2073.333333333333 hold_1_6
+   - 1777.142857142857 hold_1_7 - 1555 hold_1_8
+   - 1382.222222222222 hold_1_9 - 1244 hold_1_10
+   - 1130.909090909091 hold_1_11 - 1036.666666666667 hold_1_12
+   - 956.9230769230769 hold_1_13 - 888.5714285714287 hold_1_14
+   - 829.3333333333333 hold_1_15 - 777.5 hold_1_16
+   - 731.7647058823529 hold_1_17 - 691.1111111111112 hold_1_18
+   - 654.7368421052631 hold_1_19 - 622 hold_1_20 + flow_nic_in_1_1 <= 0
+ group_throughput_constr_2: group_tp_active_2 = 1 -> - 16320 hold_2_1
+   - 8160 hold_2_2 - 5440 hold_2_3 - 4080 hold_2_4 - 3264 hold_2_5
+   - 2720 hold_2_6 - 2331.428571428572 hold_2_7 - 2040 hold_2_8
+   - 1813.333333333333 hold_2_9 - 1632 hold_2_10
+   - 1483.636363636364 hold_2_11 - 1360 hold_2_12
+   - 1255.384615384615 hold_2_13 - 1165.714285714286 hold_2_14
+   - 1088 hold_2_15 - 1020 hold_2_16 - 960 hold_2_17
+   - 906.6666666666666 hold_2_18 - 858.9473684210526 hold_2_19
+   - 816 hold_2_20 - 777.1428571428571 hold_2_21
+   - 741.8181818181819 hold_2_22 - 709.5652173913044 hold_2_23
+   - 680 hold_2_24 - 652.8 hold_2_25 - 627.6923076923077 hold_2_26
+   - 604.4444444444445 hold_2_27 - 582.8571428571429 hold_2_28
+   - 562.7586206896552 hold_2_29 - 544 hold_2_30
+   - 526.4516129032257 hold_2_31 - 510 hold_2_32
+   - 494.5454545454545 hold_2_33 - 480 hold_2_34
+   - 466.2857142857142 hold_2_35 - 453.3333333333333 hold_2_36
+   - 441.081081081081 hold_2_37 - 429.4736842105263 hold_2_38
+   - 418.4615384615385 hold_2_39 - 408 hold_2_40 + flow_nic_in_2_2 <= 0
+ group_throughput_constr_3: group_tp_active_3 = 1 -> - 12440 hold_3_1
+   - 6220 hold_3_2 - 4146.666666666667 hold_3_3 - 3110 hold_3_4
+   - 2488 hold_3_5 - 2073.333333333333 hold_3_6
+   - 1777.142857142857 hold_3_7 - 1555 hold_3_8
+   - 1382.222222222222 hold_3_9 - 1244 hold_3_10
+   - 1130.909090909091 hold_3_11 - 1036.666666666667 hold_3_12
+   - 956.9230769230769 hold_3_13 - 888.5714285714287 hold_3_14
+   - 829.3333333333333 hold_3_15 - 777.5 hold_3_16
+   - 731.7647058823529 hold_3_17 - 691.1111111111112 hold_3_18
+   - 654.7368421052631 hold_3_19 - 622 hold_3_20 + flow_nic_in_3_3 <= 0
+ group_throughput_constr_4: group_tp_active_4 = 1 ->
+   - 12795.6930644974 hold_4_1 - 6397.846532248702 hold_4_2
+   - 4265.231021499134 hold_4_3 - 3198.923266124351 hold_4_4
+   - 2559.13861289948 hold_4_5 - 2132.615510749567 hold_4_6
+   - 1827.956152071057 hold_4_7 - 1599.461633062175 hold_4_8
+   - 1421.743673833045 hold_4_9 - 1279.56930644974 hold_4_10
+   - 1163.244824045218 hold_4_11 - 1066.307755374783 hold_4_12
+   - 984.2840818844156 hold_4_13 - 913.9780760355287 hold_4_14
+   - 853.0462042998267 hold_4_15 - 799.7308165310877 hold_4_16
+   - 752.6878273233765 hold_4_17 - 710.8718369165224 hold_4_18
+   - 673.4575297103895 hold_4_19 - 639.7846532248701 hold_4_20
+   - 609.3187173570192 hold_4_21 - 581.6224120226092 hold_4_22
+   - 556.3344810651045 hold_4_23 - 533.1538776873917 hold_4_24
+   - 511.827722579896 hold_4_25 - 492.1420409422078 hold_4_26
+   - 473.9145579443482 hold_4_27 - 456.9890380177644 hold_4_28
+   - 441.2307953274965 hold_4_29 - 426.5231021499134 hold_4_30
+   - 412.7642924031419 hold_4_31 - 399.8654082655439 hold_4_32
+   - 387.7482746817394 hold_4_33 - 376.3439136616882 hold_4_34
+   - 365.5912304142115 hold_4_35 - 355.4359184582612 hold_4_36
+   - 345.8295422837136 hold_4_37 - 336.7287648551948 hold_4_38
+   - 328.0946939614718 hold_4_39 - 319.8923266124351 hold_4_40
+   - 312.0900747438391 hold_4_41 - 304.6593586785096 hold_4_42
+   - 297.5742573138931 hold_4_43 - 290.8112060113046 hold_4_44
+   - 284.3487347666089 hold_4_45 - 278.1672405325522 hold_4_46
+   - 272.2487886063277 hold_4_47 - 266.5769388436959 hold_4_48
+   + flow_nic_in_4_4 + flow_nic_in_4_5 <= 0
+ intergroup_group_tp_4_via_nic_out_0_nic_in_4: tp_on_and_switch_nic_out_0_nic_in_4_4 = 1 ->
+   - 7109.781611208175 hold_4_1 - 4570.329757755596 hold_4_2
+   - 3367.526196547537 hold_4_3 - 2665.918892873505 hold_4_4
+   - 2206.256371075979 hold_4_5 - 1881.794060639768 hold_4_6
+   - 1640.53008565086 hold_4_7 - 1454.100509581446 hold_4_8
+   - 1305.718830859359 hold_4_9 - 1184.815925681324 hold_4_10
+   - 1084.405505807895 hold_4_11 - 999.6845439883414 hold_4_12
+   - 927.2422219402338 hold_4_13 - 864.5895809270257 hold_4_14
+   - 809.8677890834321 hold_4_15 - 761.6606006511917 hold_4_16
+   - 718.8700321587839 hold_4_17 - 680.6317169842571 hold_4_18
+   - 646.2559103992508 hold_4_19 - 615.1855126090246 hold_4_20
+   - 586.9656452268769 hold_4_21 - 561.2212340340353 hold_4_22
+   - 537.6402432085334 hold_4_23 - 515.9609658330648 hold_4_24
+   - 495.9622701295242 hold_4_25 - 477.4560293943152 hold_4_26
+   - 460.2811857763908 hold_4_27 - 444.2990507797613 hold_4_28
+   - 429.3895519820979 hold_4_29 - 415.4482109184406 hold_4_30
+   - 402.383691180353 hold_4_31 - 390.115795037207 hold_4_32
+   - 378.5738156896552 hold_4_33 - 367.6951736195327 hold_4_34
+   - 357.4242814861834 hold_4_35 - 347.7115940953936 hold_4_36
+   - 338.51280916798 hold_4_37 - 329.7881917017229 hold_4_38
+   - 321.5020001889717 hold_4_39 - 313.621997214572 hold_4_40
+   - 306.1190303033463 hold_4_41 - 298.9666715276433 hold_4_42
+   - 292.1409064840188 hold_4_43 - 285.6198649250766 hold_4_44
+   - 279.3835866799218 hold_4_45 - 273.4138175849844 hold_4_46
+   - 267.693831030365 hold_4_47 - 262.2082714473256 hold_4_48
+   + flow_nic_in_4_4 + flow_nic_in_4_5 <= 0
+ intergroup_group_tp_4_via_nic_out_1_nic_in_4: tp_on_and_switch_nic_out_1_nic_in_4_4 = 1 ->
+   - 7109.781611208175 hold_4_1 - 4570.329757755596 hold_4_2
+   - 3367.526196547537 hold_4_3 - 2665.918892873505 hold_4_4
+   - 2206.256371075979 hold_4_5 - 1881.794060639768 hold_4_6
+   - 1640.53008565086 hold_4_7 - 1454.100509581446 hold_4_8
+   - 1305.718830859359 hold_4_9 - 1184.815925681324 hold_4_10
+   - 1084.405505807895 hold_4_11 - 999.6845439883414 hold_4_12
+   - 927.2422219402338 hold_4_13 - 864.5895809270257 hold_4_14
+   - 809.8677890834321 hold_4_15 - 761.6606006511917 hold_4_16
+   - 718.8700321587839 hold_4_17 - 680.6317169842571 hold_4_18
+   - 646.2559103992508 hold_4_19 - 615.1855126090246 hold_4_20
+   - 586.9656452268769 hold_4_21 - 561.2212340340353 hold_4_22
+   - 537.6402432085334 hold_4_23 - 515.9609658330648 hold_4_24
+   - 495.9622701295242 hold_4_25 - 477.4560293943152 hold_4_26
+   - 460.2811857763908 hold_4_27 - 444.2990507797613 hold_4_28
+   - 429.3895519820979 hold_4_29 - 415.4482109184406 hold_4_30
+   - 402.383691180353 hold_4_31 - 390.115795037207 hold_4_32
+   - 378.5738156896552 hold_4_33 - 367.6951736195327 hold_4_34
+   - 357.4242814861834 hold_4_35 - 347.7115940953936 hold_4_36
+   - 338.51280916798 hold_4_37 - 329.7881917017229 hold_4_38
+   - 321.5020001889717 hold_4_39 - 313.621997214572 hold_4_40
+   - 306.1190303033463 hold_4_41 - 298.9666715276433 hold_4_42
+   - 292.1409064840188 hold_4_43 - 285.6198649250766 hold_4_44
+   - 279.3835866799218 hold_4_45 - 273.4138175849844 hold_4_46
+   - 267.693831030365 hold_4_47 - 262.2082714473256 hold_4_48
+   + flow_nic_in_4_4 + flow_nic_in_4_5 <= 0
+ intergroup_group_tp_4_via_nic_out_2_nic_in_4: tp_on_and_switch_nic_out_2_nic_in_4_4 = 1 ->
+   - 7109.781611208175 hold_4_1 - 4570.329757755596 hold_4_2
+   - 3367.526196547537 hold_4_3 - 2665.918892873505 hold_4_4
+   - 2206.256371075979 hold_4_5 - 1881.794060639768 hold_4_6
+   - 1640.53008565086 hold_4_7 - 1454.100509581446 hold_4_8
+   - 1305.718830859359 hold_4_9 - 1184.815925681324 hold_4_10
+   - 1084.405505807895 hold_4_11 - 999.6845439883414 hold_4_12
+   - 927.2422219402338 hold_4_13 - 864.5895809270257 hold_4_14
+   - 809.8677890834321 hold_4_15 - 761.6606006511917 hold_4_16
+   - 718.8700321587839 hold_4_17 - 680.6317169842571 hold_4_18
+   - 646.2559103992508 hold_4_19 - 615.1855126090246 hold_4_20
+   - 586.9656452268769 hold_4_21 - 561.2212340340353 hold_4_22
+   - 537.6402432085334 hold_4_23 - 515.9609658330648 hold_4_24
+   - 495.9622701295242 hold_4_25 - 477.4560293943152 hold_4_26
+   - 460.2811857763908 hold_4_27 - 444.2990507797613 hold_4_28
+   - 429.3895519820979 hold_4_29 - 415.4482109184406 hold_4_30
+   - 402.383691180353 hold_4_31 - 390.115795037207 hold_4_32
+   - 378.5738156896552 hold_4_33 - 367.6951736195327 hold_4_34
+   - 357.4242814861834 hold_4_35 - 347.7115940953936 hold_4_36
+   - 338.51280916798 hold_4_37 - 329.7881917017229 hold_4_38
+   - 321.5020001889717 hold_4_39 - 313.621997214572 hold_4_40
+   - 306.1190303033463 hold_4_41 - 298.9666715276433 hold_4_42
+   - 292.1409064840188 hold_4_43 - 285.6198649250766 hold_4_44
+   - 279.3835866799218 hold_4_45 - 273.4138175849844 hold_4_46
+   - 267.693831030365 hold_4_47 - 262.2082714473256 hold_4_48
+   + flow_nic_in_4_4 + flow_nic_in_4_5 <= 0
+ intergroup_group_tp_4_via_nic_out_3_nic_in_4: tp_on_and_switch_nic_out_3_nic_in_4_4 = 1 ->
+   - 7109.781611208175 hold_4_1 - 4570.329757755596 hold_4_2
+   - 3367.526196547537 hold_4_3 - 2665.918892873505 hold_4_4
+   - 2206.256371075979 hold_4_5 - 1881.794060639768 hold_4_6
+   - 1640.53008565086 hold_4_7 - 1454.100509581446 hold_4_8
+   - 1305.718830859359 hold_4_9 - 1184.815925681324 hold_4_10
+   - 1084.405505807895 hold_4_11 - 999.6845439883414 hold_4_12
+   - 927.2422219402338 hold_4_13 - 864.5895809270257 hold_4_14
+   - 809.8677890834321 hold_4_15 - 761.6606006511917 hold_4_16
+   - 718.8700321587839 hold_4_17 - 680.6317169842571 hold_4_18
+   - 646.2559103992508 hold_4_19 - 615.1855126090246 hold_4_20
+   - 586.9656452268769 hold_4_21 - 561.2212340340353 hold_4_22
+   - 537.6402432085334 hold_4_23 - 515.9609658330648 hold_4_24
+   - 495.9622701295242 hold_4_25 - 477.4560293943152 hold_4_26
+   - 460.2811857763908 hold_4_27 - 444.2990507797613 hold_4_28
+   - 429.3895519820979 hold_4_29 - 415.4482109184406 hold_4_30
+   - 402.383691180353 hold_4_31 - 390.115795037207 hold_4_32
+   - 378.5738156896552 hold_4_33 - 367.6951736195327 hold_4_34
+   - 357.4242814861834 hold_4_35 - 347.7115940953936 hold_4_36
+   - 338.51280916798 hold_4_37 - 329.7881917017229 hold_4_38
+   - 321.5020001889717 hold_4_39 - 313.621997214572 hold_4_40
+   - 306.1190303033463 hold_4_41 - 298.9666715276433 hold_4_42
+   - 292.1409064840188 hold_4_43 - 285.6198649250766 hold_4_44
+   - 279.3835866799218 hold_4_45 - 273.4138175849844 hold_4_46
+   - 267.693831030365 hold_4_47 - 262.2082714473256 hold_4_48
+   + flow_nic_in_4_4 + flow_nic_in_4_5 <= 0
+ intergroup_group_tp_4_via_source_nic_in_4: tp_on_and_switch_source_nic_in_4_4 = 1 ->
+   - 11031.2818553799 hold_4_1 - 5924.079628406621 hold_4_2
+   - 4049.338945417161 hold_4_3 - 3075.927563045123 hold_4_4
+   - 2479.811350647622 hold_4_5 - 2077.241054592203 hold_4_6
+   - 1787.121407430917 hold_4_7 - 1568.10998607286 hold_4_8
+   - 1396.917933399609 hold_4_9 - 1259.425282262861 hold_4_10
+   - 1146.573010053534 hold_4_11 - 1052.282049003606 hold_4_12
+   - 972.3210798669938 hold_4_13 - 903.6540758647719 hold_4_14
+   - 844.0460755374347 hold_4_15 - 791.8153275505399 hold_4_16
+   - 745.6720984276122 hold_4_17 - 704.6107377979038 hold_4_18
+   - 667.8355437659221 hold_4_19 - 634.7086922180014 hold_4_20
+   - 604.7129310133411 hold_4_21 - 577.4243750503909 hold_4_22
+   - 552.4923492598803 hold_4_23 - 529.6242374882158 hold_4_24
+   - 508.5739445324769 hold_4_25 - 489.1330045031035 hold_4_26
+   - 471.123653469708 hold_4_27 - 454.3933781084715 hold_4_28
+   - 438.8105860290997 hold_4_29 - 424.2611374441095 hold_4_30
+   - 410.6455446821515 hold_4_31 - 397.8766941810682 hold_4_32
+   - 385.8779806662269 hold_4_33 - 374.5817690498067 hold_4_34
+   - 363.9281188050084 hold_4_35 - 353.8637200041521 hold_4_36
+   - 344.3410011485048 hold_4_37 - 335.3173772766342 hold_4_38
+   - 326.754613275931 hold_4_39 - 318.6182823170394 hold_4_40
+   - 310.877303233809 hold_4_41 - 303.5035437410993 hold_4_42
+   - 296.4714788123638 hold_4_43 - 289.7578954733807 hold_4_44
+   - 283.3416368174123 hold_4_45 - 277.2033792939959 hold_4_46
+   - 271.3254383325263 hold_4_47 - 265.6915981821971 hold_4_48
+   + flow_nic_in_4_4 + flow_nic_in_4_5 <= 0
+Bounds
+Binaries
+ hold_0_1 hold_0_2 hold_0_3 hold_0_4 hold_0_5 hold_0_6 hold_0_7 hold_0_8
+ hold_0_9 hold_0_10 hold_0_11 hold_0_12 hold_0_13 hold_0_14 hold_0_15
+ hold_0_16 hold_0_17 hold_0_18 hold_0_19 hold_0_20 hold_0_21 hold_0_22
+ hold_0_23 hold_0_24 hold_0_25 hold_0_26 hold_0_27 hold_0_28 hold_0_29
+ hold_0_30 hold_0_31 hold_0_32 hold_0_33 hold_0_34 hold_0_35 hold_0_36
+ hold_0_37 hold_0_38 hold_0_39 hold_0_40 hold_0_41 hold_0_42 hold_0_43
+ hold_0_44 hold_0_45 hold_0_46 hold_0_47 hold_0_48 hold_1_1 hold_1_2
+ hold_1_3 hold_1_4 hold_1_5 hold_1_6 hold_1_7 hold_1_8 hold_1_9 hold_1_10
+ hold_1_11 hold_1_12 hold_1_13 hold_1_14 hold_1_15 hold_1_16 hold_1_17
+ hold_1_18 hold_1_19 hold_1_20 hold_1_21 hold_1_22 hold_1_23 hold_1_24
+ hold_1_25 hold_1_26 hold_1_27 hold_1_28 hold_1_29 hold_1_30 hold_1_31
+ hold_1_32 hold_1_33 hold_1_34 hold_1_35 hold_1_36 hold_1_37 hold_1_38
+ hold_1_39 hold_1_40 hold_1_41 hold_1_42 hold_1_43 hold_1_44 hold_1_45
+ hold_1_46 hold_1_47 hold_1_48 hold_2_1 hold_2_2 hold_2_3 hold_2_4 hold_2_5
+ hold_2_6 hold_2_7 hold_2_8 hold_2_9 hold_2_10 hold_2_11 hold_2_12
+ hold_2_13 hold_2_14 hold_2_15 hold_2_16 hold_2_17 hold_2_18 hold_2_19
+ hold_2_20 hold_2_21 hold_2_22 hold_2_23 hold_2_24 hold_2_25 hold_2_26
+ hold_2_27 hold_2_28 hold_2_29 hold_2_30 hold_2_31 hold_2_32 hold_2_33
+ hold_2_34 hold_2_35 hold_2_36 hold_2_37 hold_2_38 hold_2_39 hold_2_40
+ hold_2_41 hold_2_42 hold_2_43 hold_2_44 hold_2_45 hold_2_46 hold_2_47
+ hold_2_48 hold_3_1 hold_3_2 hold_3_3 hold_3_4 hold_3_5 hold_3_6 hold_3_7
+ hold_3_8 hold_3_9 hold_3_10 hold_3_11 hold_3_12 hold_3_13 hold_3_14
+ hold_3_15 hold_3_16 hold_3_17 hold_3_18 hold_3_19 hold_3_20 hold_3_21
+ hold_3_22 hold_3_23 hold_3_24 hold_3_25 hold_3_26 hold_3_27 hold_3_28
+ hold_3_29 hold_3_30 hold_3_31 hold_3_32 hold_3_33 hold_3_34 hold_3_35
+ hold_3_36 hold_3_37 hold_3_38 hold_3_39 hold_3_40 hold_3_41 hold_3_42
+ hold_3_43 hold_3_44 hold_3_45 hold_3_46 hold_3_47 hold_3_48 hold_4_1
+ hold_4_2 hold_4_3 hold_4_4 hold_4_5 hold_4_6 hold_4_7 hold_4_8 hold_4_9
+ hold_4_10 hold_4_11 hold_4_12 hold_4_13 hold_4_14 hold_4_15 hold_4_16
+ hold_4_17 hold_4_18 hold_4_19 hold_4_20 hold_4_21 hold_4_22 hold_4_23
+ hold_4_24 hold_4_25 hold_4_26 hold_4_27 hold_4_28 hold_4_29 hold_4_30
+ hold_4_31 hold_4_32 hold_4_33 hold_4_34 hold_4_35 hold_4_36 hold_4_37
+ hold_4_38 hold_4_39 hold_4_40 hold_4_41 hold_4_42 hold_4_43 hold_4_44
+ hold_4_45 hold_4_46 hold_4_47 hold_4_48 hold_5_1 hold_5_2 hold_5_3
+ hold_5_4 hold_5_5 hold_5_6 hold_5_7 hold_5_8 hold_5_9 hold_5_10 hold_5_11
+ hold_5_12 hold_5_13 hold_5_14 hold_5_15 hold_5_16 hold_5_17 hold_5_18
+ hold_5_19 hold_5_20 hold_5_21 hold_5_22 hold_5_23 hold_5_24 hold_5_25
+ hold_5_26 hold_5_27 hold_5_28 hold_5_29 hold_5_30 hold_5_31 hold_5_32
+ hold_5_33 hold_5_34 hold_5_35 hold_5_36 hold_5_37 hold_5_38 hold_5_39
+ hold_5_40 hold_5_41 hold_5_42 hold_5_43 hold_5_44 hold_5_45 hold_5_46
+ hold_5_47 hold_5_48 switch_source_nic_in_0 switch_nic_out_0_sink
+ switch_nic_out_0_nic_in_1 switch_nic_out_0_nic_in_2
+ switch_nic_out_0_nic_in_3 switch_nic_out_0_nic_in_4 switch_nic_in_0_0
+ switch_0_nic_out_0 switch_source_nic_in_1 switch_nic_out_1_sink
+ switch_nic_out_1_nic_in_0 switch_nic_out_1_nic_in_2
+ switch_nic_out_1_nic_in_3 switch_nic_out_1_nic_in_4 switch_nic_in_1_1
+ switch_1_nic_out_1 switch_source_nic_in_2 switch_nic_out_2_sink
+ switch_nic_out_2_nic_in_0 switch_nic_out_2_nic_in_1
+ switch_nic_out_2_nic_in_3 switch_nic_out_2_nic_in_4 switch_nic_in_2_2
+ switch_2_nic_out_2 switch_source_nic_in_3 switch_nic_out_3_sink
+ switch_nic_out_3_nic_in_0 switch_nic_out_3_nic_in_1
+ switch_nic_out_3_nic_in_2 switch_nic_out_3_nic_in_4 switch_nic_in_3_3
+ switch_3_nic_out_3 switch_source_nic_in_4 switch_nic_out_4_sink
+ switch_nic_out_4_nic_in_0 switch_nic_out_4_nic_in_1
+ switch_nic_out_4_nic_in_2 switch_nic_out_4_nic_in_3 switch_nic_in_4_4
+ switch_4_nic_out_4 switch_nic_in_4_5 switch_5_nic_out_4 switch_4_5
+ switch_5_4 group_tp_active_0 group_tp_active_1 group_tp_active_2
+ group_tp_active_3 group_tp_active_4 is_active_0 is_active_1 is_active_2
+ is_active_3 is_active_4 is_active_5 is_start_zero_0_for_source_nic_in_0
+ is_end_complete_0 is_start_zero_1_for_source_nic_in_1 is_end_complete_1
+ is_start_zero_2_for_source_nic_in_2 is_end_complete_2
+ is_start_zero_3_for_source_nic_in_3 is_end_complete_3
+ is_start_zero_4_for_source_nic_in_4 is_start_zero_5_for_source_nic_in_4
+ is_end_complete_4 is_end_complete_5 pp_permission_4_5 pp_permission_5_4
+ tp_on_and_switch_nic_out_0_nic_in_4_4
+ tp_on_and_switch_nic_out_1_nic_in_4_4
+ tp_on_and_switch_nic_out_2_nic_in_4_4
+ tp_on_and_switch_nic_out_3_nic_in_4_4 tp_on_and_switch_source_nic_in_4_4
+Generals
+ start_0 start_1 start_2 start_3 start_4 start_5 group_start_1 val_end_0
+ group_end_0 group_start_2 group_start_3 group_start_4 group_start_0
+ val_end_1 group_end_1 val_end_2 group_end_2 val_end_3 group_end_3
+ val_end_4 val_end_5 group_end_4
+General Constraints
+ min_start_1: group_start_1 = MIN ( start_1 )
+ max_end_0: group_end_0 = MAX ( val_end_0 )
+ min_start_2: group_start_2 = MIN ( start_2 )
+ min_start_3: group_start_3 = MIN ( start_3 )
+ min_start_4: group_start_4 = MIN ( start_4 , start_5 )
+ min_start_0: group_start_0 = MIN ( start_0 )
+ max_end_1: group_end_1 = MAX ( val_end_1 )
+ max_end_2: group_end_2 = MAX ( val_end_2 )
+ max_end_3: group_end_3 = MAX ( val_end_3 )
+ max_end_4: group_end_4 = MAX ( val_end_4 , val_end_5 )
+End

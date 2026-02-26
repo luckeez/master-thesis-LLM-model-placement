@@ -1,0 +1,12 @@
+{
+  "test_name": "test_E2_us-split-1_LLaMa70B_0.1",
+  "model": "LLaMa70B",
+  "alpha": 0.1,
+  "batch_size": 8,
+  "solver_time_s": 1807.0,
+  "feasible": true,
+  "throughput_tokens_s": 203.16,
+  "rental_cost_usd_hr": 0,
+  "power_watts": 0.0,
+  "active_gpus": 10
+}

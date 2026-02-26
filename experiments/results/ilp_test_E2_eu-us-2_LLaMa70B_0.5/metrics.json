@@ -1,0 +1,12 @@
+{
+  "test_name": "test_E2_eu-us-2_LLaMa70B_0.5",
+  "model": "LLaMa70B",
+  "alpha": 0.5,
+  "batch_size": 8,
+  "solver_time_s": 1801.8,
+  "feasible": true,
+  "throughput_tokens_s": 311.56,
+  "rental_cost_usd_hr": 0,
+  "power_watts": 0.0,
+  "active_gpus": 9
+}

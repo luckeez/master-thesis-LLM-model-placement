@@ -1,0 +1,12 @@
+{
+  "test_name": "test_E3_scale-18_LLaMa30B_0.9",
+  "model": "LLaMa30B",
+  "alpha": 0.9,
+  "batch_size": 8,
+  "solver_time_s": 1801.5,
+  "feasible": true,
+  "throughput_tokens_s": 2240.09,
+  "rental_cost_usd_hr": 0,
+  "power_watts": 0.0,
+  "active_gpus": 18
+}

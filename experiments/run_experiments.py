@@ -427,39 +427,49 @@ def generate_e4_configs() -> List[Tuple[str, List[Dict[str, Any]]]]:
     R = DEFAULT_REGION
     configs = []
 
-    # E4-1: 7×A6000 ($3.99) vs 2×H100 ($3.80)
-    # Cheap: groups of 4, 2, 1
+    # E4-1: 10×A6000 ($5.70) vs 3×H100 ($5.70) — exact cost match
+    # Cheap: groups of 4, 2, 2, 1, 1
     configs.append(("E4_cheap-A6000", [
         {"num_nodes": 4, "type": "A6000", "region": R},
         {"num_nodes": 2, "type": "A6000", "region": R},
+        {"num_nodes": 2, "type": "A6000", "region": R},
+        {"num_nodes": 1, "type": "A6000", "region": R},
         {"num_nodes": 1, "type": "A6000", "region": R},
     ]))
     configs.append(("E4_expensive-H100-1", [
         {"num_nodes": 1, "type": "H100", "region": R},
         {"num_nodes": 1, "type": "H100", "region": R},
+        {"num_nodes": 1, "type": "H100", "region": R},
     ]))
 
-    # E4-2: 10×A30 ($3.30) vs 2×A100-80 ($3.30)
-    # Cheap: groups of 4, 2, 2, 1, 1
+    # E4-2: 15×A30 ($4.95) vs 3×A100-80 ($4.95) — exact cost match
+    # Cheap: groups of 4, 2, 2, 2, 2, 1, 1, 1
     configs.append(("E4_cheap-A30", [
         {"num_nodes": 4, "type": "A30", "region": R},
         {"num_nodes": 2, "type": "A30", "region": R},
         {"num_nodes": 2, "type": "A30", "region": R},
+        {"num_nodes": 2, "type": "A30", "region": R},
+        {"num_nodes": 2, "type": "A30", "region": R},
+        {"num_nodes": 1, "type": "A30", "region": R},
         {"num_nodes": 1, "type": "A30", "region": R},
         {"num_nodes": 1, "type": "A30", "region": R},
     ]))
     configs.append(("E4_expensive-A100-80", [
         {"num_nodes": 1, "type": "A100-80", "region": R},
         {"num_nodes": 1, "type": "A100-80", "region": R},
+        {"num_nodes": 1, "type": "A100-80", "region": R},
     ]))
 
-    # E4-3: 4×L40S ($3.44) vs 2×H100 ($3.80)
-    # Cheap: groups of 2, 2
+    # E4-3: 7×L40S ($6.02) vs 3×H100 ($5.70) — ~5% diff
+    # Cheap: groups of 2, 2, 2, 1
     configs.append(("E4_cheap-L40S", [
         {"num_nodes": 2, "type": "L40S", "region": R},
         {"num_nodes": 2, "type": "L40S", "region": R},
+        {"num_nodes": 2, "type": "L40S", "region": R},
+        {"num_nodes": 1, "type": "L40S", "region": R},
     ]))
     configs.append(("E4_expensive-H100-2", [
+        {"num_nodes": 1, "type": "H100", "region": R},
         {"num_nodes": 1, "type": "H100", "region": R},
         {"num_nodes": 1, "type": "H100", "region": R},
     ]))

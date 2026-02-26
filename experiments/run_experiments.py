@@ -413,28 +413,90 @@ def run_e3() -> List[Dict[str, Any]]:
 
 
 # ===========================================================================
+# E4 — Cheap vs Expensive GPU Comparison (cost-matched)
+# ===========================================================================
+
+E4_ALPHA = 0.5  # Only α=0.5 for E4
+
+def generate_e4_configs() -> List[Tuple[str, List[Dict[str, Any]]]]:
+    """
+    3 experiments × 2 sides = 6 configs.
+    Each experiment compares N cheap GPUs vs M expensive GPUs at matched cost.
+    Only α=0.5 is used (balanced trade-off).
+    """
+    R = DEFAULT_REGION
+    configs = []
+
+    # E4-1: 7×A6000 ($3.99) vs 2×H100 ($3.80)
+    # Cheap: groups of 4, 2, 1
+    configs.append(("E4_cheap-A6000", [
+        {"num_nodes": 4, "type": "A6000", "region": R},
+        {"num_nodes": 2, "type": "A6000", "region": R},
+        {"num_nodes": 1, "type": "A6000", "region": R},
+    ]))
+    configs.append(("E4_expensive-H100-1", [
+        {"num_nodes": 1, "type": "H100", "region": R},
+        {"num_nodes": 1, "type": "H100", "region": R},
+    ]))
+
+    # E4-2: 10×A30 ($3.30) vs 2×A100-80 ($3.30)
+    # Cheap: groups of 4, 2, 2, 1, 1
+    configs.append(("E4_cheap-A30", [
+        {"num_nodes": 4, "type": "A30", "region": R},
+        {"num_nodes": 2, "type": "A30", "region": R},
+        {"num_nodes": 2, "type": "A30", "region": R},
+        {"num_nodes": 1, "type": "A30", "region": R},
+        {"num_nodes": 1, "type": "A30", "region": R},
+    ]))
+    configs.append(("E4_expensive-A100-80", [
+        {"num_nodes": 1, "type": "A100-80", "region": R},
+        {"num_nodes": 1, "type": "A100-80", "region": R},
+    ]))
+
+    # E4-3: 4×L40S ($3.44) vs 2×H100 ($3.80)
+    # Cheap: groups of 2, 2
+    configs.append(("E4_cheap-L40S", [
+        {"num_nodes": 2, "type": "L40S", "region": R},
+        {"num_nodes": 2, "type": "L40S", "region": R},
+    ]))
+    configs.append(("E4_expensive-H100-2", [
+        {"num_nodes": 1, "type": "H100", "region": R},
+        {"num_nodes": 1, "type": "H100", "region": R},
+    ]))
+
+    return configs
+
+
+def run_e4() -> List[Dict[str, Any]]:
+    """E4: Cheap vs Expensive. 6 configs × 1 alpha × 2 models = 12 runs."""
+    print("\n" + "#"*60 + "\n  E4 — Cheap vs Expensive GPU Comparison\n" + "#"*60)
+    results = []
+    for name, groups in generate_e4_configs():
+        for model in MODELS:
+            m = run_single(name, groups, model, E4_ALPHA)
+            results.append(m)
+    return results
+
+
+# ===========================================================================
 # Summary & output
 # ===========================================================================
 
 def save_summary(all_metrics: List[Dict[str, Any]], path: str):
     with open(path, "w") as f:
         json.dump(all_metrics, f, indent=2)
-    print(f"\nSummary saved to: {path}")
-
 
 def print_table(metrics: List[Dict[str, Any]]):
-    hdr = f"{'Test':<50} {'Mod':<9} {'α':<5} {'OK':<3} {'TP(t/s)':<9} {'$/hr':<8} {'GPUs':<5} {'Time':<7}"
-    print(f"\n{'='*len(hdr)}\n{hdr}\n{'='*len(hdr)}")
+    fmt = "{:<40} {:>8} {:>8} {:>10} {:>8} {:>8}"
+    print("\n" + fmt.format("Test", "Model", "Alpha", "TP (t/s)", "$/hr", "Active"))
+    print("-"*90)
     for m in metrics:
-        name = m.get("test_name","?")[:49]
-        mod  = m.get("model","?")[:8]
-        a    = m.get("alpha","?")
-        ok   = "✓" if m.get("feasible") else "✗"
-        tp   = m.get("throughput_tokens_s", "-")
-        cost = m.get("rental_cost_usd_hr", "-")
-        gpus = m.get("active_gpus", "-")
-        t    = m.get("solver_time_s", "-")
-        print(f"{name:<50} {mod:<9} {a:<5} {ok:<3} {tp:<9} {cost:<8} {gpus:<5} {t:<7}")
+        print(fmt.format(
+            m.get("test_name","?"), m.get("model","?"), str(m.get("alpha","?")),
+            str(m.get("throughput_tokens_s","?")),
+            str(m.get("rental_cost_usd_hr","?")),
+            str(m.get("active_gpus","?")),
+        ))
 
 
 # ===========================================================================
@@ -444,7 +506,7 @@ def print_table(metrics: List[Dict[str, Any]]):
 def main_cli():
     parser = argparse.ArgumentParser(description="Run LLM placement experiments")
     parser.add_argument("--exp", type=str, default="all",
-                        choices=["E1", "E2", "E3", "all"])
+                        choices=["E1", "E2", "E3", "E4", "all"])
     parser.add_argument("--dry-run", action="store_true",
                         help="Only print configs, don't run solver")
     args = parser.parse_args()
@@ -452,10 +514,12 @@ def main_cli():
     all_metrics = []
 
     if args.dry_run:
-        funcs = {"E1": generate_e1_configs, "E2": generate_e2_configs, "E3": generate_e3_configs}
-        for exp in (["E1","E2","E3"] if args.exp == "all" else [args.exp]):
+        funcs = {"E1": generate_e1_configs, "E2": generate_e2_configs,
+                 "E3": generate_e3_configs, "E4": generate_e4_configs}
+        for exp in (["E1","E2","E3","E4"] if args.exp == "all" else [args.exp]):
             configs = funcs[exp]()
-            print(f"\n{exp}: {len(configs)} configs × {len(ALPHAS)} alphas × {len(MODELS)} models = {len(configs)*len(ALPHAS)*len(MODELS)} runs")
+            n_alphas = 1 if exp == "E4" else len(ALPHAS)
+            print(f"\n{exp}: {len(configs)} configs × {n_alphas} alphas × {len(MODELS)} models = {len(configs)*n_alphas*len(MODELS)} runs")
             for name, groups in configs:
                 total_gpus = sum(g["num_nodes"] for g in groups)
                 types = set(g["type"] for g in groups)
@@ -469,6 +533,8 @@ def main_cli():
         all_metrics.extend(run_e2())
     if args.exp in ("E3", "all"):
         all_metrics.extend(run_e3())
+    if args.exp in ("E4", "all"):
+        all_metrics.extend(run_e4())
 
     if all_metrics:
         summary_path = os.path.join(EXPERIMENTS_DIR, "results", "summary.json")

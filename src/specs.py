@@ -49,15 +49,17 @@ MODEL_SPECS: Dict[str, ModelSpec] = {
 
 GPU_SPECS: Dict[str, GPUSpec] = {
     "T4": GPUSpec(name="T4", fp16_tflops=65, memory_gb=16, memory_bandwidth_gbps=320, rent_cost=0.35, tdp_watts=70),
-    "L4": GPUSpec(name="L4", fp16_tflops=242, memory_gb=24, memory_bandwidth_gbps=300, rent_cost=0.47, tdp_watts=75),
+    "L4": GPUSpec(name="L4", fp16_tflops=242, memory_gb=24, memory_bandwidth_gbps=300, rent_cost=0.90, tdp_watts=75),
     "A100": GPUSpec(name="A100-40", fp16_tflops=312, memory_gb=40, memory_bandwidth_gbps=1555, rent_cost=1.29, tdp_watts=250),
     "A100-80": GPUSpec(name="A100-80", fp16_tflops=312, memory_gb=80, memory_bandwidth_gbps=2040, rent_cost=1.65, tdp_watts=400),
 
-    "H100": GPUSpec(name="H100", fp16_tflops=1979, memory_gb=80, memory_bandwidth_gbps=3350,rent_cost=1.9, tdp_watts=700),
-    "L40S": GPUSpec(name="L40S", fp16_tflops=733, memory_gb=48, memory_bandwidth_gbps=864, rent_cost=1.36, tdp_watts=350),
-    "A30": GPUSpec(name="A30", fp16_tflops=235, memory_gb=24, memory_bandwidth_gbps=933, rent_cost=0.33, tdp_watts=165),
-    "A4000": GPUSpec(name="A4000", fp16_tflops=153, memory_gb=16, memory_bandwidth_gbps=448, rent_cost=0.3, tdp_watts=140),
-    # "A10": GPUSpec(name="A10", fp16_tflops=140, memory_gb=24, memory_bandwidth_gbps=600, buy_cost=3000, rent_cost=0.5, tdp_watts=150)
+    "H100": GPUSpec(name="H100", fp16_tflops=1979, memory_gb=80, memory_bandwidth_gbps=3350, rent_cost=1.90, tdp_watts=700),
+    "L40S": GPUSpec(name="L40S", fp16_tflops=733, memory_gb=48, memory_bandwidth_gbps=864, rent_cost=0.86, tdp_watts=350),
+    "A30": GPUSpec(name="A30", fp16_tflops=330, memory_gb=24, memory_bandwidth_gbps=933, rent_cost=0.33, tdp_watts=165),
+    "A4000": GPUSpec(name="A4000", fp16_tflops=153, memory_gb=16, memory_bandwidth_gbps=448, rent_cost=0.30, tdp_watts=140),
+    "A10": GPUSpec(name="A10", fp16_tflops=250, memory_gb=24, memory_bandwidth_gbps=600, rent_cost=0.75, tdp_watts=150),
+    "A40": GPUSpec(name="A40", fp16_tflops=300, memory_gb=48, memory_bandwidth_gbps=696, rent_cost=0.53, tdp_watts=300),
+    "A6000": GPUSpec(name="A6000", fp16_tflops=309, memory_gb=48, memory_bandwidth_gbps=768, rent_cost=0.57, tdp_watts=300),
 }
 
 LINK_SPECS: Dict[str, LinkSpec] = {

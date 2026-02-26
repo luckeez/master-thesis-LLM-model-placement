@@ -6,7 +6,7 @@
   "solver_time_s": 1801.0,
   "feasible": true,
   "throughput_tokens_s": 412.96,
-  "rental_cost_usd_hr": 0,
-  "power_watts": 0.0,
+  "rental_cost_usd_hr": 10.09,
+  "power_watts": 2170.0,
   "active_gpus": 12
 }

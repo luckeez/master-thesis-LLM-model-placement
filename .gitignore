@@ -4,3 +4,5 @@ gurobi.log
 **/__pycache__/
 experiments/SimulationPlan.md
 Thesis/
+experiments/analyze_results.py
+experiments/regenerate_costs.py

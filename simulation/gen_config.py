@@ -323,7 +323,7 @@ if __name__ == "__main__":
     name = "test-cloud-short-a30.ini"
     cluster_configuration = [
         {"num_nodes": 2, "type": "L40S", "region": "eu-west"},
-        {"num_nodes": 2, "type": "L40S", "region": "eu-west"}, # 1.9
+        {"num_nodes": 2, "type": "L40S", "region": "eu-west"}, # 1.72
         {"num_nodes": 4, "type": "A30", "region": "eu-west"}, # 0.9
         # {"num_nodes": 2, "type": "L4", "region": "eu-west"}, # 1.72
         # {"num_nodes": 4, "type": "L4", "region": "eu-west"}, # 3.37

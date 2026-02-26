@@ -31,8 +31,8 @@ def output_costs(name_2_val: Dict[str, int], node_types: Dict[str, str], output_
     rental_cost: int = 0
     energy_cost: float = 0.0
     for key, value in name_2_val.items():
-        if key.startswith("hold_") and value:
-            gpu_id: str = key.split("_")[1]
+        if key.startswith("is_active") and value:
+            gpu_id: str = key.split("_")[2]
             gpu_type = node_types[gpu_id]
             gpu: GPUSpec = GPU_SPECS[gpu_type]
             rental_cost += gpu.rent_cost

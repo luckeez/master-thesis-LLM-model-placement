@@ -6,3 +6,4 @@ experiments/SimulationPlan.md
 Thesis/
 experiments/analyze_results.py
 experiments/regenerate_costs.py
+experiments/plot*

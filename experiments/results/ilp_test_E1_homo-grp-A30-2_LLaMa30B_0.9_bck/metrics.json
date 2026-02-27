@@ -3,9 +3,9 @@
   "model": "LLaMa30B",
   "alpha": 0.9,
   "batch_size": 8,
-  "solver_time_s": 3601.8,
+  "solver_time_s": 1801.0,
   "feasible": true,
-  "throughput_tokens_s": 1770.29,
+  "throughput_tokens_s": 1766.96,
   "rental_cost_usd_hr": 5.28,
   "power_watts": 2640.0,
   "active_gpus": 16

@@ -17,7 +17,7 @@ def ilp_layout(model_name, complete_cluster_file_name):
     # see simulator.initial_layout.layout_synthesizer.synthesize for more details about the arguments
     ilp_args = {
         # ILP
-        "max_run_time": 1800, # half an hour
+        "max_run_time": 3600, # half an hour
         "early_stop_time": 100,
         "early_stop_threshold": 0.95,
         "enable_memory": True,

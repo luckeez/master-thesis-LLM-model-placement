@@ -1,0 +1,12 @@
+{
+  "test_name": "test_E4_expensive-A100-80_LLaMa70B_0.9",
+  "model": "LLaMa70B",
+  "alpha": 0.9,
+  "batch_size": 8,
+  "solver_time_s": 0.7,
+  "feasible": true,
+  "throughput_tokens_s": 453.08,
+  "rental_cost_usd_hr": 6.6,
+  "power_watts": 1600.0,
+  "active_gpus": 4
+}

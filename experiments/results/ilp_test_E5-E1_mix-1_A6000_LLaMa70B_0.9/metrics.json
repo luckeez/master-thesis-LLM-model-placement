@@ -1,0 +1,12 @@
+{
+  "test_name": "test_E5-E1_mix-1_A6000_LLaMa70B_0.9",
+  "model": "LLaMa70B",
+  "alpha": 0.9,
+  "batch_size": 8,
+  "solver_time_s": 1801.2,
+  "feasible": true,
+  "throughput_tokens_s": 558.69,
+  "rental_cost_usd_hr": 11.43,
+  "power_watts": 2940.0,
+  "active_gpus": 17
+}

@@ -1,0 +1,12 @@
+{
+  "test_name": "test_E4_cheap_sized-A6000_LLaMa30B_0.9",
+  "model": "LLaMa30B",
+  "alpha": 0.9,
+  "batch_size": 8,
+  "solver_time_s": 1.5,
+  "feasible": true,
+  "throughput_tokens_s": 524.03,
+  "rental_cost_usd_hr": 3.42,
+  "power_watts": 1800.0,
+  "active_gpus": 6
+}

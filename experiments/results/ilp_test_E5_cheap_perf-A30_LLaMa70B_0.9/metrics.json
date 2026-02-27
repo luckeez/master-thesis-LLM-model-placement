@@ -1,0 +1,12 @@
+{
+  "test_name": "test_E5_cheap_perf-A30_LLaMa70B_0.9",
+  "model": "LLaMa70B",
+  "alpha": 0.9,
+  "batch_size": 8,
+  "solver_time_s": 89.5,
+  "feasible": true,
+  "throughput_tokens_s": 705.46,
+  "rental_cost_usd_hr": 5.28,
+  "power_watts": 2640.0,
+  "active_gpus": 16
+}

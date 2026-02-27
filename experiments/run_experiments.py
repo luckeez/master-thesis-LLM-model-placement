@@ -416,7 +416,7 @@ def run_e3() -> List[Dict[str, Any]]:
 # E4 — Cheap vs Expensive GPU Comparison (cost-matched)
 # ===========================================================================
 
-E4_ALPHA = 0.5  # Only α=0.5 for E4
+E4_ALPHA = 0.9  # Only α=0.5 for E4
 
 def generate_e4_configs() -> List[Tuple[str, List[Dict[str, Any]]]]:
     """
@@ -427,53 +427,160 @@ def generate_e4_configs() -> List[Tuple[str, List[Dict[str, Any]]]]:
     R = DEFAULT_REGION
     configs = []
 
-    # E4-1: 10×A6000 ($5.70) vs 3×H100 ($5.70) — exact cost match
-    # Cheap: groups of 4, 2, 2, 1, 1
-    configs.append(("E4_cheap-A6000", [
+    # # E4-1: 10×A6000 ($5.70) vs 3×H100 ($5.70) — exact cost match
+    # # Cheap: groups of 4, 2, 2, 1, 1
+    # configs.append(("E4_cheap_sized2-A6000", [
+    #     {"num_nodes": 4, "type": "A6000", "region": R},
+    #     # {"num_nodes": 4, "type": "A6000", "region": R},
+    #     {"num_nodes": 2, "type": "A6000", "region": R},
+    #     {"num_nodes": 2, "type": "A6000", "region": R},
+    #     # {"num_nodes": 1, "type": "A6000", "region": R},
+    # ]))
+    # configs.append(("E4_expensive-H100-1", [
+    #     {"num_nodes": 1, "type": "H100", "region": R},
+    #     {"num_nodes": 1, "type": "H100", "region": R},
+    #     {"num_nodes": 1, "type": "H100", "region": R},
+    #     {"num_nodes": 1, "type": "H100", "region": R},
+    # ]))
+
+    # # # E4-2: 15×A30 ($4.95) vs 3×A100-80 ($4.95) — exact cost match
+    # # # Cheap: groups of 4, 2, 2, 2, 2, 1, 1, 1
+    # # configs.append(("E4_cheap-A30", [
+    # #     {"num_nodes": 4, "type": "A30", "region": R},
+    # #     {"num_nodes": 2, "type": "A30", "region": R},
+    # #     {"num_nodes": 2, "type": "A30", "region": R},
+    # #     {"num_nodes": 2, "type": "A30", "region": R},
+    # #     {"num_nodes": 2, "type": "A30", "region": R},
+    # #     {"num_nodes": 1, "type": "A30", "region": R},
+    # #     {"num_nodes": 1, "type": "A30", "region": R},
+    # #     {"num_nodes": 1, "type": "A30", "region": R},
+    # # ]))
+    # configs.append(("E4_expensive-A100-80", [
+    #     {"num_nodes": 1, "type": "A100-80", "region": R},
+    #     {"num_nodes": 1, "type": "A100-80", "region": R},
+    #     {"num_nodes": 1, "type": "A100-80", "region": R},
+    #     {"num_nodes": 1, "type": "A100-80", "region": R},
+    # ]))
+
+    # # E4-3: 7×L40S ($6.02) vs 3×H100 ($5.70) — ~5% diff
+    # # Cheap: groups of 2, 2, 2, 1
+    # configs.append(("E4_cheap-L40S", [
+    #     {"num_nodes": 2, "type": "L40S", "region": R},
+    #     {"num_nodes": 2, "type": "L40S", "region": R},
+    #     {"num_nodes": 2, "type": "L40S", "region": R},
+    #     {"num_nodes": 1, "type": "L40S", "region": R},
+    # ]))
+    # configs.append(("E4_expensive-H100-2", [
+    #     {"num_nodes": 1, "type": "H100", "region": R},
+    #     {"num_nodes": 1, "type": "H100", "region": R},
+    #     {"num_nodes": 1, "type": "H100", "region": R},
+    #     {"num_nodes": 1, "type": "H100", "region": R},
+    # ]))
+
+    # ------------------------------------------------------------
+
+    configs.append(("E5_cheap_min-A6000", [
+        {"num_nodes": 4, "type": "A6000", "region": R},
+        {"num_nodes": 2, "type": "A6000", "region": R},
+        {"num_nodes": 1, "type": "A6000", "region": R},
+        
+    ]))
+    configs.append(("E5_cheap_perf-A6000", [
         {"num_nodes": 4, "type": "A6000", "region": R},
         {"num_nodes": 2, "type": "A6000", "region": R},
         {"num_nodes": 2, "type": "A6000", "region": R},
-        {"num_nodes": 1, "type": "A6000", "region": R},
-        {"num_nodes": 1, "type": "A6000", "region": R},
     ]))
-    configs.append(("E4_expensive-H100-1", [
-        {"num_nodes": 1, "type": "H100", "region": R},
-        {"num_nodes": 1, "type": "H100", "region": R},
-        {"num_nodes": 1, "type": "H100", "region": R},
+    configs.append(("E5_cheap_perf++-A6000", [
+        {"num_nodes": 4, "type": "A6000", "region": R},
+        {"num_nodes": 2, "type": "A6000", "region": R},
+        {"num_nodes": 2, "type": "A6000", "region": R},
+        {"num_nodes": 2, "type": "A6000", "region": R},
     ]))
 
-    # E4-2: 15×A30 ($4.95) vs 3×A100-80 ($4.95) — exact cost match
-    # Cheap: groups of 4, 2, 2, 2, 2, 1, 1, 1
-    configs.append(("E4_cheap-A30", [
+    configs.append(("E5_cheap_min-A30", [
+        {"num_nodes": 4, "type": "A30", "region": R},
         {"num_nodes": 4, "type": "A30", "region": R},
         {"num_nodes": 2, "type": "A30", "region": R},
         {"num_nodes": 2, "type": "A30", "region": R},
         {"num_nodes": 2, "type": "A30", "region": R},
+    ]))
+    configs.append(("E5_cheap_perf-A30", [
+        {"num_nodes": 4, "type": "A30", "region": R},
+        {"num_nodes": 4, "type": "A30", "region": R},
+        {"num_nodes": 2, "type": "A30", "region": R},
+        {"num_nodes": 2, "type": "A30", "region": R},
         {"num_nodes": 2, "type": "A30", "region": R},
         {"num_nodes": 1, "type": "A30", "region": R},
         {"num_nodes": 1, "type": "A30", "region": R},
-        {"num_nodes": 1, "type": "A30", "region": R},
     ]))
-    configs.append(("E4_expensive-A100-80", [
+
+    configs.append(("E5_exp_min_exp-A100-80", [
+        {"num_nodes": 1, "type": "A100-80", "region": R},
         {"num_nodes": 1, "type": "A100-80", "region": R},
         {"num_nodes": 1, "type": "A100-80", "region": R},
         {"num_nodes": 1, "type": "A100-80", "region": R},
     ]))
 
-    # E4-3: 7×L40S ($6.02) vs 3×H100 ($5.70) — ~5% diff
-    # Cheap: groups of 2, 2, 2, 1
-    configs.append(("E4_cheap-L40S", [
-        {"num_nodes": 2, "type": "L40S", "region": R},
-        {"num_nodes": 2, "type": "L40S", "region": R},
-        {"num_nodes": 2, "type": "L40S", "region": R},
-        {"num_nodes": 1, "type": "L40S", "region": R},
-    ]))
-    configs.append(("E4_expensive-H100-2", [
+    configs.append(("E5_exp_min_exp-H100", [
+        {"num_nodes": 1, "type": "H100", "region": R},
         {"num_nodes": 1, "type": "H100", "region": R},
         {"num_nodes": 1, "type": "H100", "region": R},
         {"num_nodes": 1, "type": "H100", "region": R},
     ]))
 
+    configs.append(("E5_hybrid_min-A30_A100-80", [
+        {"num_nodes": 4, "type": "A30", "region": R},
+        {"num_nodes": 2, "type": "A30", "region": R},
+        {"num_nodes": 1, "type": "A100-80", "region": R},
+        {"num_nodes": 1, "type": "A100-80", "region": R},
+    ]))
+    configs.append(("E5_hybrid_perf-A30_A100-80", [
+        {"num_nodes": 4, "type": "A30", "region": R},
+        {"num_nodes": 2, "type": "A30", "region": R},
+        {"num_nodes": 2, "type": "A30", "region": R},
+        {"num_nodes": 1, "type": "A100-80", "region": R},
+        {"num_nodes": 1, "type": "A100-80", "region": R},
+    ]))
+
+    configs.append(("E5_hybrid_min-A6000_A100-80", [
+        {"num_nodes": 1, "type": "A6000", "region": R},
+        {"num_nodes": 2, "type": "A6000", "region": R},
+        {"num_nodes": 1, "type": "A100-80", "region": R},
+        {"num_nodes": 1, "type": "A100-80", "region": R},
+    ]))
+    configs.append(("E5_hybrid_perf-A6000_A100-80", [
+        {"num_nodes": 2, "type": "A6000", "region": R},
+        {"num_nodes": 2, "type": "A6000", "region": R},
+        {"num_nodes": 1, "type": "A6000", "region": R},
+        {"num_nodes": 1, "type": "A100-80", "region": R},
+        {"num_nodes": 1, "type": "A100-80", "region": R},
+    ]))
+
+    configs.append(("E5_hybrid_min-A30_A6000_A100-80", [
+        {"num_nodes": 4, "type": "A30", "region": R},
+        {"num_nodes": 2, "type": "A30", "region": R},
+        {"num_nodes": 2, "type": "A6000", "region": R},
+        {"num_nodes": 1, "type": "A100-80", "region": R},
+    ]))
+    configs.append(("E5_hybrid_perf-A30_A6000_A100-80", [
+        {"num_nodes": 4, "type": "A30", "region": R},
+        {"num_nodes": 2, "type": "A30", "region": R},
+        {"num_nodes": 2, "type": "A6000", "region": R},
+        {"num_nodes": 2, "type": "A6000", "region": R},
+        {"num_nodes": 1, "type": "A100-80", "region": R},
+    ]))
+
+    defs = [(2,"L40S"),(4,"A30"),(2,"L4"),(4,"L4"),(1,"A100-80"),(2,"A4000"),(1,"A100")]
+    groups = [{"num_nodes": n, "type": t, "region": R} for n, t in defs]
+    configs.append((f"E5-E1_mix-{1}_orig", groups))
+
+    defs = [(2,"L40S"),(4,"A30"),(2,"L4"),(4,"L4"),(4, "A30"),(2,"A4000"),(1,"A100")]
+    groups = [{"num_nodes": n, "type": t, "region": R} for n, t in defs]
+    configs.append((f"E5-E1_mix-{1}_A30", groups))
+
+    defs = [(2,"L40S"),(4,"A30"),(2,"L4"),(4,"L4"),(2, "A6000"),(2,"A4000"),(1,"A100")]
+    groups = [{"num_nodes": n, "type": t, "region": R} for n, t in defs]
+    configs.append((f"E5-E1_mix-{1}_A6000", groups))
     return configs
 
 
@@ -482,9 +589,10 @@ def run_e4() -> List[Dict[str, Any]]:
     print("\n" + "#"*60 + "\n  E4 — Cheap vs Expensive GPU Comparison\n" + "#"*60)
     results = []
     for name, groups in generate_e4_configs():
-        for model in MODELS:
-            m = run_single(name, groups, model, E4_ALPHA)
-            results.append(m)
+        # for model in MODELS:
+        model = "LLaMa70B"  # Only run the bigger model for E4 (more likely to show differences)
+        m = run_single(name, groups, model, E4_ALPHA)
+        results.append(m)
     return results
 
 

@@ -1,0 +1,12 @@
+{
+  "test_name": "test_E4_cheap-A6000_LLaMa70B_0.9",
+  "model": "LLaMa70B",
+  "alpha": 0.9,
+  "batch_size": 8,
+  "solver_time_s": 36.6,
+  "feasible": true,
+  "throughput_tokens_s": 510.33,
+  "rental_cost_usd_hr": 7.41,
+  "power_watts": 3900.0,
+  "active_gpus": 13
+}

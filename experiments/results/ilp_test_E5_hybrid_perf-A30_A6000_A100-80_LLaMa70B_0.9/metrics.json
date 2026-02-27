@@ -1,0 +1,12 @@
+{
+  "test_name": "test_E5_hybrid_perf-A30_A6000_A100-80_LLaMa70B_0.9",
+  "model": "LLaMa70B",
+  "alpha": 0.9,
+  "batch_size": 8,
+  "solver_time_s": 4.3,
+  "feasible": true,
+  "throughput_tokens_s": 507.93,
+  "rental_cost_usd_hr": 5.61,
+  "power_watts": 2590.0,
+  "active_gpus": 11
+}

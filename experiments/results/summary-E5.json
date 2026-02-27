@@ -154,41 +154,5 @@
     "rental_cost_usd_hr": 5.61,
     "power_watts": 2590.0,
     "active_gpus": 11
-  },
-  {
-    "test_name": "test_E5-E1_mix-1_orig_LLaMa70B_0.9",
-    "model": "LLaMa70B",
-    "alpha": 0.9,
-    "batch_size": 8,
-    "solver_time_s": 1253.4,
-    "feasible": true,
-    "throughput_tokens_s": 598.46,
-    "rental_cost_usd_hr": 11.64,
-    "power_watts": 2740.0,
-    "active_gpus": 16
-  },
-  {
-    "test_name": "test_E5-E1_mix-1_A30_LLaMa70B_0.9",
-    "model": "LLaMa70B",
-    "alpha": 0.9,
-    "batch_size": 8,
-    "solver_time_s": 761.3,
-    "feasible": true,
-    "throughput_tokens_s": 667.86,
-    "rental_cost_usd_hr": 11.61,
-    "power_watts": 3000.0,
-    "active_gpus": 19
-  },
-  {
-    "test_name": "test_E5-E1_mix-1_A6000_LLaMa70B_0.9",
-    "model": "LLaMa70B",
-    "alpha": 0.9,
-    "batch_size": 8,
-    "solver_time_s": 1801.2,
-    "feasible": true,
-    "throughput_tokens_s": 558.69,
-    "rental_cost_usd_hr": 11.43,
-    "power_watts": 2940.0,
-    "active_gpus": 17
   }
 ]

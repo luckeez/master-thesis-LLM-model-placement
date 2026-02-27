@@ -50,8 +50,8 @@ MODEL_SPECS: Dict[str, ModelSpec] = {
 GPU_SPECS: Dict[str, GPUSpec] = {
     "T4": GPUSpec(name="T4", fp16_tflops=65, memory_gb=16, memory_bandwidth_gbps=320, rent_cost=0.35, tdp_watts=70),
     "L4": GPUSpec(name="L4", fp16_tflops=242, memory_gb=24, memory_bandwidth_gbps=300, rent_cost=0.90, tdp_watts=75),
-    "A100": GPUSpec(name="A100-40", fp16_tflops=312, memory_gb=40, memory_bandwidth_gbps=1555, rent_cost=1.29, tdp_watts=250),
-    "A100-80": GPUSpec(name="A100-80", fp16_tflops=312, memory_gb=80, memory_bandwidth_gbps=2040, rent_cost=1.65, tdp_watts=400),
+    "A100": GPUSpec(name="A100-40", fp16_tflops=312, memory_gb=40, memory_bandwidth_gbps=1555, rent_cost=1.25, tdp_watts=250),
+    "A100-80": GPUSpec(name="A100-80", fp16_tflops=312, memory_gb=80, memory_bandwidth_gbps=2040, rent_cost=1.35, tdp_watts=400),
 
     "H100": GPUSpec(name="H100", fp16_tflops=1979, memory_gb=80, memory_bandwidth_gbps=3350, rent_cost=1.90, tdp_watts=700),
     "L40S": GPUSpec(name="L40S", fp16_tflops=733, memory_gb=48, memory_bandwidth_gbps=864, rent_cost=0.86, tdp_watts=350),

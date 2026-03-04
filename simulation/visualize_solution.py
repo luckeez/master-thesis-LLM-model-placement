@@ -239,20 +239,23 @@ if __name__ == "__main__":
     current_dir = os.getcwd()
     layouts_dir = os.path.join(current_dir, "layouts")
     configs_dir = os.path.join(current_dir, "config")
+
+    experiments_dir = "/home/luckeez/Unitrento/Magistrale/Tesi/llm-Model-Placement/experiments/results"
     
-    aux_folders = [d for d in os.listdir(layouts_dir) if os.path.isdir(os.path.join(layouts_dir, d)) and (d.startswith("ilp_test"))]
+    aux_folders = [d for d in os.listdir(experiments_dir) if os.path.isdir(os.path.join(experiments_dir, d)) and (d.startswith("ilp_test"))]
 
     if not aux_folders:
         sys.exit(1)
 
     for folder in aux_folders:
-        folder_path = os.path.join(layouts_dir, folder)
+        folder_path = os.path.join(experiments_dir, folder)
         sol_path = os.path.join(folder_path, "ilp_solution.sol")
         
-        suffix = find_ini(folder_path)
-        if suffix is None:
-            suffix = folder.split('ilp_')[-1]
-        ini_file = os.path.join(configs_dir, f"{suffix}.ini")
+        # suffix = find_ini(folder_path)
+        # if suffix is None:
+        #     suffix = folder.split('ilp_')[-1]
+        # ini_file = os.path.join(configs_dir, f"{suffix}.ini")
+        ini_file = os.path.join(folder_path, "config.ini")
         
         if os.path.exists(sol_path) and os.path.exists(ini_file):
             output_solution(ini_file, sol_path, folder_path)

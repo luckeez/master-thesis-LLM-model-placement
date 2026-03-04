@@ -214,7 +214,9 @@ def generate_e1_configs() -> List[Tuple[str, List[Dict[str, Any]]]]:
     # ---- Cat 2: Homogeneous, singles + groups ----
     homo_grp = [
         ("L4",  [4, 4, 1, 1, 1, 1, 1, 1, 1, 1]),
-        ("A30", [4, 2, 2, 2, 1, 1, 1, 1, 1, 1])
+        ("A30", [4, 2, 2, 2, 1, 1, 1, 1, 1, 1]),
+        ("L4", [4, 4, 4, 4]),
+        ("A30", [4, 4, 4, 4]),
     ]
     for i, (gpu, sizes) in enumerate(homo_grp):
         groups = [{"num_nodes": s, "type": gpu, "region": R} for s in sizes]

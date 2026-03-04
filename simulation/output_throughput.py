@@ -59,7 +59,7 @@ def simulate_inference_scaling_with_cost(model: ModelSpec, gpu: GPUSpec, max_gpu
             else:
                 link_type = "NVLink"
         throughput = calc_throughput(model=model, gpu=gpu, n_gpu=n, batch_size=batch_size, link_type=link_type, assigned_layers=assigned_layers)
-        if gpu.name == "A4000" or gpu.name == "A30":
+        if gpu.name == "L4" or gpu.name == "A30":
             print(f"Th: {throughput}, gpu: {gpu.name}, n_gpu: {n}")
 
         rent_cost = formulas.calc_rental_cost(gpu=gpu, n_gpu=n, hours=1)
@@ -79,7 +79,6 @@ def plot_throughput(list_results: dict[dict], model: ModelSpec, assigned_layers 
     plt.figure(figsize=(10, 6))
     for gpu_name, results in list_results.items():
         plt.plot(results["n_gpus"], results["throughput"], marker='o', label=f"{gpu_name}")
-        print(results["throughput"])
     
     if assigned_layers is None:
         assigned_layers = model.n_layers
@@ -154,78 +153,88 @@ def plot_power_vs_throughput(list_results: dict[dict], model: ModelSpec):
 import matplotlib.pyplot as plt
 
 def plot_scatter(list_results: dict, model: ModelSpec):
-    plt.figure(figsize=(18, 12))
-    
-    # Definiamo colori o marker specifici per ogni GPU per coerenza
-    # (Opzionale, ma aiuta molto la leggibilità)
+    fig, ax = plt.subplots(figsize=(14, 9))
+
+    # Distinct style per GPU
     gpu_styles = {
-        "T4": {"color": "tab:red", "marker": "o"},
-        "L4": {"color": "tab:orange", "marker": "s"},
-        "A100-80GB": {"color": "tab:green", "marker": "^"},
-        "H100": {"color": "tab:blue", "marker": "D"}
+        "T4":       {"color": "#EF5350", "marker": "v"},
+        "L4":       {"color": "#FF7043", "marker": "o"},
+        "A10":      {"color": "#AB47BC", "marker": "s"},
+        "A30":      {"color": "#66BB6A", "marker": "^"},
+        "A40":      {"color": "#26A69A", "marker": "D"},
+        "A4000":    {"color": "#BDBDBD", "marker": "p"},
+        "A6000":    {"color": "#42A5F5", "marker": "h"},
+        "A100-40":  {"color": "#FFA726", "marker": "<"},
+        "A100-80":  {"color": "#EC407A", "marker": ">"},
+        "L40S":     {"color": "#7E57C2", "marker": "P"},
+        "H100":     {"color": "#29B6F6", "marker": "*"},
     }
-    
-    # 1. Loop per GPU (Serie Dati)
+
+    KEY_COUNTS = [1, 2, 3, 4, 5, 6, 8, 16]
+
     for gpu_name, results in list_results.items():
-        
-        # Filtriamo i dati PRIMA di plottare
-        # Vogliamo solo i punti validi (>0) e che siano nei target [1, 2, 4...]
-        valid_x = []
-        valid_y = []
-        valid_n = []
-        
+        # Filter to key GPU counts with valid throughput
+        filtered = []
         for i in range(len(results["n_gpus"])):
-            n_val = results["n_gpus"][i]
-            th_val = results["throughput"][i]
-            cost_val = results["cost_rent_hourly"][i]
-            
-            # Check: Deve essere un numero di GPU di interesse E avere throughput valido
-            # if n_val in [1, 2, 4, 8, 16] and th_val is not None and th_val > 0:
-            if th_val is not None and th_val > 0 and th_val < 600:
-                valid_x.append(th_val)
-                valid_y.append(cost_val)
-                valid_n.append(n_val)
-        
-        if not valid_x:
-            continue # Salta se non ci sono dati validi per questa GPU
+            n = results["n_gpus"][i]
+            tp = results["throughput"][i]
+            cost = results["cost_rent_hourly"][i]
+            if n in KEY_COUNTS and tp is not None and tp > 0 and tp < 800:
+                filtered.append((tp, cost, n))
 
-        # Recupera stile (o usa default se la GPU non è nel dizionario)
-        style = gpu_styles.get(gpu_name, {"color": None, "marker": "o"})
+        if not filtered:
+            continue
 
-        # 2. PLOT UNICO per l'intera serie (così la legenda funziona!)
-        plt.scatter(valid_x, valid_y, 
-                    label=gpu_name, # Fondamentale per la legenda
-                    # color=style["color"],
-                    # marker=style["marker"],
-                    s=100, alpha=0.7, edgecolors="black")
-        
-        # 3. Annotazione intelligente (Loop sui punti filtrati)
-        for x, y, n in zip(valid_x, valid_y, valid_n):
-            # Scriviamo "4x" invece di "T4"
-            plt.annotate(f"{n}x - {gpu_name}", (x, y), 
-                         textcoords="offset points", xytext=(0, 8), 
-                         ha='center', fontsize=9, fontweight='bold')
+        # Sort by GPU count for line connection
+        filtered.sort(key=lambda x: x[2])
+        tps = [p[0] for p in filtered]
+        costs = [p[1] for p in filtered]
+        ns = [p[2] for p in filtered]
 
-    plt.title(f"Rental Cost vs Performance Map (Model: {model.name})")
-    plt.xlabel("Throughput (Tokens / Sec)")
-    plt.ylabel("Rental Cost (USD / Hour)")
-    
-    # Imposta limiti assi partendo da 0 per chiarezza
-    plt.xlim(left=0)
-    plt.ylim(bottom=0)
-    
-    plt.grid(True, which="both", linestyle="--", linewidth=0.5)
-    plt.legend(title="GPU Type", loc="upper left")
-    
-    plt.tight_layout()
-    plt.savefig(f"images/output_plots/{model.name}/scatter_rental_vs_perf_{model.name}.png")
-    # plt.show()
+        style = gpu_styles.get(gpu_name, {"color": "#888", "marker": "o"})
+
+        # Draw connecting line (scaling trajectory)
+        ax.plot(costs, tps, color=style["color"], linewidth=1.5, alpha=0.4, zorder=2)
+
+        # Plot points
+        ax.scatter(costs, tps, label=gpu_name, color=style["color"],
+                   marker=style["marker"], s=100, alpha=0.85,
+                   edgecolors="white", linewidths=0.5, zorder=4)
+
+        # Label: count number on all points
+        for i_pt, (tp, cost, n) in enumerate(filtered):
+            ax.annotate(f"{n}", (cost, tp),
+                        textcoords="offset points", xytext=(0, 7),
+                        ha='center', fontsize=6, color=style["color"],
+                        alpha=0.8)
+
+        # GPU name label near the last point
+        ltp, lcost, ln = filtered[-1]
+        ax.annotate(f"{gpu_name}", (lcost, ltp),
+                    textcoords="offset points", xytext=(12, 0),
+                    ha='left', fontsize=7.5, color=style["color"],
+                    fontweight='bold')
+
+    ax.set_title(f"Throughput vs Rental Cost — {model.name}",
+                 fontweight='bold')
+    ax.set_xlabel("Rental Cost (USD / Hour)")
+    ax.set_ylabel("Throughput (Tokens / Sec)")
+    ax.set_xlim(left=0)
+    ax.set_ylim(bottom=100)
+    ax.grid(True, linestyle="--", linewidth=0.3, alpha=0.5)
+    ax.legend(title="GPU Type", loc="upper left", fontsize=15, ncol=2,
+              framealpha=0.9, title_fontsize=15)
+
+    fig.tight_layout()
+    fig.savefig(f"images/output_plots/{model.name}/scatter_rental_vs_perf_{model.name}.png",
+                dpi=200, bbox_inches='tight')
+    plt.close(fig)
 # ------------ END PLOTS ------------
 
 if __name__ == "__main__":
     # model: ModelSpec = MODEL_SPECS["LlaMa-3.1-8B"]
     model: ModelSpec = MODEL_SPECS["LLaMa30B"]
-    assigned_layers = 48
+    assigned_layers = 60
 
     list_results: dict[dict] = {}
     for gpu in GPU_SPECS.values():
@@ -235,10 +244,10 @@ if __name__ == "__main__":
     for m in MODEL_SPECS.keys():
         if not os.path.exists(f"images/output_plots/{m}"):
             os.makedirs(f"images/output_plots/{m}")
-    plot_throughput(list_results=list_results, model=model, assigned_layers=assigned_layers, show=True)
+    # plot_throughput(list_results=list_results, model=model, assigned_layers=assigned_layers, show=True)
     # plot_purchase_vs_throughput(list_results=list_results, model=model)
     # plot_rental_vs_throughput(list_results=list_results, model=model)
     # plot_power_vs_throughput(list_results=list_results, model=model)
     # plot_cost(list_results=list_results, model=model)
-    # plot_scatter(list_results=list_results, model=model)
+    plot_scatter(list_results=list_results, model=model)
 

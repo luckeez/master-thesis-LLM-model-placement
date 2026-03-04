@@ -21,27 +21,31 @@ def parse_solution(save_sol_path) -> Dict[str, int]:
     name_2_val: Dict[str, int] = {}
     with open(save_sol_path, "r") as file:
         for line in file:
-            if line.startswith("is_active"):
-                name, val = line.split(" ")
-                name_2_val[name] = eval(val)
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            parts = line.split()
+            if len(parts) >= 2:
+                name, val = parts[0], parts[1]
+                if name.startswith("is_active"):
+                    name_2_val[name] = int(eval(val))
     
     return name_2_val
 
-def output_costs(name_2_val: Dict[str, int], node_types: Dict[str, str], output_path = None) -> tuple[int, float, float]:
-    rental_cost: int = 0
-    energy_cost: float = 0.0
+def output_costs(name_2_val: Dict[str, int], node_types: Dict[str, str], output_path = None) -> tuple[float, float]:
+    rental_cost: float = 0.0
+    energy_watts: float = 0.0
     for key, value in name_2_val.items():
-        if key.startswith("is_active") and value:
-            gpu_id: str = key.split("_")[2]
-            gpu_type = node_types[gpu_id]
-            gpu: GPUSpec = GPU_SPECS[gpu_type]
-            rental_cost += gpu.rent_cost
-            energy_cost += gpu.tdp_watts
+        if key.startswith("is_active") and value > 0.5:
+            # key is 'is_active_NODEID'
+            gpu_id: str = key.split("_")[-1]
+            if gpu_id in node_types:
+                gpu_type = node_types[gpu_id]
+                gpu: GPUSpec = GPU_SPECS[gpu_type]
+                rental_cost += gpu.rent_cost
+                energy_watts += gpu.tdp_watts
     
-    if output_path:
-        print(rental_cost, energy_cost)
-        
-    return (rental_cost, energy_cost)
+    return (rental_cost, energy_watts)
     
 
 

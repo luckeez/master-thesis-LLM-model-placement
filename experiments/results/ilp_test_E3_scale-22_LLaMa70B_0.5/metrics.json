@@ -5,7 +5,7 @@
   "batch_size": 8,
   "solver_time_s": 1804.5,
   "feasible": true,
-  "throughput_tokens_s": 441.63,
+  "throughput_tokens_s": 602.63,
   "rental_cost_usd_hr": 8.16,
   "power_watts": 2095.0,
   "active_gpus": 13

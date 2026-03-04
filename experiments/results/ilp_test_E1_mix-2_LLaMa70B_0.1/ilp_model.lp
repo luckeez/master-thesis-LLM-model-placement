@@ -1,4 +1,4 @@
-\ Model 2026-02-26_19-42-16
+\ Model 2026-02-27_17-19-06
 \ LP format - for model browsing. Use MPS format to capture full model detail.
 Maximize
   1.2307475912511426e-04 flow_source_nic_in_0
@@ -11,14 +11,14 @@ Maximize
    + 1.2307475912511426e-04 flow_source_nic_in_13
    + 1.2307475912511426e-04 flow_source_nic_in_14
    + 1.2307475912511426e-04 flow_source_nic_in_15
-   - 0.0279397930385701 is_active_0 - 0.0279397930385701 is_active_1
-   - 0.0279397930385701 is_active_2 - 0.0279397930385701 is_active_3
-   - 0.1151458137347131 is_active_4 - 0.1151458137347131 is_active_5
-   - 0.1396989651928504 is_active_6 - 0.160865475070555 is_active_7
-   - 0.0397930385700847 is_active_8 - 0.0397930385700847 is_active_9
-   - 0.0253998118532455 is_active_10 - 0.0253998118532455 is_active_11
-   - 0.0296331138287864 is_active_12 - 0.0296331138287864 is_active_13
-   - 0.0397930385700847 is_active_14 - 0.0279397930385701 is_active_15
+   - 0.0271978021978022 is_active_0 - 0.0271978021978022 is_active_1
+   - 0.0271978021978022 is_active_2 - 0.0271978021978022 is_active_3
+   - 0.0708791208791209 is_active_4 - 0.0708791208791209 is_active_5
+   - 0.1359890109890109 is_active_6 - 0.1565934065934066 is_active_7
+   - 0.0741758241758242 is_active_8 - 0.0741758241758242 is_active_9
+   - 0.0247252747252747 is_active_10 - 0.0247252747252747 is_active_11
+   - 0.0288461538461538 is_active_12 - 0.0288461538461538 is_active_13
+   - 0.0741758241758242 is_active_14 - 0.0271978021978022 is_active_15
    + 0 val_end_0 + 0 val_end_1 + 0 val_end_2 + 0 val_end_3 + 0 val_end_4
    + 0 val_end_5 + 0 val_end_6 + 0 val_end_7 + 0 val_end_8 + 0 val_end_9
    + 0 val_end_10 + 0 val_end_11 + 0 val_end_12 + 0 val_end_13
@@ -1977,7 +1977,7 @@ Subject To
  force_min_throughput: flow_source_nic_in_0 + flow_source_nic_in_4
    + flow_source_nic_in_6 + flow_source_nic_in_7 + flow_source_nic_in_8
    + flow_source_nic_in_10 + flow_source_nic_in_12 + flow_source_nic_in_13
-   + flow_source_nic_in_14 + flow_source_nic_in_15 >= 1
+   + flow_source_nic_in_14 + flow_source_nic_in_15 >= 100
  inactive_start_invalid_0: is_active_0 = 0 -> start_0 = 80
  inactive_start_invalid_1: is_active_1 = 0 -> start_1 = 80
  inactive_start_invalid_2: is_active_2 = 0 -> start_2 = 80

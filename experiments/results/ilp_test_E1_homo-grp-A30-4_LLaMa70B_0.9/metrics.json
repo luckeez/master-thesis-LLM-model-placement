@@ -1,0 +1,12 @@
+{
+  "test_name": "test_E1_homo-grp-A30-4_LLaMa70B_0.9",
+  "model": "LLaMa70B",
+  "alpha": 0.9,
+  "batch_size": 8,
+  "solver_time_s": 362.8,
+  "feasible": true,
+  "throughput_tokens_s": 1410.92,
+  "rental_cost_usd_hr": 10.56,
+  "power_watts": 5280.0,
+  "active_gpus": 32
+}

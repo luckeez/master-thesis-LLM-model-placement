@@ -1,0 +1,12 @@
+{
+  "test_name": "test_E1_homo-A30-4_LLaMa30B_0.9",
+  "model": "LLaMa30B",
+  "alpha": 0.9,
+  "batch_size": 8,
+  "solver_time_s": 401.2,
+  "feasible": true,
+  "throughput_tokens_s": 2738.12,
+  "rental_cost_usd_hr": 8.91,
+  "power_watts": 4455.0,
+  "active_gpus": 27
+}

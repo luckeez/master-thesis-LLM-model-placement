@@ -3,10 +3,10 @@
   "model": "LLaMa70B",
   "alpha": 0.9,
   "batch_size": 8,
-  "solver_time_s": 369.1,
+  "solver_time_s": 1804.3,
   "feasible": true,
-  "throughput_tokens_s": 680.62,
-  "rental_cost_usd_hr": 5.28,
-  "power_watts": 2640.0,
-  "active_gpus": 16
+  "throughput_tokens_s": 809.85,
+  "rental_cost_usd_hr": 8.25,
+  "power_watts": 4125.0,
+  "active_gpus": 25
 }

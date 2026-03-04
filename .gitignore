@@ -7,3 +7,4 @@ Thesis/
 experiments/analyze_results.py
 experiments/regenerate_costs.py
 experiments/plot*
+experiments/results/summary.json

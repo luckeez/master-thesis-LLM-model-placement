@@ -1,0 +1,8 @@
+{
+    "config": "/home/luckeez/Unitrento/Magistrale/Tesi/llm-Model-Placement/experiments/results/ilp_test_E1_heter2-L4-A100-2_LLaMa70B_0.9/config.ini",
+    "strategy": "homo",
+    "model": "LLaMa70B",
+    "batch_size": 8,
+    "throughput_tokens_s": 375.51286221381656,
+    "rental_cost_usd_hr": 5.4
+}

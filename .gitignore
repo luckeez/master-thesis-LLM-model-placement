@@ -8,3 +8,12 @@ experiments/analyze_results.py
 experiments/regenerate_costs.py
 experiments/plot*
 experiments/results/summary.json
+experiments/analyze_e5.py
+simulation/old_config/
+simulation/old_layouts/
+simulation/run_tests.py
+simulation/visualize_aux_cluster.py
+simulation/layouts/ilp/
+simulation/images/model_placement.jpg
+simulation/check_layout.py
+

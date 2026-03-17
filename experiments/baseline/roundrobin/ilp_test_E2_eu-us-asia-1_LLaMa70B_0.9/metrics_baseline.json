@@ -1,0 +1,8 @@
+{
+    "config": "/home/luckeez/Unitrento/Magistrale/Tesi/llm-Model-Placement/experiments/results/ilp_test_E2_eu-us-asia-1_LLaMa70B_0.9/config.ini",
+    "strategy": "rr",
+    "model": "LLaMa70B",
+    "batch_size": 8,
+    "throughput_tokens_s": 63.47485341064458,
+    "rental_cost_usd_hr": 12.040000000000003
+}

@@ -59,7 +59,7 @@ def simulate_inference_scaling_with_cost(model: ModelSpec, gpu: GPUSpec, max_gpu
             else:
                 link_type = "NVLink"
         throughput = calc_throughput(model=model, gpu=gpu, n_gpu=n, batch_size=batch_size, link_type=link_type, assigned_layers=assigned_layers)
-        if gpu.name == "L4" or gpu.name == "A30":
+        if gpu.name == "A30" or gpu.name == "A100-80":
             print(f"Th: {throughput}, gpu: {gpu.name}, n_gpu: {n}")
 
         rent_cost = formulas.calc_rental_cost(gpu=gpu, n_gpu=n, hours=1)
@@ -83,7 +83,7 @@ def plot_throughput(list_results: dict[dict], model: ModelSpec, assigned_layers 
     if assigned_layers is None:
         assigned_layers = model.n_layers
     
-    plt.title(f"Inference Throughput Scaling (Model: {model.name}) (Num layers: {assigned_layers})")
+    # plt.title(f"Inference Throughput Scaling (Model: {model.name}) (Num layers: {assigned_layers})")
     plt.xlabel("Number of GPUs")
     plt.ylabel("Inference Throughput (tokens/sec)")
     plt.grid(True, which="both", linestyle="--", linewidth=0.5)
@@ -194,34 +194,35 @@ def plot_scatter(list_results: dict, model: ModelSpec):
         style = gpu_styles.get(gpu_name, {"color": "#888", "marker": "o"})
 
         # Draw connecting line (scaling trajectory)
-        ax.plot(costs, tps, color=style["color"], linewidth=1.5, alpha=0.4, zorder=2)
+        ax.plot(tps, costs, color=style["color"], linewidth=1.5, alpha=0.4, zorder=2)
 
         # Plot points
-        ax.scatter(costs, tps, label=gpu_name, color=style["color"],
+        ax.scatter(tps, costs, label=gpu_name, color=style["color"],
                    marker=style["marker"], s=100, alpha=0.85,
                    edgecolors="white", linewidths=0.5, zorder=4)
 
         # Label: count number on all points
         for i_pt, (tp, cost, n) in enumerate(filtered):
-            ax.annotate(f"{n}", (cost, tp),
+            ax.annotate(f"{n}", (tp, cost),
                         textcoords="offset points", xytext=(0, 7),
-                        ha='center', fontsize=6, color=style["color"],
+                        ha='center', fontsize=16, fontweight='bold', color=style["color"],
                         alpha=0.8)
 
         # GPU name label near the last point
         ltp, lcost, ln = filtered[-1]
-        ax.annotate(f"{gpu_name}", (lcost, ltp),
-                    textcoords="offset points", xytext=(12, 0),
-                    ha='left', fontsize=7.5, color=style["color"],
-                    fontweight='bold')
+        # ax.annotate(f"{gpu_name}", (ltp, lcost),
+        #             textcoords="offset points", xytext=(12, 0),
+        #             ha='left', fontsize=7.5, color=style["color"],
+        #             fontweight='bold')
 
-    ax.set_title(f"Throughput vs Rental Cost — {model.name}",
-                 fontweight='bold')
-    ax.set_xlabel("Rental Cost (USD / Hour)")
-    ax.set_ylabel("Throughput (Tokens / Sec)")
-    ax.set_xlim(left=0)
-    ax.set_ylim(bottom=100)
+    # ax.set_title(f"Rental Cost vs Throughput — {model.name}",
+    #              fontweight='bold')
+    ax.set_xlabel("Throughput (Tokens / Sec)", fontsize=14)
+    ax.set_ylabel("Rental Cost (USD / Hour)", fontsize=14)
+    ax.set_xlim(left=100)
+    ax.set_ylim(bottom=0)
     ax.grid(True, linestyle="--", linewidth=0.3, alpha=0.5)
+    ax.tick_params(axis='both', labelsize=12)
     ax.legend(title="GPU Type", loc="upper left", fontsize=15, ncol=2,
               framealpha=0.9, title_fontsize=15)
 
@@ -233,8 +234,8 @@ def plot_scatter(list_results: dict, model: ModelSpec):
 
 if __name__ == "__main__":
     # model: ModelSpec = MODEL_SPECS["LlaMa-3.1-8B"]
-    model: ModelSpec = MODEL_SPECS["LLaMa30B"]
-    assigned_layers = 60
+    model: ModelSpec = MODEL_SPECS["LLaMa70B"]
+    assigned_layers = 80
 
     list_results: dict[dict] = {}
     for gpu in GPU_SPECS.values():
@@ -244,7 +245,7 @@ if __name__ == "__main__":
     for m in MODEL_SPECS.keys():
         if not os.path.exists(f"images/output_plots/{m}"):
             os.makedirs(f"images/output_plots/{m}")
-    # plot_throughput(list_results=list_results, model=model, assigned_layers=assigned_layers, show=True)
+    plot_throughput(list_results=list_results, model=model, assigned_layers=assigned_layers)
     # plot_purchase_vs_throughput(list_results=list_results, model=model)
     # plot_rental_vs_throughput(list_results=list_results, model=model)
     # plot_power_vs_throughput(list_results=list_results, model=model)

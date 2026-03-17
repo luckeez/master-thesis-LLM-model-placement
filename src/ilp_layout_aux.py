@@ -189,7 +189,7 @@ class ILPLayout:
         # NEW global max num layers
         self.global_max_num_layers: int = -1  # arbitrary number
 
-    def from_ini(self, cluster_file_name: str, model_name: str, enable_memory: bool, batch_size: int, tp_only: bool) -> None:
+    def from_ini(self, cluster_file_name: str, model_name: str, enable_memory: bool, batch_size: int, tp_only: bool, lower_bound_tp: float = 1.0) -> None:
         """
         Initialize the ILP using a given cluster topology and machine profiles.
 
@@ -205,6 +205,7 @@ class ILPLayout:
         self.enable_memory = enable_memory
         self.batch_size = batch_size
         self.tp_only = tp_only
+        self.lower_bound_tp = lower_bound_tp
 
         # # load machine statistics
         # machine_profile_parser = ConfigParser()
@@ -1506,9 +1507,8 @@ class ILPLayout:
         if not self.enable_memory:
             self.ilp_model.setObjective(gp.quicksum(source_flow_out_list), GRB.MAXIMIZE)
         else:
-            # MEM
             source_flow_out = gp.quicksum(source_flow_out_list)
-            self.ilp_model.addConstr(source_flow_out >= 1.0, name="force_min_throughput")
+            self.ilp_model.addConstr(source_flow_out >= self.lower_bound_tp, name="force_min_throughput")
             norm_throughput = source_flow_out / self.max_throughput
 
             # total active vram

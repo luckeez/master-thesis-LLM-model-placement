@@ -7,7 +7,7 @@ from itertools import permutations
 
 # 1. External Network
 # Used for links: Source -> NIC_IN, NIC_OUT -> Sink
-EXT_BW = "1 * gbps"
+EXT_BW = "10 * gbps"
 EXT_LAT = "0.1 * MilliSec"
 
 # 2. Internal Bus
@@ -319,6 +319,26 @@ if __name__ == "__main__":
         {"num_nodes": 1, "type": "A100-80", "region": "eu-west"}, # 1.82
         {"num_nodes": 2, "type": "A4000", "region": "eu-west"}, # 0.30
     ]
+
+
+
+
+
+    name = "test-cloud.ini"
+    cluster_configuration = [
+        {"num_nodes": 2, "type": "L40S",    "region": "eu-west"},
+        {"num_nodes": 2, "type": "L40S",    "region": "us-west"},
+        {"num_nodes": 1, "type": "L4",      "region": "us-east"},
+        {"num_nodes": 2, "type": "L4",      "region": "asia-south"},
+        {"num_nodes": 4, "type": "L4",      "region": "us-west"},
+        {"num_nodes": 1, "type": "A100-80", "region": "asia-east"},
+        {"num_nodes": 2, "type": "A4000",   "region": "eu-west"},
+    ]
+
+
+
+
+
 
     name = "test-cloud-short-a30.ini"
     cluster_configuration = [

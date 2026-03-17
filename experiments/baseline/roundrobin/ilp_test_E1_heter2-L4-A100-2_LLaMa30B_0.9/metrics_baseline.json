@@ -1,0 +1,8 @@
+{
+    "config": "/home/luckeez/Unitrento/Magistrale/Tesi/llm-Model-Placement/experiments/results/ilp_test_E1_heter2-L4-A100-2_LLaMa30B_0.9/config.ini",
+    "strategy": "rr",
+    "model": "LLaMa30B",
+    "batch_size": 8,
+    "throughput_tokens_s": 632.9613506352697,
+    "rental_cost_usd_hr": 9.0
+}

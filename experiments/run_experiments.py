@@ -58,7 +58,7 @@ def parse_throughput_from_sol(sol_path: str) -> float:
 def collect_metrics(
     test_name: str, model: str, alpha: float, batch_size: int,
     config_path: str, output_dir: str, solver_time: float
-) -> Dict[str, Any]:
+    ) -> Dict[str, Any]:
     """Collect metrics from a completed simulation run."""
     metrics = {
         "test_name": test_name,
@@ -112,7 +112,7 @@ def run_single(
     model: str,
     alpha: float,
     batch_size: int = DEFAULT_BATCH_SIZE,
-) -> Dict[str, Any]:
+    ) -> Dict[str, Any]:
     """
     Run one simulation:
       1. Generate config .ini via gen_config
@@ -184,7 +184,7 @@ def run_single(
 
 def run_transversal(
     config_name: str, groups: List[Dict[str, Any]], batch_size: int = DEFAULT_BATCH_SIZE,
-) -> List[Dict[str, Any]]:
+    ) -> List[Dict[str, Any]]:
     """Run one config across all alpha × model combinations."""
     results = []
     for model in MODELS:
